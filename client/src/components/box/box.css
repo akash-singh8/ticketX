@@ -1,0 +1,29 @@
+.ticket-image{
+border-radius: 28px 28px 0px 0px;
+background: #D81F84;
+width: 400px;
+height: 400px;
+flex-shrink: 0;
+}
+
+.ticket-name{
+    border-radius: 0px 0px 28px 28px;
+background: #E9E9E9;
+width: 400px;
+height: 100px;
+flex-shrink: 0;
+color: #000;
+font-family: 'Roboto';
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 1.12px;
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-container{
+    padding: 15px 5px;
+}
