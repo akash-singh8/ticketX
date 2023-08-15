@@ -1,1 +1,87 @@
 /* ======= NavBar Styles ======= */
+
+.Navbar{
+   
+height: 70px;
+flex-shrink: 0;
+border-radius: 48px;
+border: 1px solid rgba(0, 0, 0, 0.08);
+background: rgba(0, 0, 0, 0.02);
+margin: 20px 20px;
+display: flex;
+justify-content: space-between;
+
+}
+.bar{
+    background: #D81F84;
+    width: 60.007px;
+height: 2px;
+position: relative;
+left: 18px;
+}
+
+.navigation{
+    display: flex;
+    padding: 23px;
+   
+}
+
+.links{
+    color: #35363A;
+font-family: 'Inter', sans-serif;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+padding:0px 20px ;
+cursor: pointer;
+}
+
+.logo{
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    padding: 5px 0px;
+}
+.button{
+    font-weight: 500;
+  width: 120px;
+  height: 40px;
+  border-radius: 14.33px;
+background: #D81F84;
+cursor: pointer;
+text-align: center;
+position: relative;
+bottom: 7px;
+
+padding: 9px 0px;
+margin: 0px 30px;
+color: #FFF;
+font-family: 'Roboto', sans-serif;
+font-size: 20px;
+font-style: normal;
+
+line-height: normal;
+
+
+
+
+
+
+}
+
+@media(max-width:800px){
+    .web{
+        display: none;
+    }
+}
+@media(max-width:500px){
+    .web-2{
+        display: none;
+    }
+    .container-1{
+        padding: 0px 30px;
+    }
+}
+    
+    

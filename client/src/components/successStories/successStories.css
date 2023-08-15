@@ -1,0 +1,60 @@
+.successStories{
+    margin: 50px 120px;
+}
+
+.story-details{
+    display: flex;
+    margin: 50px 0px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.story-image{
+    border-radius: 16.874px 16.874px 0px 0px;
+background: #D81F84;
+width: 619px;
+height: 255.939px;
+flex-shrink: 0;
+}
+
+.story-description{
+    border-radius: 0px 0px 16.874px 16.874px;
+border-right: 1px solid #DEDEDE;
+border-bottom: 1px solid #DEDEDE;
+border-left: 1px solid #DEDEDE;
+background: #F1F1F1;
+width: 619px;
+height: 285.927px;
+flex-shrink: 0;
+color: #000;
+font-family: 'Roboto';
+font-size: 22px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: 0.88px;
+display: flex;
+    justify-content: center;
+    
+}
+
+.story-heading{
+    color: #000;
+text-align: right;
+font-family: Roboto;
+font-size: 34px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 1.36px;
+}
+
+.more-stories{
+    padding-left: 50px;
+}
+
+.story-image-2{
+    width: 448px;
+height: 446.887px;
+flex-shrink: 0;
+}

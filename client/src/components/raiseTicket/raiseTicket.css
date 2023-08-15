@@ -1,0 +1,26 @@
+.raiseTicket{
+    margin: 50px 120px;
+    justify-content: space-sround;
+   
+}
+
+.heading{
+    color: #000;
+font-family: 'Roboto';
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 1.6px;
+}
+span{
+    color: #D81F84;
+
+}
+.ticket-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 70px 0px;
+    flex-wrap: wrap;
+
+}
