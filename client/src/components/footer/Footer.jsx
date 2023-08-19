@@ -63,7 +63,7 @@ function Footer() {
         </div>
       </footer>
       <div className="copyright">
-        Copyright 2023 Imagine her is a nonprofit organization. All right
+      &copy; Copyright 2023 Imagine her is a nonprofit organization. All right
         reserved.
       </div>
     </>

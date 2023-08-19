@@ -1,6 +1,10 @@
 .successStories{
     margin: 50px 120px;
 }
+.story-box{
+
+    width: 619px;
+}
 
 .story-details{
     display: flex;
@@ -12,7 +16,6 @@
 .story-image{
     border-radius: 16.874px 16.874px 0px 0px;
 background: #D81F84;
-width: 619px;
 height: 255.939px;
 flex-shrink: 0;
 }
@@ -23,7 +26,7 @@ border-right: 1px solid #DEDEDE;
 border-bottom: 1px solid #DEDEDE;
 border-left: 1px solid #DEDEDE;
 background: #F1F1F1;
-width: 619px;
+
 height: 285.927px;
 flex-shrink: 0;
 color: #000;
@@ -57,4 +60,29 @@ letter-spacing: 1.36px;
     width: 448px;
 height: 446.887px;
 flex-shrink: 0;
+}
+
+@media (max-width:500px) {
+    .story-box{
+        margin: 0px 0px;
+        width: 200px;
+    }
+    .story-details{
+        width: 300px;
+        justify-content: center;
+        align-items: center;
+    }
+    .story-image-2{
+        width: 200px;
+        height: 200px;
+    }
+    .successStories{
+        margin: 0px 10px;
+        
+        
+    }
+    .more-stories{
+        padding: 0px 0px;
+    }
+    
 }

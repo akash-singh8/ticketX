@@ -1,7 +1,7 @@
 .ticket-image{
 border-radius: 28px 28px 0px 0px;
 background: #D81F84;
-width: 400px;
+
 height: 400px;
 flex-shrink: 0;
 }
@@ -9,7 +9,7 @@ flex-shrink: 0;
 .ticket-name{
     border-radius: 0px 0px 28px 28px;
 background: #E9E9E9;
-width: 400px;
+
 height: 100px;
 flex-shrink: 0;
 color: #000;
@@ -26,4 +26,17 @@ display: flex;
 
 .box-container{
     padding: 15px 5px;
+    width: 400px;
+}
+
+@media (max-width:500px) {
+    .box-container{
+        margin: 0px 0px;
+        width: 300px;
+        height: 500px;
+    }
+    .ticket-image{
+        height: 350px;
+    }
+    
 }

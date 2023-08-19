@@ -1,6 +1,8 @@
 import React from 'react';
 import "./navbar.css";
 import logo from "../../assets/logo.png";
+import Login from '../login/Login';
+import SignUp from '../signUp/SignUp';
 
 function NavBar() {
   const handleClickServices= () => {
@@ -19,19 +21,21 @@ function NavBar() {
   
   return (
     <div className='Navbar'>
-      <div className='navigation'>
+      <div className='navigation web'>
         <div>
 
-        <div className='links' onClick={handleClickHome}>Home</div>
-        <div className='bar'></div>
+        <div className='links web' onClick={handleClickHome}>Home</div>
+        <div className='bar web'></div>
         </div>
         <div className='links web'onClick={handleClickServices}>Services</div>
         <div className='links web'onClick={handleClickStories}>Stories</div>
       </div>
-      <img className='logo web' src={logo} alt='company-logo'></img>
+      <img className='logo ' src={logo} alt='company-logo'></img>
       <div className='navigation'>
-        <div className='links web-2'>Login</div>
-        <div className='button'>Signin</div>
+      <Login/>
+      <SignUp/>
+        
+        
 
       </div>
     </div>
