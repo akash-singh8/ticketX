@@ -24,3 +24,18 @@ span{
     flex-wrap: wrap;
 
 }
+
+@media (max-width:450px) {
+    .ticket-box{
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .raiseTicket{
+      
+        margin: 0px 0px;
+    }
+    .heading{
+        font-size: 30px;
+    }
+}
