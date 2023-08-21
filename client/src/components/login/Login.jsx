@@ -28,7 +28,8 @@ const ModalContent = styled.div`
   border-radius: 8px;
   display: block;
 `;
-export default function Login() {
+export default function Login(props) {
+  const styleName=props.styleName
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     username: "",
@@ -78,7 +79,7 @@ export default function Login() {
 
   return (
     <div>
-      <div className="links web-2" onClick={openModal}>
+      <div className={styleName} onClick={openModal}>
         Login
       </div>
 

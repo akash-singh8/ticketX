@@ -1,10 +1,13 @@
-import React from 'react';
+import React,{useState} from 'react';
 import "./navbar.css";
 import logo from "../../assets/logo.png";
 import Login from '../login/Login';
 import SignUp from '../signUp/SignUp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function NavBar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleClickServices= () => {
     const element =document.getElementById('services')
     element.scrollIntoView({behavior: 'smooth'});
@@ -20,6 +23,7 @@ function NavBar() {
   
   
   return (
+    <>
     <div className='Navbar'>
       <div className='navigation web'>
         <div>
@@ -32,13 +36,26 @@ function NavBar() {
       </div>
       <img className='logo ' src={logo} alt='company-logo'></img>
       <div className='navigation'>
-      <Login/>
-      <SignUp/>
+      <Login styleName='links'/>
+      <SignUp styleName='button'/>
+      </div>
+      <div className='mobile-menu-icon' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+      <FontAwesomeIcon icon={faBars} size='2x' />
+      </div>
         
+    </div>
+      {mobileMenuOpen && (
+        <div className='mobile-dropdown'>
+            <div className='links' onClick={handleClickHome}>Home</div>
+            <div className='links' onClick={handleClickServices}>Services</div>
+            <div className='links' onClick={handleClickStories}>Stories</div>
+            <Login styleName='links'/>
+            <SignUp styleName='links'/>
+          </div>
+        )}
         
 
-      </div>
-    </div>
+        </>
   )
 }
 
