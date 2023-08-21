@@ -63,8 +63,8 @@ export default function Login() {
   
   useEffect(() => {
     const handleModalClick = (event) => {
-      if (event.target === modalRef.current) {
-        console.log("clicking ourside the")
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      
         closeModal();
       }
     };
@@ -80,7 +80,7 @@ export default function Login() {
     <div>
       <div className='links web-2' onClick={openModal}>Login</div>
 
-      <CustomModal
+      <CustomModal 
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Login Modal"

@@ -65,8 +65,8 @@ export default function Login() {
   
   useEffect(() => {
     const handleModalClick = (event) => {
-      if (event.target === modalRef.current) {
-        console.log("clicking ourside the")
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        
         closeModal();
       }
     };
