@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../../components/navbar/NavBar'
 import Box from '../../components/box/Box'
+import Footer from '../../components/footer/Footer'
 
 export default function Gethelp() {
   return (
@@ -12,14 +13,15 @@ export default function Gethelp() {
                  TO <span>GET HELP </span>WITH</div>
         </div>
         <div className='ticket-box '>
-            <Box ticketName='GET HELP'/>
-            <Box  ticketName='BUSINESS UPDATES'/>
-            <Box  ticketName='RESOURCES'/>
-            <Box  ticketName='RESOURCES'/>
-            <Box  ticketName='RESOURCES'/>
-            <Box  ticketName='RESOURCES'/>
+            <Box ticketName='BUSINESS STRATEGY'/>
+            <Box  ticketName='MARKETING'/>
+            <Box  ticketName='FINANCIAL MANAGEMENT'/>
+            <Box  ticketName='TECHNICAL SUPPORT'/>
+            <Box  ticketName='OPERATION & LOGISTICS'/>
+            <Box  ticketName='OTHERS'/>
         </div>
     </section>
+    <Footer/>
     </>
   )
 }
