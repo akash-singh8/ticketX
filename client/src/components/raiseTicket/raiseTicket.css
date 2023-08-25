@@ -21,7 +21,8 @@ span{
     display: flex;
     justify-content: space-between;
     padding: 70px 0px;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
+    height: 100%;
 
 }
 
