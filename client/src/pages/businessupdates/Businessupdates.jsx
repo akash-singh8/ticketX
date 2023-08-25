@@ -10,7 +10,7 @@ export default function Businessupdates() {
       <section  className='gethelp-tickets raiseTicket'>
         <div className='heading'>
             <div>SELECT CATEGORY <br></br>
-                 FOR<span>BUSINESS UPDATES</span></div>
+                 FOR <span>BUSINESS UPDATES</span></div>
         </div>
         <div className='ticket-box '>
             <Box ticketName='NEW PRODUCT LAUNCH'/>
