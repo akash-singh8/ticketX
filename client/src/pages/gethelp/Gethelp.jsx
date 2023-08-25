@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar from '../../components/navbar/NavBar'
 import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
+import Navbar2 from '../../components/navbar2/Navbar2'
 
 export default function Gethelp() {
   return (
     <>
-      <NavBar/>
+      <Navbar2/>
       <section  className='gethelp-tickets raiseTicket'>
         <div className='heading'>
             <div>SELECT CATEGORY <br></br>

@@ -28,10 +28,9 @@ display: flex;
     padding: 15px 5px;
     width: 400px;
 }
-.helpbox{
-    width: 400px;
-height: 100px;
-flex-shrink: 0;
+
+.box-link{
+   text-decoration: none;
 }
 
 @media (max-width:500px) {
