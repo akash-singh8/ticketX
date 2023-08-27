@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import Navbar2 from '../../components/navbar2/Navbar2'
+import GethelpPopup from '../../components/gethelp/Gethelp'
 
 export default function Resources() {
   return (
@@ -13,9 +14,9 @@ export default function Resources() {
                <span>RESOURCES</span>CATEGORY</div>
       </div>
       <div className='ticket-box '>
-          <Box ticketName='NEW TRAININGS'/>
-          <Box  ticketName='INFORMATION ON PROGRAM'/>
-          <Box  ticketName='RECORDING OF SESSIONS'/>
+          <GethelpPopup ticketName='NEW TRAININGS'/>
+          <GethelpPopup  ticketName='INFORMATION ON PROGRAM'/>
+          <GethelpPopup  ticketName='RECORDING OF SESSIONS'/>
       </div>
   </section>
   <Footer/>

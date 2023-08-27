@@ -1,14 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import './box.css';
 
 export default function Box(props) {
-  const ticketName = props.ticketName;
-  const specialStyle = props.specialStyle || false; 
-  const linkPath = `/${ticketName.toLowerCase().replace(' ', '-')}`; 
+  const { ticketName, specialStyle, openInPopup, onClick } = props;
+  const linkPath = `/${ticketName.toLowerCase().replace(' ', '-')}`;
+
+  const linkProps = {
+    className: "box-link",
+    target: openInPopup ? '_blank' : '_self',
+    rel: openInPopup ? 'noopener noreferrer' : undefined,
+  };
+
+  const handleClick = (event) => {
+    if (openInPopup && onClick) {
+      event.preventDefault(); 
+      onClick(); 
+    }
+  };
 
   return (
-    <Link to={linkPath} className="box-link"> 
+    <Link to={linkPath} {...linkProps} onClick={handleClick}>
       <div className={`box-container ${specialStyle ? 'helpbox' : ''}`}>
         <div className='ticket-image'></div>
         <div className='ticket-name'>{ticketName}</div>
@@ -16,3 +28,7 @@ export default function Box(props) {
     </Link>
   );
 }
+
+Box.defaultProps = {
+  openInPopup: false,
+};

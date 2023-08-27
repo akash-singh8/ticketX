@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import Navbar2 from '../../components/navbar2/Navbar2'
+import GethelpPopup from '../../components/gethelp/Gethelp'
 
 export default function Businessupdates() {
   return (
@@ -13,12 +14,12 @@ export default function Businessupdates() {
                  FOR <span>BUSINESS UPDATES</span></div>
         </div>
         <div className='ticket-box '>
-            <Box ticketName='NEW PRODUCT LAUNCH'/>
-            <Box  ticketName='MARKETING'/>
-            <Box  ticketName='EXPANSION OF BUSINESS'/>
-            <Box  ticketName='REVENUE'/>
+            <GethelpPopup ticketName='NEW PRODUCT LAUNCH'/>
+            <GethelpPopup  ticketName='MARKETING'/>
+            <GethelpPopup  ticketName='EXPANSION OF BUSINESS'/>
+            <GethelpPopup  ticketName='REVENUE'/>
            
-            <Box  ticketName='OTHERS'/>
+            <GethelpPopup  ticketName='OTHERS'/>
         </div>
     </section>
     <Footer/>

@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import Navbar2 from '../../components/navbar2/Navbar2'
+import GethelpPopup from '../../components/gethelp/Gethelp'
 
 export default function Gethelp() {
   return (
@@ -13,12 +14,12 @@ export default function Gethelp() {
                  TO <span>GET HELP </span>WITH</div>
         </div>
         <div className='ticket-box '>
-            <Box ticketName='BUSINESS STRATEGY'/>
-            <Box  ticketName='MARKETING'/>
-            <Box  ticketName='FINANCIAL MANAGEMENT'/>
-            <Box  ticketName='TECHNICAL SUPPORT'/>
-            <Box  ticketName='OPERATION & LOGISTICS'/>
-            <Box  ticketName='OTHERS'/>
+            <GethelpPopup ticketName='BUSINESS STRATEGY'/>
+            <GethelpPopup  ticketName='MARKETING'/>
+            <GethelpPopup  ticketName='FINANCIAL MANAGEMENT'/>
+            <GethelpPopup  ticketName='TECHNICAL SUPPORT'/>
+            <GethelpPopup  ticketName='OPERATION & LOGISTICS'/>
+            <GethelpPopup  ticketName='OTHERS'/>
         </div>
     </section>
     <Footer/>
