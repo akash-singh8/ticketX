@@ -5,8 +5,10 @@ import Login from '../login/Login';
 import SignUp from '../signUp/SignUp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import {useNavigate} from 'react-router-dom';
 
 function NavBar() {
+  const navigate=useNavigate()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleClickServices= () => {
     const element =document.getElementById('services')
@@ -17,8 +19,8 @@ function NavBar() {
     element.scrollIntoView({behavior: 'smooth'});
   };
   const handleClickHome= () => {
-    const element =document.getElementById('hero')
-    element.scrollIntoView({behavior: 'smooth'});
+    
+    navigate("/")
   };
   
   

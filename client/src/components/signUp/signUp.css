@@ -7,7 +7,7 @@ form {
     margin: 10px 20px;
 
 }
-input{
+#MobileNo,#username,#password,#passwordConfirm{
     width: 100% !important;
     margin: 5px 5px;
     border-radius: 9.886px;
