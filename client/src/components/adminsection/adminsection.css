@@ -1,0 +1,11 @@
+.admin_section{
+    margin: 50px 120px;
+    justify-content: space-sround;
+    max-width: 1980px;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
