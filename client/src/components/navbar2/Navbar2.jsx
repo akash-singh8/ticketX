@@ -13,6 +13,10 @@ export default function Navbar2() {
   const handleClickHome = () => {
     navigate("/");
   };
+
+  const handleClickTicketHistory=()=>{
+    navigate("/ticket-history");
+  };
   return (
     <>
       <div className="Navbar2">
@@ -27,7 +31,7 @@ export default function Navbar2() {
             Services
             <div className="bar web"></div>
           </div>
-          <div className="links web">Ticket History</div>
+          <div className="links web"  onClick={handleClickTicketHistory}>Ticket History</div>
         </div>
         <div className="navigation">
 

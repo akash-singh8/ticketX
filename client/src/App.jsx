@@ -4,6 +4,7 @@ import Landing from "./pages/landing/Landing";
 import Gethelp from "./pages/gethelp/Gethelp";
 import Businessupdates from "./pages/businessupdates/Businessupdates";
 import Resources from "./pages/resources/Resources";
+import TicketHistory from "./pages/ticketHistory/TicketHistory";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/get-help" element={<Gethelp />}></Route>
           <Route path="/business-updates" element={<Businessupdates />}></Route>
           <Route path="/resources" element={<Resources/>}></Route>
+          <Route path="/ticket-history" element={<TicketHistory/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
