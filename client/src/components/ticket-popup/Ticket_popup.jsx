@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./ticket_popup.css";
-
+import Reqbox from "../reqbox/Reqbox";
 const CustomModal = styled(Modal)`
   display: flex;
   align-items: center;
@@ -78,6 +78,10 @@ export default function Ticketpopup(props) {
               <div className="inreview">Inreview</div>
               <div className="resolved">Resolved</div>
           </div>
+          <Reqbox/>
+          <Reqbox/>
+          <Reqbox/>
+          <Reqbox/>
         </ModalContent>
       </CustomModal>
     </div>
