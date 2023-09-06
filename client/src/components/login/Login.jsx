@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
+import {useNavigate} from 'react-router-dom';
 import "./login.css";
 
 const CustomModal = styled(Modal)`
@@ -30,6 +31,7 @@ const ModalContent = styled.div`
 `;
 export default function Login(props) {
   const styleName=props.styleName
+  const navigate=useNavigate();
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     username: "",
@@ -47,9 +49,10 @@ export default function Login(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    //add further logic here, like sending the form data to a server.
-
-    // Clear the form data after submission
+  
+    localStorage.setItem("user", JSON.stringify(formData))
+          
+    closeModal();
     setFormData({
       username: "",
       password: "",

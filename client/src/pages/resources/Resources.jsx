@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Footer from '../../components/footer/Footer'
-import Navbar2 from '../../components/navbar2/Navbar2'
+import NavBar from '../../components/navbar/NavBar'
 import GethelpPopup from '../../components/gethelp/Gethelp'
 
 export default function Resources() {
   return (
     <>
-    <Navbar2/>
+    <NavBar/>
     <section  className='gethelp-tickets raiseTicket'>
       <div className='heading'>
           <div>SELECT <br></br>

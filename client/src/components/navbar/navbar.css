@@ -80,6 +80,34 @@ line-height: normal;
     border: 1px solid rgba(0, 0, 0, 0.08);
 background: rgba(0, 0, 0, 0.02);
   }
+  .username{
+    width: 138px;
+height: 36px;
+flex-shrink: 0;
+border-radius: 8px;
+background: #D81F84;
+color: #FFF;
+font-family: 'Roboto';
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+align-items: center;
+justify-content: center;
+display: flex;
+}
+
+.profile{
+   background-color:#E8E8E8;
+   
+   height: 50px;
+   width: 50px;
+   border-radius: 100%;
+   position: relative;
+   right: 13px;
+   bottom: 7px;
+
+}
 
 @media(max-width:800px){
     .web{

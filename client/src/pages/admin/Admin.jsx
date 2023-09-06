@@ -1,12 +1,12 @@
 import React from "react";
 import Footer from "../../components/footer/Footer";
-import Navbar2 from "../../components/navbar2/Navbar2";
+import NavBar from "../../components/navbar/NavBar";
 import Adminsection from "../../components/adminsection/Adminsection";
 
 export default function Admin() {
   return (
     <>
-      <Navbar2 />
+      <NavBar />
       <Adminsection />
       <Footer />
     </>
