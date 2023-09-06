@@ -1,5 +1,4 @@
 import React from 'react'
-import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import NavBar from '../../components/navbar/NavBar'
 import GethelpPopup from '../../components/gethelp/Gethelp'

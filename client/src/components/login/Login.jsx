@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
-import {useNavigate} from 'react-router-dom';
+
 import "./login.css";
 
 const CustomModal = styled(Modal)`
@@ -31,7 +31,6 @@ const ModalContent = styled.div`
 `;
 export default function Login(props) {
   const styleName=props.styleName
-  const navigate=useNavigate();
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     username: "",
