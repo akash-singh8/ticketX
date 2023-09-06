@@ -6,6 +6,7 @@ import Businessupdates from "./pages/businessupdates/Businessupdates";
 import Resources from "./pages/resources/Resources";
 import TicketHistory from "./pages/ticketHistory/TicketHistory";
 import Admin from "./pages/admin/Admin";
+import TicketRequests from "./pages/ticketrequests/Ticketrequests";
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
           <Route path="/resources" element={<Resources/>}></Route>
           <Route path="/ticket-history" element={<TicketHistory/>}></Route>
           <Route path="/admin" element={<Admin/>}></Route>
+          <Route path="/ticket-history/requests" element={<TicketRequests/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

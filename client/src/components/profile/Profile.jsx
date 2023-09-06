@@ -1,7 +1,14 @@
 import React from 'react'
 import "./profile.css"
-import Ticketpopup from '../ticket-popup/Ticket_popup'
+
+import {useNavigate} from 'react-router-dom';
+
 export default function Profile() {
+  const navigate=useNavigate()
+  const handleClickTicketHistory = () => {
+    navigate("/ticket-history/requests");
+  
+};
   return (
     <>
     <div className='profile_page'>
@@ -28,7 +35,9 @@ export default function Profile() {
             <div className='hero-button edit'>LogOut</div>
         </div>
         </div>
-        <Ticketpopup styleName="req-popup"/>
+        <div className="req-popup" onClick={handleClickTicketHistory}>
+        Ticket History
+      </div>
     </div>
     </>
   )
