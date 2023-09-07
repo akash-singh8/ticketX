@@ -10,9 +10,9 @@ export default function RaiseTicket() {
                  TO <span>RAISE TICKET</span></div>
         </div>
         <div className='ticket-box'>
-            <Box ticketName='GET HELP'/>
-            <Box ticketName='BUSINESS UPDATES'/>
-            <Box ticketName='RESOURCES'/>
+            <Box ticketName='GET HELP' link="/get-help"/>
+            <Box ticketName='BUSINESS UPDATES' link="/business-updates"/>
+            <Box ticketName='RESOURCES' link="/resources"/>
         </div>
     </section>
   )

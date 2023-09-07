@@ -10,9 +10,7 @@ export default function Gethelp() {
   const auth = JSON.parse(authData);
  
   const navigate =useNavigate()
-  const toadmin=()=>{
-             navigate("/admin")
-  }
+  
   return (
     <>
       <NavBar/>
@@ -22,24 +20,22 @@ export default function Gethelp() {
                  TO <span>GET HELP </span>WITH</div>
         </div>
         <div className='ticket-box '>
-          {auth.username==="client" &&
-          <>
+          
             <GethelpPopup ticketName='BUSINESS STRATEGY'/>
             <GethelpPopup  ticketName='MARKETING'/>
             <GethelpPopup  ticketName='FINANCIAL MANAGEMENT'/>
             <GethelpPopup  ticketName='TECHNICAL SUPPORT'/>
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'/>
             <GethelpPopup  ticketName='OTHERS'/>
-          </>}
-          {auth.username==="admin" &&
+          
+          {auth && auth.username==="admin" &&
           <>
-             <Box ticketName='BUSINESS STRATEGY' onClick={toadmin}  />
-             <Box ticketName='MARKETING' onClick={toadmin} />
-             <Box ticketName='FINANCIAL MANAGEMENT' onClick={toadmin} />
-             <Box ticketName='TECHNICAL SUPPORT' onClick={toadmin} />
-             <Box ticketName='OPERATION & LOGISTICS' onClick={toadmin} />
-             <Box ticketName='OTHERS' onClick={toadmin} />
-             
+             <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy"  />
+             <Box ticketName='MARKETING' link="/admin/marketing" />
+             <Box ticketName='FINANCIAL MANAGEMENT' link="/admin/financial-management" />
+             <Box ticketName='TECHNICAL SUPPORT' link="/admin/technical-support" />
+             <Box ticketName='OPERATION & LOGISTICS' link="/admin/operation&logistics" />
+             <Box ticketName='OTHERS'link="/admin/others" />
           </>}
         </div>
     </section>
