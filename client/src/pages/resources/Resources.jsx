@@ -16,12 +16,13 @@ export default function Resources() {
                <span>RESOURCES</span>CATEGORY</div>
       </div>
       <div className='ticket-box '>
-      
+      {auth.username==="client" && 
+        <>
            
            <GethelpPopup ticketName='NEW TRAININGS'/>
            <GethelpPopup  ticketName='INFORMATION ON PROGRAM'/>
            <GethelpPopup  ticketName='RECORDING OF SESSIONS'/>
-      
+        </>}
       {auth && auth.username==="admin" &&
         <>
            <Box ticketName='NEW TRAININGS' link="/admin/new-trainings" />

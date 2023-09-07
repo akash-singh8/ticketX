@@ -20,15 +20,16 @@ export default function Gethelp() {
                  TO <span>GET HELP </span>WITH</div>
         </div>
         <div className='ticket-box '>
-          
+          {auth.username==="client" &&
+          <>
             <GethelpPopup ticketName='BUSINESS STRATEGY'/>
             <GethelpPopup  ticketName='MARKETING'/>
             <GethelpPopup  ticketName='FINANCIAL MANAGEMENT'/>
             <GethelpPopup  ticketName='TECHNICAL SUPPORT'/>
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'/>
             <GethelpPopup  ticketName='OTHERS'/>
-          
-          {auth && auth.username==="admin" &&
+          </>}
+          { auth && auth.username==="admin" &&
           <>
              <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy"  />
              <Box ticketName='MARKETING' link="/admin/marketing" />

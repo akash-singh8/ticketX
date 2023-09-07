@@ -15,13 +15,14 @@ export default function Businessupdates() {
                  FOR <span>BUSINESS UPDATES</span></div>
         </div>
         <div className='ticket-box '>
-        
+        {auth.username==="client" && 
+        <>
             <GethelpPopup ticketName='NEW PRODUCT LAUNCH'/>
             <GethelpPopup  ticketName='MARKETING'/>
             <GethelpPopup  ticketName='EXPANSION OF BUSINESS'/>
             <GethelpPopup  ticketName='REVENUE'/>
             <GethelpPopup  ticketName='OTHERS'/>
-      
+        </>}
         {auth && auth.username==="admin" && 
         <>
             <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch"/>

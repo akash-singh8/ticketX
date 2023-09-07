@@ -4,10 +4,17 @@ import "./profile.css"
 import {useNavigate} from 'react-router-dom';
 
 export default function Profile() {
+  const authData = localStorage.getItem("user");
+  const auth = JSON.parse(authData);
   const navigate=useNavigate()
   const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
   
+};
+
+const logout = () => {
+  localStorage.clear();
+  navigate('/');
 };
   return (
     <>
@@ -20,7 +27,7 @@ export default function Profile() {
                 <div className='name'>
 
                  <div className='title'>Name</div>
-                 <div className='name-box'>UserName</div>
+                 <div className='name-box'>{auth.username}</div>
                 </div>
                 <div className='name'>
                  <div className='title'>Phone No</div>
@@ -32,7 +39,7 @@ export default function Profile() {
         </div>
         <div className='buttons'>
             <div className='hero-button edit'>Edit Profile</div>
-            <div className='hero-button edit'>LogOut</div>
+            <div className='hero-button edit' onClick={logout}>LogOut</div>
         </div>
         </div>
         <div className="req-popup" onClick={handleClickTicketHistory}>

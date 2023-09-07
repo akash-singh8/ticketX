@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const navigate = useNavigate();
-  const auth = localStorage.getItem("user");
+  const authData = localStorage.getItem("user");
+  const auth = JSON.parse(authData);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleClickServices = () => {
     const element = document.getElementById("services");
@@ -47,10 +48,10 @@ function NavBar() {
           </div>}
         </div>
         <img className="logo " src={logo} alt="company-logo"></img>
-        {auth ? (
+        {authData ? (
           <>
             <div className="navigation">
-              <div className="username">UserName</div>
+              <div className="username">{auth.username}</div>
               <div className="profile"></div>
             </div>
           </>
