@@ -2,6 +2,8 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
+import Login from "../login/Login";
+import { useNavigate } from "react-router-dom";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -30,7 +32,7 @@ const ModalContent = styled.div`
 `;
 export default function SignUp(props) {
   const {styleName,text}=props
-  
+  const navigate=useNavigate()
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
@@ -51,7 +53,7 @@ export default function SignUp(props) {
     event.preventDefault();
     console.log(formData);
     //add further logic here, like sending the form data to a server.
-
+    navigate("/") 
     // Clear the form data after submission
     setFormData({
       username: "",
@@ -152,7 +154,8 @@ export default function SignUp(props) {
               SignUp
             </div>
             <div className="new-account">Already have an account? </div>
-            <div className="forgotPass create-acc">Login</div>
+            <Login styleName="forgotPass create-acc"/>
+            
           </form>
         </ModalContent>
       </CustomModal>

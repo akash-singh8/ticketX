@@ -30,7 +30,7 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Login(props) {
-  const styleName=props.styleName
+  const {styleName,text}=props
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     username: "",
@@ -50,6 +50,7 @@ export default function Login(props) {
     console.log(formData);
   
     localStorage.setItem("user", JSON.stringify(formData))
+    window.location.reload();
           
     closeModal();
     setFormData({
@@ -82,7 +83,7 @@ export default function Login(props) {
   return (
     <div>
       <div className={styleName} onClick={openModal}>
-        Login
+        {text?text:"Login"}
       </div>
 
       <CustomModal
