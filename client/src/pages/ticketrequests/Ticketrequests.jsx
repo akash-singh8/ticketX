@@ -1,14 +1,13 @@
 import React from "react";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/navbar/NavBar";
-import Adminsection from "../../components/adminsection/Adminsection";
+import TicketRequestssection from "../../components/ticket-popup/Ticket_popup";
 
-export default function Admin(props) {
-  const cat=props.cat
+export default function TicketRequests() {
   return (
     <>
       <NavBar />
-      <Adminsection cat={cat} />
+      <TicketRequestssection/>
       <Footer />
     </>
   );

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./adminsection.css";
 import Reqbox from "../reqbox/Reqbox";
 import Pagenavigation from "../pagenavigation/Pagenavigation";
-export default function Adminsection() {
+export default function Adminsection(props) {
+  const cat=props.cat;
   const [sortby, setsortby] = useState(false);
   return (
     <>
@@ -11,7 +12,7 @@ export default function Adminsection() {
           <div className="heading">
             <div>
               REQUESTS FOR<br></br>
-              <span>BUSINESS STRATERGY</span>
+              <span>{cat}</span>
             </div>
           </div>
           <div className="container">

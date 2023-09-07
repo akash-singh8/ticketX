@@ -88,8 +88,8 @@ export default function Gethelp(props) {
       <div className="form-heading-signUp">GET HELP</div>
       <form className="signup-form">
         
-      <div>{`>`} BUSINESS STRATEGY</div>
-      <div>{`>`} Financially want some help</div>
+      <div>{`>`} {ticketName}</div>
+      
         <textarea
           type="text"
           placeholder="Write concise description of your request for assistance with business strategy"
