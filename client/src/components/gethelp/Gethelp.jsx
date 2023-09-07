@@ -35,7 +35,7 @@ const ModalContent = styled.div`
 
 export default function Gethelp(props) {
   const navigate =useNavigate();
-    const ticketName=props.ticketName
+    const {ticketName,cat}=props
     const authData = localStorage.getItem("user");
     const auth = JSON.parse(authData);
   const modalRef = useRef();
@@ -92,7 +92,7 @@ export default function Gethelp(props) {
     ariaHideApp={false}
   >
     <ModalContent ref={modalRef}>
-      <div className="form-heading-signUp">GET HELP</div>
+      <div className="form-heading-signUp">{cat}</div>
       <form className="signup-form">
         
       <div>{`>`} {ticketName}</div>
