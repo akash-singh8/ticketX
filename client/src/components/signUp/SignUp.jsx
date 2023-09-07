@@ -28,8 +28,9 @@ const ModalContent = styled.div`
   border-radius: 8px;
   display: block;
 `;
-export default function Login(props) {
-  const styleName=props.styleName
+export default function SignUp(props) {
+  const {styleName,text}=props
+  
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
@@ -82,7 +83,7 @@ export default function Login(props) {
   return (
     <div>
       <div className={styleName} onClick={openModal}>
-        SignUp
+        {text ? text :'SignUp'}
       </div>
 
       <CustomModal

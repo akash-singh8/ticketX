@@ -20,7 +20,8 @@ export default function Gethelp() {
                  TO <span>GET HELP </span>WITH</div>
         </div>
         <div className='ticket-box '>
-          {auth.username==="client" &&
+
+          {(!auth || (auth && auth.username==="client")) &&
           <>
             <GethelpPopup ticketName='BUSINESS STRATEGY'/>
             <GethelpPopup  ticketName='MARKETING'/>

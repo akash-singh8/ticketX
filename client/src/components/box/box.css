@@ -27,10 +27,15 @@ display: flex;
 .box-container{
     padding: 15px 5px;
     width: 400px;
+    cursor: pointer;
 }
 
 .box-link{
    text-decoration: none;
+}
+a{
+    text-decoration: none;
+
 }
 
 @media (max-width:500px) {
