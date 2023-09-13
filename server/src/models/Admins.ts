@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,11 +14,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  location: {
-    type: String,
-    required: true,
-  },
-  ticketRaised: [
+  ticketResolved: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "tickets",
@@ -26,6 +22,6 @@ const UserSchema = new mongoose.Schema({
   ],
 });
 
-const UserModel = mongoose.model("User", UserSchema);
+const Admins = mongoose.model("Admin", AdminSchema);
 
-module.exports = UserModel;
+export default Admins;

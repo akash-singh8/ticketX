@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserRaised = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -33,11 +33,11 @@ const TicketSchema = new mongoose.Schema({
     required: true,
   },
   raisedBy: {
-    type: UserSchema,
+    type: UserRaised,
     required: true,
   },
 });
 
-const TicketModel = mongoose.model("Ticket", TicketSchema);
+const Tickets = mongoose.model("Ticket", TicketSchema);
 
-module.exports = TicketModel;
+export default Tickets;
