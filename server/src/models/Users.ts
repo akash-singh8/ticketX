@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
   },
   OTP: {
     type: String,
-    required: false,
+    required: true,
   },
   OTP_Attempt: {
     type: Number,
