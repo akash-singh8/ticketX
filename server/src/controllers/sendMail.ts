@@ -27,7 +27,7 @@ const sendMail = async (email: string, OTP: number): MailPromise => {
           <hr>
           <br>
           <img src="https://imagineher.org/images/ih_logo.png" alt="Imagine Her" style="max-width: 80px;">
-          <p><strong>Imagine Her Entrepreneur Support Portal</strong></p>
+          <p><strong>Imagine Her<br>Entrepreneur Support Portal</strong></p>
         </body>
     `,
   };
