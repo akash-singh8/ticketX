@@ -3,9 +3,26 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Users from "../models/Users.js";
 import sendMail from "./sendMail.js";
+import { UserLoginData, UserSignupData } from "../types/user.js";
+import {
+  userLoginInputSchema,
+  userSignupInputSchema,
+} from "../validation/user.js";
 
 export const handleUserSignup = async (req: Request, res: Response) => {
-  const { name, email, password, location } = req.body;
+  const bodyData: UserSignupData = req.body;
+
+  const isValidInput = userSignupInputSchema.safeParse(bodyData);
+
+  if (!isValidInput.success) {
+    res.status(400).json({
+      message: isValidInput.error.issues[0].message,
+      error: isValidInput.error,
+    });
+    return;
+  }
+
+  const { name, email, password, location } = isValidInput.data;
 
   try {
     const user = await Users.findOne({ email });
@@ -50,7 +67,19 @@ export const handleUserSignup = async (req: Request, res: Response) => {
 };
 
 export const handleUserLogin = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const bodyData: UserLoginData = req.body;
+
+  const isValidInput = userLoginInputSchema.safeParse(bodyData);
+
+  if (!isValidInput.success) {
+    res.status(400).json({
+      message: isValidInput.error.issues[0].message,
+      error: isValidInput.error,
+    });
+    return;
+  }
+
+  const { email, password } = isValidInput.data;
 
   try {
     const user = await Users.findOne({ email });
@@ -84,7 +113,9 @@ export const handleUserLogin = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Logged successfully", authToken: token });
   } catch (err) {
-    res.status(500).json({ message: "Internal server error during user login" });
+    res
+      .status(500)
+      .json({ message: "Internal server error during user login" });
     console.log(err);
   }
 };
