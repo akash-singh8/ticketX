@@ -42,7 +42,49 @@ export const handleUserSignup = async (req: Request, res: Response) => {
     });
     res.status(201).json({ message: "Signed successfully", authToken: token });
   } catch (err) {
-    res.status(500).json({ message: "Internal server error during user signup" });
+    res
+      .status(500)
+      .json({ message: "Internal server error during user signup" });
+    console.log(err);
+  }
+};
+
+export const handleUserLogin = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await Users.findOne({ email });
+
+    if (!user) {
+      res
+        .status(404)
+        .json({ message: `The user with the email ${email} does not exist.` });
+      return;
+    }
+
+    if (user.banned) {
+      res.status(403).json({ message: `User ${email} is banned.` });
+      return;
+    }
+
+    const isValidPswd = await bcrypt.compare(password, user.password);
+
+    if (!isValidPswd) {
+      res.status(401).json({ message: "Invalid password" });
+      return;
+    }
+
+    if (!process.env.JWT_AUTH_SECRET) {
+      throw new Error("JWT_AUTH_SECRET environment variable is not defined.");
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_AUTH_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({ message: "Logged successfully", authToken: token });
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error during user login" });
     console.log(err);
   }
 };
