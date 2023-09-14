@@ -53,9 +53,13 @@ export const handleAdminSignup = async (req: Request, res: Response) => {
     });
     await newAdmin.save();
 
-    const token = jwt.sign({ id: newAdmin._id }, process.env.JWT_AUTH_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: newAdmin._id, role: "admin" },
+      process.env.JWT_AUTH_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     res.status(201).json({ message: "Signed successfully", authToken: token });
   } catch (err) {
     res
@@ -106,9 +110,13 @@ export const handleAdminLogin = async (req: Request, res: Response) => {
       throw new Error("JWT_AUTH_SECRET environment variable is not defined.");
     }
 
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_AUTH_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: admin._id, role: "admin" },
+      process.env.JWT_AUTH_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({ message: "Logged successfully", authToken: token });
   } catch (err) {

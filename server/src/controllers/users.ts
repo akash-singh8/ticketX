@@ -54,9 +54,13 @@ export const handleUserSignup = async (req: Request, res: Response) => {
     });
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_AUTH_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: newUser._id, role: "user" },
+      process.env.JWT_AUTH_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     res.status(201).json({ message: "Signed successfully", authToken: token });
   } catch (err) {
     res
@@ -107,9 +111,13 @@ export const handleUserLogin = async (req: Request, res: Response) => {
       throw new Error("JWT_AUTH_SECRET environment variable is not defined.");
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_AUTH_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: user._id, role: "user" },
+      process.env.JWT_AUTH_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({ message: "Logged successfully", authToken: token });
   } catch (err) {
