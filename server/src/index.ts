@@ -2,11 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import AuthRouter from "./routes/auth";
+import otpRouter from "./routes/otp";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use("/auth", AuthRouter);
+app.use("/otp", otpRouter);
 
 const mongodb_uri = process.env.MONGODB_URI;
 
