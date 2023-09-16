@@ -6,6 +6,7 @@ import SignUp from "../signUp/SignUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import profile from "../../assets/profile.png"
 
 function NavBar() {
   const navigate = useNavigate();
@@ -66,7 +67,9 @@ function NavBar() {
           <>
             <div className="navigation profile-design"onClick={handleProfile}>
               <div className="username">{auth.username}</div>
-              <div className="profile"></div>
+              
+                <img src={profile} alt="profile-pic" className="profile"/>
+              
             </div>
           </>
         ) : (
