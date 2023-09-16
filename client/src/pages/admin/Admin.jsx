@@ -14,3 +14,7 @@ export default function Admin(props) {
     </>
   );
 }
+
+Admin.defaultProps={
+  recent:false,
+};
