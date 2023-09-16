@@ -23,13 +23,8 @@ function NavBar() {
     }, 100);
   };
   const handleClickStories = () => {
-    navigate("/");
-    setTimeout(() => {
-      const element = document.getElementById("stories");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 100);
+    window.location.href="https://imagineher.org/our-impact"
+    
     
   };
   const handleClickHome = () => {
@@ -59,7 +54,7 @@ function NavBar() {
           <div className="links web"  onClick={handleClickTicketHistory}>Ticket History</div>
         :
           <div className="links web" onClick={handleClickStories}>
-            Stories
+            Impact
           </div>}
         </div>
         <img className="company-logo " src={logo} alt="company-logo"></img>
@@ -99,7 +94,7 @@ function NavBar() {
           <div className="links "  onClick={handleClickTicketHistory}>Ticket History</div>
         :
           <div className="links" onClick={handleClickStories}>
-            Stories
+            Impact
           <Login styleName="links" />
           <SignUp styleName="links" />
           </div>}
