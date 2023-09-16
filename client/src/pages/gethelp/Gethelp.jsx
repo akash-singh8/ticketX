@@ -3,13 +3,13 @@ import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import NavBar from '../../components/navbar/NavBar'
 import GethelpPopup from '../../components/gethelp/Gethelp'
-import {useNavigate } from 'react-router-dom'
+
 
 export default function Gethelp() {
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
  
-  const navigate =useNavigate()
+  
   
   return (
     <>

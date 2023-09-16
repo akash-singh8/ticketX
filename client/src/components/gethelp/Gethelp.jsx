@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import styled from "styled-components";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import Box from '../box/Box'
 import './gethelp.css'
 import { useNavigate } from "react-router-dom";
