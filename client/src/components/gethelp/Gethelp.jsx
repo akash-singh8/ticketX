@@ -3,6 +3,8 @@ import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import Box from '../box/Box'
 import './gethelp.css'
+import { useNavigate } from "react-router-dom";
+import SignUp from "../signUp/SignUp";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -32,14 +34,17 @@ const ModalContent = styled.div`
   `;
 
 export default function Gethelp(props) {
-    const ticketName=props.ticketName
-   
+  const navigate =useNavigate();
+    const {ticketName,cat}=props
+    const authData = localStorage.getItem("user");
+    const auth = JSON.parse(authData);
   const modalRef = useRef();
   const [formData, setFormData] = useState({
    request:" "
   });
 
   const handleChange = (event) => {
+
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -50,7 +55,9 @@ export default function Gethelp(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    //add further logic here, like sending the form data to a server.
+    if(!auth){
+         navigate()
+    }
 
     // Clear the form data after submission
     setFormData({
@@ -85,7 +92,7 @@ export default function Gethelp(props) {
     ariaHideApp={false}
   >
     <ModalContent ref={modalRef}>
-      <div className="form-heading-signUp">GET HELP</div>
+      <div className="form-heading-signUp">{cat}</div>
       <form className="signup-form">
         
       <div>{`>`} {ticketName}</div>
@@ -100,7 +107,10 @@ export default function Gethelp(props) {
           onChange={handleChange}
           required
         />
-        
+        {!auth ? 
+        <>
+           <SignUp text="Submit Request" styleName="button login-button request-button"/>
+        </>:<>
         <div
           className="button login-button request-button"
           onClick={handleSubmit}
@@ -108,6 +118,7 @@ export default function Gethelp(props) {
         >
           Submit Request
         </div>
+        </>}
         <div className="new-account request-back" onClick={closeModal}>Go Back</div>
         
       </form>

@@ -16,12 +16,12 @@ export default function Resources() {
                <span>RESOURCES</span>CATEGORY</div>
       </div>
       <div className='ticket-box '>
-      {auth.username==="client" && 
+      {(!auth || (auth && auth.username==="client")) && 
         <>
            
-           <GethelpPopup ticketName='NEW TRAININGS'/>
-           <GethelpPopup  ticketName='INFORMATION ON PROGRAM'/>
-           <GethelpPopup  ticketName='RECORDING OF SESSIONS'/>
+           <GethelpPopup ticketName='NEW TRAININGS' cat="RESOURCES"/>
+           <GethelpPopup  ticketName='INFORMATION ON PROGRAM'cat="RESOURCES"/>
+           <GethelpPopup  ticketName='RECORDING OF SESSIONS'cat="RESOURCES"/>
         </>}
       {auth && auth.username==="admin" &&
         <>

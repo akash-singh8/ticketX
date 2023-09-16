@@ -13,17 +13,31 @@ function NavBar() {
   const auth = JSON.parse(authData);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleClickServices = () => {
-    const element = document.getElementById("services");
-    element.scrollIntoView({ behavior: "smooth" });
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById("services");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
   const handleClickStories = () => {
-    const element = document.getElementById("stories");
-    element.scrollIntoView({ behavior: "smooth" });
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById("stories");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+    
   };
   const handleClickHome = () => {
     navigate("/");
   };
   const handleClickTicketHistory=()=>{
+    navigate("/ticket-history/requests");
+  };
+  const handleProfile=()=>{
     navigate("/ticket-history");
   };
 
@@ -47,10 +61,10 @@ function NavBar() {
             Stories
           </div>}
         </div>
-        <img className="logo " src={logo} alt="company-logo"></img>
+        <img className="company-logo " src={logo} alt="company-logo"></img>
         {authData ? (
           <>
-            <div className="navigation">
+            <div className="navigation profile-design"onClick={handleProfile}>
               <div className="username">{auth.username}</div>
               <div className="profile"></div>
             </div>

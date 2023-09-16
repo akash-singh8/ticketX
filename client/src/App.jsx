@@ -29,7 +29,7 @@ function App() {
           <Route path="/admin/new-product-launch"element={<Admin cat="NEW PRODUCT LAUNCH"/>}></Route>
           <Route path="/admin/expansion-of-business"element={<Admin cat="EXPANSION OF BUSINESS"/>}></Route>
           <Route path="/admin/revenue"element={<Admin cat="REVENUE"/>}></Route>
-          
+          <Route path="/admin/requests"element={<Admin recent={true}/>}></Route>
           <Route path="/ticket-history/requests" element={<TicketRequests/>}></Route>
         </Routes>
       </BrowserRouter>

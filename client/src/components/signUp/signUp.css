@@ -7,7 +7,7 @@ form {
     margin: 10px 20px;
 
 }
-#MobileNo,#username,#password,#passwordConfirm{
+#MobileNo,#username,#password,#passwordConfirm,#dropdown{
     width: 100% !important;
     margin: 5px 5px;
     border-radius: 9.886px;

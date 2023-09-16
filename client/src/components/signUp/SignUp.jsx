@@ -2,6 +2,8 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
+import Login from "../login/Login";
+import { useNavigate } from "react-router-dom";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -28,8 +30,9 @@ const ModalContent = styled.div`
   border-radius: 8px;
   display: block;
 `;
-export default function Login(props) {
-  const styleName=props.styleName
+export default function SignUp(props) {
+  const { styleName, text } = props;
+  const navigate = useNavigate();
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
@@ -50,7 +53,7 @@ export default function Login(props) {
     event.preventDefault();
     console.log(formData);
     //add further logic here, like sending the form data to a server.
-
+    navigate("/");
     // Clear the form data after submission
     setFormData({
       username: "",
@@ -82,7 +85,7 @@ export default function Login(props) {
   return (
     <div>
       <div className={styleName} onClick={openModal}>
-        SignUp
+        {text ? text : "SignUp"}
       </div>
 
       <CustomModal
@@ -118,6 +121,15 @@ export default function Login(props) {
               onChange={handleChange}
               required
             />
+            <label for="dropdown">Location:</label>
+            <select id="dropdown">
+              <option value="option1">Northern Region</option>
+              <option value="option2">Eastern Region</option>
+              <option value="option3">Western Region</option>
+              <option value="option3">South Western Region</option>
+              <option value="option3">West Nile</option>
+              <option value="option3">Central Region</option>
+            </select>
             <label htmlFor="password" className="signUp">
               Password
             </label>
@@ -151,7 +163,7 @@ export default function Login(props) {
               SignUp
             </div>
             <div className="new-account">Already have an account? </div>
-            <div className="forgotPass create-acc">Login</div>
+            <Login styleName="forgotPass create-acc" />
           </form>
         </ModalContent>
       </CustomModal>
