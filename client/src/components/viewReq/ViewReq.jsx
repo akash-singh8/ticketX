@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React, { useState, useRef } from "react";
 
 import "./viewReq.css";
-import { useNavigate } from "react-router-dom";
+
 import profile from "../../assets/profile.png";
 
 const CustomModal = styled(Modal)`
@@ -33,7 +33,7 @@ const ModalContent = styled.div`
 `;
 
 export default function ViewReq() {
-  const navigate = useNavigate();
+  
   
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
@@ -42,15 +42,7 @@ export default function ViewReq() {
 
   
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
-    if (!auth) {
-      navigate();
-    }
-
-    
-  };
+  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
