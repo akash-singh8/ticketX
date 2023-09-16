@@ -31,8 +31,8 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function SignUp(props) {
-  const {styleName,text}=props
-  const navigate=useNavigate()
+  const { styleName, text } = props;
+  const navigate = useNavigate();
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
@@ -53,7 +53,7 @@ export default function SignUp(props) {
     event.preventDefault();
     console.log(formData);
     //add further logic here, like sending the form data to a server.
-    navigate("/") 
+    navigate("/");
     // Clear the form data after submission
     setFormData({
       username: "",
@@ -85,7 +85,7 @@ export default function SignUp(props) {
   return (
     <div>
       <div className={styleName} onClick={openModal}>
-        {text ? text :'SignUp'}
+        {text ? text : "SignUp"}
       </div>
 
       <CustomModal
@@ -121,6 +121,15 @@ export default function SignUp(props) {
               onChange={handleChange}
               required
             />
+            <label for="dropdown">Location:</label>
+            <select id="dropdown">
+              <option value="option1">Northern Region</option>
+              <option value="option2">Eastern Region</option>
+              <option value="option3">Western Region</option>
+              <option value="option3">South Western Region</option>
+              <option value="option3">West Nile</option>
+              <option value="option3">Central Region</option>
+            </select>
             <label htmlFor="password" className="signUp">
               Password
             </label>
@@ -154,8 +163,7 @@ export default function SignUp(props) {
               SignUp
             </div>
             <div className="new-account">Already have an account? </div>
-            <Login styleName="forgotPass create-acc"/>
-            
+            <Login styleName="forgotPass create-acc" />
           </form>
         </ModalContent>
       </CustomModal>

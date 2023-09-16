@@ -35,6 +35,9 @@ function NavBar() {
     navigate("/");
   };
   const handleClickTicketHistory=()=>{
+    navigate("/ticket-history/requests");
+  };
+  const handleProfile=()=>{
     navigate("/ticket-history");
   };
 
@@ -61,7 +64,7 @@ function NavBar() {
         <img className="company-logo " src={logo} alt="company-logo"></img>
         {authData ? (
           <>
-            <div className="navigation profile-design">
+            <div className="navigation profile-design"onClick={handleProfile}>
               <div className="username">{auth.username}</div>
               <div className="profile"></div>
             </div>

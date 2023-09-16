@@ -28,6 +28,7 @@ left: 18px;
 .profile-design{
     position: relative;
     bottom: 6px;
+    cursor: pointer;
 }
 .links{
     color: #35363A;
