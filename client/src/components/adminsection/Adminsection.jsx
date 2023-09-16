@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./adminsection.css";
 import Reqbox from "../reqbox/Reqbox";
 import Pagenavigation from "../pagenavigation/Pagenavigation";
+import Location from "../location/Location";
 export default function Adminsection(props) {
   const cat=props.cat;
   const [sortby, setsortby] = useState(false);
@@ -28,6 +29,7 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
+        <Location/>
         <div className="center">
           <div className="req-status admin_status">
             <div className="pending">Pending</div>
