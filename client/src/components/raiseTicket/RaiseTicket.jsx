@@ -12,7 +12,7 @@ export default function RaiseTicket() {
         <div className='ticket-box'>
             <Box ticketName='GET HELP' link="/get-help"/>
             <Box ticketName='BUSINESS UPDATES' link="/business-updates"/>
-            <Box ticketName='RESOURCES' link="/resources"/>
+            <Box ticketName='RESOURCES' link="https://imagineher.org/programs/social-enterprise-innovation-program"/>
         </div>
     </section>
   )

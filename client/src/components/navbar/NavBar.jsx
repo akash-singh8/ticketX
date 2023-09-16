@@ -23,7 +23,7 @@ function NavBar() {
     }, 100);
   };
   const handleClickStories = () => {
-    window.location.href="https://imagineher.org/our-impact"
+    window.open("https://imagineher.org/our-impact",'_blank')
     
     
   };

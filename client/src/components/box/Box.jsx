@@ -14,8 +14,12 @@ export default function Box(props) {
       onClick(); 
     }
     else{
-      navigate(link)
-      window.scrollTo(0, 0);
+      if (link.startsWith('http://') || link.startsWith('https://')) {
+        window.open(link,'_blank');
+      } else {
+        navigate(link);
+        window.scrollTo(0, 0);
+      }
 
     }
   };
