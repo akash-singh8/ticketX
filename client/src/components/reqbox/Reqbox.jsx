@@ -1,5 +1,6 @@
 import React from 'react'
 import "./reqbox.css"
+import ViewReq from '../viewReq/ViewReq'
 export default function Reqbox() {
   return (
     <div className='req-box'>
@@ -7,9 +8,7 @@ export default function Reqbox() {
             <div className='ticket-title'>Title</div>
             <div className='ticket-detail'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm...</div>
         </div>
-        <div className='container2-req'>
-            <div className='view-button'>View</div>
-        </div>
+        <ViewReq/>
     </div>
   )
 }
