@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import AuthRouter from "./routes/auth";
 import otpRouter from "./routes/otp";
+import { authenticateJWT } from "./middlewares/authJWT";
+import { validateStats } from "./middlewares/authStats";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use("/auth", AuthRouter);
-app.use("/otp", otpRouter);
+app.use("/otp", authenticateJWT, validateStats, otpRouter);
 
 const mongodb_uri = process.env.MONGODB_URI;
 
