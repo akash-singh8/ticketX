@@ -2,8 +2,8 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
-import Login from "../login/Login";
-import { useNavigate } from "react-router-dom";
+
+import { useModal } from "../modalProvider/Modalprovider";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -15,11 +15,12 @@ const CustomModal = styled(Modal)`
   left: 0;
   right: 0;
   bottom: 0;
-`;
-
-const ModalContent = styled.div`
+  `;
+  
+  const ModalContent = styled.div`
   width: 500px;
-
+  z-index:1000;
+  position: fixed;
   flex-shrink: 0;
   border-radius: 16.477px;
   background: #fff;
@@ -30,17 +31,19 @@ const ModalContent = styled.div`
   border-radius: 8px;
   display: block;
 `;
-export default function SignUp(props) {
-  const { styleName, text } = props;
-  const navigate = useNavigate();
+export default function SignUp() {
+  
+  const {signupModalIsOpen,closeSignupModal,openLoginModal} = useModal();
   const modalRef = useRef();
+ 
   const [formData, setFormData] = useState({
     name: "",
     password: "",
     number: "",
     Confirmpassword: "",
+    location: "",
   });
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -49,31 +52,26 @@ export default function SignUp(props) {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    closeSignupModal();
+    openLoginModal();
+    //event.preventDefault();
     console.log(formData);
     //add further logic here, like sending the form data to a server.
-    navigate("/");
+    //console.log(openLoginModal);
     // Clear the form data after submission
     setFormData({
       username: "",
       password: "",
     });
   };
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  
+ 
 
   useEffect(() => {
     const handleModalClick = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
+        closeSignupModal();
       }
     };
     document.addEventListener("mousedown", handleModalClick);
@@ -82,16 +80,20 @@ export default function SignUp(props) {
     };
   }, []);
 
+  const handleLogin=()=>{
+    closeSignupModal();
+    openLoginModal();
+  }
   return (
     <div>
-      <div className={styleName} onClick={openModal}>
+        {/* <div className={styleName} onClick={openSignupModal}>
         {text ? text : "SignUp"}
-      </div>
-
+      </div> */}
+       
       <CustomModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Login Modal"
+        isOpen={signupModalIsOpen}
+        onRequestClose={closeSignupModal}
+        contentLabel="SignUp Modal"
         ariaHideApp={false}
       >
         <ModalContent ref={modalRef}>
@@ -121,15 +123,21 @@ export default function SignUp(props) {
               onChange={handleChange}
               required
             />
-            <label for="dropdown">Location:</label>
-            <select id="dropdown">
-              <option value="option1">Northern Region</option>
-              <option value="option2">Eastern Region</option>
-              <option value="option3">Western Region</option>
-              <option value="option3">South Western Region</option>
-              <option value="option3">West Nile</option>
-              <option value="option3">Central Region</option>
+            <label htmlFor="dropdown">Location:</label>
+            <select
+              id="dropdown"
+              name="location"
+              value={formData.location}
+             
+            >
+              <option value="Northern Region">Northern Region</option>
+              <option value="Eastern Region">Eastern Region</option>
+              <option value="Western Region">Western Region</option>
+              <option value="South Western Region">South Western Region</option>
+              <option value="West Nile">West Nile</option>
+              <option value="Central Region">Central Region</option>
             </select>
+
             <label htmlFor="password" className="signUp">
               Password
             </label>
@@ -163,7 +171,7 @@ export default function SignUp(props) {
               SignUp
             </div>
             <div className="new-account">Already have an account? </div>
-            <Login styleName="forgotPass create-acc" />
+            <div className="forgotPass create-acc" onClick={handleLogin} >LogIn</div>
           </form>
         </ModalContent>
       </CustomModal>
