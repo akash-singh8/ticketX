@@ -9,8 +9,7 @@ AuthRouter.post("/signup", (req, res) => {
 
   if (role === "user") handleUserSignup(req, res);
   else if (role === "admin") handleAdminSignup(req, res);
-
-  res.status(404).json({ message: "Role is not defined" });
+  else res.status(404).json({ message: "Role is not defined" });
 });
 
 AuthRouter.post("/login", (req, res) => {
@@ -18,8 +17,7 @@ AuthRouter.post("/login", (req, res) => {
 
   if (role === "user") handleUserLogin(req, res);
   else if (role === "admin") handleAdminLogin(req, res);
-
-  res.status(404).json({ message: "Role is not defined" });
+  else res.status(404).json({ message: "Role is not defined" });
 });
 
 export default AuthRouter;
