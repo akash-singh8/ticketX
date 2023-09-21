@@ -71,7 +71,7 @@ export default function Otp(props) {
               <input type="number" />
               <input type="number" />
             </div>
-            <div className="buttons">
+            <div className="buttons2">
               <div
                 className="button login-button otp-button"
                 onClick={handleBack}
