@@ -1,5 +1,5 @@
-import React,{useEffect} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './box.css';
 
 export default function Box(props) {
@@ -14,8 +14,12 @@ export default function Box(props) {
       onClick(); 
     }
     else{
-      navigate(link)
-      window.scrollTo(0, 0);
+      if (link.startsWith('http://') || link.startsWith('https://')) {
+        window.open(link,'_blank');
+      } else {
+        navigate(link);
+        window.scrollTo(0, 0);
+      }
 
     }
   };

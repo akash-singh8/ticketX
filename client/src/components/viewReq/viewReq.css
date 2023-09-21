@@ -1,0 +1,23 @@
+.user-details{
+    display: flex;
+    margin: 10px 20px;
+    justify-content: space-between;
+}
+
+.profile-pic{
+    display: flex;
+}
+
+.text{
+    height: 230px;
+    background-color: #f2f2f2;
+    margin: 10px 20px;
+}
+.checkbox{
+    margin: 10px 20px;
+    display: flex;
+}
+
+.container2-req{
+    cursor: pointer;
+}

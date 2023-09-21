@@ -1,10 +1,10 @@
 import Modal from "react-modal";
 import styled from "styled-components";
-import React, { useState, useRef, useEffect } from "react";
-import Box from '../box/Box'
-import './gethelp.css'
+import React, { useState, useRef } from "react";
+import Box from "../box/Box";
+import "./gethelp.css";
 import { useNavigate } from "react-router-dom";
-import SignUp from "../signUp/SignUp";
+import { useModal } from "../modalProvider/Modalprovider";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -30,21 +30,20 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
-  
-  `;
+`;
 
 export default function Gethelp(props) {
-  const navigate =useNavigate();
-    const {ticketName,cat}=props
-    const authData = localStorage.getItem("user");
-    const auth = JSON.parse(authData);
+  const { openSignupModal } = useModal();
+  const navigate = useNavigate();
+  const { ticketName, cat } = props;
+  const authData = localStorage.getItem("user");
+  const auth = JSON.parse(authData);
   const modalRef = useRef();
   const [formData, setFormData] = useState({
-   request:" "
+    request: auth ? "" : localStorage.getItem("formData") || "",
   });
 
   const handleChange = (event) => {
-
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -55,14 +54,17 @@ export default function Gethelp(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    if(!auth){
-         navigate()
+    if (!auth) {
+      localStorage.setItem("formData", formData.request);
+      navigate("/");
+      openSignupModal();
     }
 
     // Clear the form data after submission
-    setFormData({
-        request:" "
-    });
+    auth &&
+      setFormData({
+        request: " ",
+      });
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -74,8 +76,6 @@ export default function Gethelp(props) {
     setModalIsOpen(false);
   };
 
-  
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault(); // Prevent form submission on Enter key press
@@ -83,46 +83,46 @@ export default function Gethelp(props) {
   };
 
   return (
-    <><Box ticketName={ticketName} onClick={openModal} openInPopup={true}/>
+    <>
+      <Box ticketName={ticketName} onClick={openModal} openInPopup={true} />
 
-  <CustomModal
-    isOpen={modalIsOpen}
-    
-    contentLabel="Login Modal"
-    ariaHideApp={false}
-  >
-    <ModalContent ref={modalRef}>
-      <div className="form-heading-signUp">{cat}</div>
-      <form className="signup-form">
-        
-      <div>{`>`} {ticketName}</div>
-      
-        <textarea
-          type="text"
-          placeholder="Write concise description of your request for assistance with business strategy"
-          id="request"
-          name="request"
-          onKeyDown={handleKeyDown}
-          value={formData.request}
-          onChange={handleChange}
-          required
-        />
-        {!auth ? 
-        <>
-           <SignUp text="Submit Request" styleName="button login-button request-button"/>
-        </>:<>
-        <div
-          className="button login-button request-button"
-          onClick={handleSubmit}
-          type="submit"
-        >
-          Submit Request
-        </div>
-        </>}
-        <div className="new-account request-back" onClick={closeModal}>Go Back</div>
-        
-      </form>
-    </ModalContent>
-  </CustomModal></>
-  )
+      <CustomModal
+        isOpen={modalIsOpen}
+        contentLabel="GetHelp Modal"
+        ariaHideApp={false}
+      >
+        <ModalContent ref={modalRef}>
+          <div className="form-heading-signUp">{cat}</div>
+          <form className="signup-form">
+            <div>
+              {`>`} {ticketName}
+            </div>
+
+            <textarea
+              type="text"
+              placeholder="Write concise description of your request for assistance with business strategy"
+              id="request"
+              name="request"
+              onKeyDown={handleKeyDown}
+              value={formData.request}
+              onChange={handleChange}
+              required
+            />
+
+            <div
+              className="button login-button request-button"
+              onClick={handleSubmit}
+              type="submit"
+            >
+              Submit Request
+            </div>
+
+            <div className="new-account request-back" onClick={closeModal}>
+              Go Back
+            </div>
+          </form>
+        </ModalContent>
+      </CustomModal>
+    </>
+  );
 }

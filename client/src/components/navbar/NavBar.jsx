@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import "./navbar.css";
 import logo from "../../assets/logo.png";
 import Login from "../login/Login";
-import SignUp from "../signUp/SignUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import profile from "../../assets/profile.png";
+import { useModal } from "../modalProvider/Modalprovider";
+import Otp from "../otp/Otp";
 
 function NavBar() {
+  const { openSignupModal, openLoginModal} = useModal();
   const navigate = useNavigate();
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const handleClickServices = () => {
     navigate("/");
     setTimeout(() => {
@@ -21,25 +25,23 @@ function NavBar() {
       }
     }, 100);
   };
+
   const handleClickStories = () => {
-    navigate("/");
-    setTimeout(() => {
-      const element = document.getElementById("stories");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 100);
-    
+    window.open("https://imagineher.org/our-impact", "_blank");
   };
+
   const handleClickHome = () => {
     navigate("/");
   };
-  const handleClickTicketHistory=()=>{
+
+  const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
   };
-  const handleProfile=()=>{
+
+  const handleProfile = () => {
     navigate("/ticket-history");
   };
+
 
   return (
     <>
@@ -54,35 +56,41 @@ function NavBar() {
           <div className="links web" onClick={handleClickServices}>
             Services
           </div>
-          {auth ?
-          <div className="links web"  onClick={handleClickTicketHistory}>Ticket History</div>
-        :
-          <div className="links web" onClick={handleClickStories}>
-            Stories
-          </div>}
+          {auth ? (
+            <div className="links web" onClick={handleClickTicketHistory}>
+              Ticket History
+            </div>
+          ) : (
+            <div className="links web" onClick={handleClickStories}>
+              Impact
+            </div>
+          )}
         </div>
-        <img className="company-logo " src={logo} alt="company-logo"></img>
+        <img className="company-logo" src={logo} alt="company-logo" />
         {authData ? (
           <>
-            <div className="navigation profile-design"onClick={handleProfile}>
+            <div className="navigation profile-design" onClick={handleProfile}>
               <div className="username">{auth.username}</div>
-              <div className="profile"></div>
+              <img src={profile} alt="profile-pic" className="profile" />
             </div>
           </>
         ) : (
           <>
             <div className="navigation">
-              <Login styleName="links" />
-              <SignUp styleName="button" />
+            <Login styleName="links" />
+            <Otp/>
+              <div className="button" onClick={openSignupModal}>
+                SignUp
+              </div>
             </div>
           </>
         )}
-            <div
-              className="mobile-menu-icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <FontAwesomeIcon icon={faBars} size="2x" />
-            </div>
+        <div
+          className="mobile-menu-icon"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <FontAwesomeIcon icon={faBars} size="2x" />
+        </div>
       </div>
       {mobileMenuOpen && (
         <div className="mobile-dropdown">
@@ -92,14 +100,21 @@ function NavBar() {
           <div className="links" onClick={handleClickServices}>
             Services
           </div>
-          {auth ?
-          <div className="links "  onClick={handleClickTicketHistory}>Ticket History</div>
-        :
-          <div className="links" onClick={handleClickStories}>
-            Stories
-          <Login styleName="links" />
-          <SignUp styleName="links" />
-          </div>}
+          {auth ? (
+            <div className="links" onClick={handleClickTicketHistory}>
+              Ticket History
+            </div>
+          ) : (
+            <div className="links" onClick={handleClickStories}>
+              Impact
+            </div>
+          )}
+          <div className="links" onClick={openLoginModal}>
+            Login
+          </div>
+          <div className="links" onClick={openSignupModal}>
+            SignUp
+          </div>
         </div>
       )}
     </>
