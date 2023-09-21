@@ -1,0 +1,87 @@
+.profile_page{
+   
+height: 391px;
+flex-shrink: 0;
+border-radius: 20px;
+border: 2px solid #EFEFEF;
+background: #FAFAFA;
+display: block;
+margin: 50px 50px;
+padding: 95px 50px;
+
+}
+.container-profile{
+    display: flex;
+    
+
+justify-content: space-between;
+}
+
+.profile-img{
+    width: 121px;
+    height: 121px;
+    flex-shrink: 0;
+    background-color: black;
+    border-radius: 100%;
+    margin: 0 50px;
+}
+
+.profile-details{
+    display: flex;
+   
+}
+
+.title{
+    color: #35363A;
+font-family: 'Roboto';
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+padding: 13px 0px;
+width: 80px;
+}
+.name{
+    display: flex;
+    margin-bottom: 30px;
+    
+}
+
+.name-box{
+    width: 200px;
+height: 51px;
+flex-shrink: 0;
+border-radius: 10px;
+border: 2px solid #EAEAEA;
+background: #FAFAFA;
+color: #35363A;
+font-family: 'Ubuntu';
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+padding: 13px 0px;
+margin: 0px 50px;
+}
+
+.edit{
+    margin: 0px 0px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+.buttons{
+    margin-right: 50px;
+}
+.req-popup{
+    color: #3F80CC;
+font-family: 'Roboto';
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.22px;
+text-decoration-line: underline;
+margin-left: 50px;
+cursor: pointer;
+}

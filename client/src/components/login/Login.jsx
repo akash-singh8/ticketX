@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
+import { useModal } from "../modalProvider/Modalprovider";
 import "./login.css";
 
 const CustomModal = styled(Modal)`
@@ -27,9 +28,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  
 `;
 export default function Login(props) {
-  const styleName=props.styleName
+  const {openSignupModal,loginModalIsOpen,closeLoginModal,openLoginModal} = useModal();
+  const {styleName,text}=props
   const modalRef = useRef();
   const [formData, setFormData] = useState({
     username: "",
@@ -47,28 +50,22 @@ export default function Login(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    //add further logic here, like sending the form data to a server.
-
-    // Clear the form data after submission
+    localStorage.setItem("user", JSON.stringify(formData))
+    window.location.reload();
+    
+    closeLoginModal();
+    
     setFormData({
       username: "",
       password: "",
     });
   };
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  
 
   useEffect(() => {
     const handleModalClick = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
+        closeLoginModal();
       }
     };
     document.addEventListener("mousedown", handleModalClick);
@@ -77,15 +74,20 @@ export default function Login(props) {
     };
   }, []);
 
+  const handleSignup=()=>{
+    closeLoginModal();
+    openSignupModal();
+  }
+
   return (
     <div>
-      <div className={styleName} onClick={openModal}>
-        Login
+      <div className={styleName} onClick={openLoginModal}>
+        {text?text:"Login"}
       </div>
 
       <CustomModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        isOpen={loginModalIsOpen}
+        onRequestClose={closeLoginModal}
         contentLabel="Login Modal"
         ariaHideApp={false}
       >
@@ -121,7 +123,7 @@ export default function Login(props) {
               Login
             </div>
             <div className="new-account">Don't have an account yet? </div>
-            <div className="forgotPass create-acc">Create an account</div>
+            <div className="forgotPass create-acc" onClick={handleSignup}>Create an account</div>
           </form>
         </ModalContent>
       </CustomModal>
