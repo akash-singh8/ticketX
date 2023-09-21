@@ -4,20 +4,20 @@ const ModalContext = createContext();
 export function ModalProvider({ children }) {
   const [loginModalIsOpen, setloginModalIsOpen] = useState(false);
   const [signupModalIsOpen, setsignupModalIsOpen] = useState(false);
-  const [reqModalIsOpen, setreqModalIsOpen] = useState(false);
+  const [otpModalIsOpen, setotpModalIsOpen] = useState(false);
 
   const openLoginModal = () => {
     setloginModalIsOpen(true);
   };
-  const openreqModal = () => {
-    setreqModalIsOpen(true);
+  const openotpModal = () => {
+    setotpModalIsOpen(true);
   };
 
   const closeLoginModal = () => {
     setloginModalIsOpen(false);
   };
-  const closereqModal = () => {
-    setreqModalIsOpen(false);
+  const closeotpModal = () => {
+    setotpModalIsOpen(false);
   };
   const openSignupModal = () => {
     setsignupModalIsOpen(true);
@@ -36,9 +36,9 @@ export function ModalProvider({ children }) {
         openSignupModal,
         closeSignupModal,
         signupModalIsOpen,
-        reqModalIsOpen,
-        openreqModal,
-        closereqModal,
+        otpModalIsOpen,
+        openotpModal,
+        closeotpModal,
       }}
     >
       {children}
