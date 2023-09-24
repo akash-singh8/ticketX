@@ -71,7 +71,7 @@ export default function ViewReq() {
             <div className="profile-pic">
               <img src={profile} alt="profilepic" className="profile pic" />
               <div className="user-deatils">
-                <div className="name-admin">Name : {auth.username}</div>
+                <div className="name-admin">Name : {auth.email}</div>
                 <div className="number">Phone Number : </div>
               </div>
             </div>

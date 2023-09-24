@@ -70,7 +70,7 @@ function NavBar() {
         {authData ? (
           <>
             <div className="navigation profile-design" onClick={handleProfile}>
-              <div className="username">{auth.username}</div>
+              <div className="email">{auth.email}</div>
               <img src={profile} alt="profile-pic" className="profile" />
             </div>
           </>

@@ -34,10 +34,10 @@ export default function Hero() {
         </div>
         <SignUp/>
         {!auth && <div className="hero-button" text="REGISTER NOW" onClick={openSignupModal} >Register Now</div>}
-        {auth && auth.username==="client" && <>
+        {auth && auth.email==="client" && <>
         <div className="hero-button" onClick={handleClickServices}>RAISE TICKETS</div>
         </>}
-        {auth && auth.username==="admin" && <>
+        {auth && auth.email==="admin" && <>
         <div className="hero-button" onClick={viewRequests}>VIEW TICKETS</div>
         </>}
       </div>

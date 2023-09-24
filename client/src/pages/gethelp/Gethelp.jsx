@@ -21,7 +21,7 @@ export default function Gethelp() {
         </div>
         <div className='ticket-box '>
 
-          {(!auth || (auth && auth.username==="client")) &&
+          {(!auth || (auth && auth.email==="client")) &&
           <>
             <GethelpPopup ticketName='BUSINESS STRATEGY' cat="GET HELP"/>
             <GethelpPopup  ticketName='MARKETING'cat="GET HELP"/>
@@ -30,7 +30,7 @@ export default function Gethelp() {
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'cat="GET HELP"/>
             <GethelpPopup  ticketName='OTHERS'cat="GET HELP"/>
           </>}
-          { auth && auth.username==="admin" &&
+          { auth && auth.email==="admin" &&
           <>
              <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy"  />
              <Box ticketName='MARKETING' link="/admin/marketing" />

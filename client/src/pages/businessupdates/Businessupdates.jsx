@@ -15,7 +15,7 @@ export default function Businessupdates() {
                  FOR <span>BUSINESS UPDATES</span></div>
         </div>
         <div className='ticket-box '>
-        {(!auth || (auth && auth.username==="client")) && 
+        {(!auth || (auth && auth.email==="client")) && 
         <>
             <GethelpPopup ticketName='NEW PRODUCT LAUNCH' cat="BUSINESS UPDATES"/>
             <GethelpPopup  ticketName='MARKETING'cat="BUSINESS UPDATES"/>
@@ -23,7 +23,7 @@ export default function Businessupdates() {
             <GethelpPopup  ticketName='REVENUE'cat="BUSINESS UPDATES"/>
             <GethelpPopup  ticketName='OTHERS'cat="BUSINESS UPDATES"/>
         </>}
-        {auth && auth.username==="admin" && 
+        {auth && auth.email==="admin" && 
         <>
             <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch"/>
             <Box  ticketName='MARKETING'link="/admin/marketing"/>

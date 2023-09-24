@@ -92,7 +92,7 @@ line-height: normal;
     border: 1px solid rgba(0, 0, 0, 0.08);
 background: rgba(0, 0, 0, 0.02);
   }
-  .username{
+  .email{
     width: 138px;
 height: 36px;
 flex-shrink: 0;

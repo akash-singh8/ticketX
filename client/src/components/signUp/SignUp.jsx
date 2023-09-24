@@ -62,7 +62,7 @@ export default function SignUp() {
     //console.log(openLoginModal);
     // Clear the form data after submission
     setFormData({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -100,7 +100,7 @@ export default function SignUp() {
         <ModalContent ref={modalRef}>
           <div className="form-heading-signUp">SignUp</div>
           <form className="signup-form">
-            <label className="signUp" htmlFor="username">
+            <label className="signUp" htmlFor="email">
               Name
             </label>
             <input
@@ -112,13 +112,13 @@ export default function SignUp() {
               onChange={handleChange}
               required
             />
-            <label className="signUp" htmlFor="username">
+            <label className="signUp" htmlFor="email">
               Mobile No.
             </label>
             <input
               type="text"
               placeholder="Enter your mobile number*"
-              id="username"
+              id="email"
               name="number"
               value={formData.number}
               onChange={handleChange}
