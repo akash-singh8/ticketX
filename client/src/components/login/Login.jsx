@@ -28,14 +28,14 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
-  
 `;
 export default function Login(props) {
-  const {openSignupModal,loginModalIsOpen,closeLoginModal,openLoginModal} = useModal();
-  const {styleName,text}=props
+  const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal } =
+    useModal();
+  const { styleName, text } = props;
   const modalRef = useRef();
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -47,20 +47,45 @@ export default function Login(props) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
-    localStorage.setItem("user", JSON.stringify(formData))
-    window.location.reload();
-    
+
+    try {
+      const response = await fetch(
+        "http://localhost:3080/auth/login?role=user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        localStorage.setItem("authorization", `Bearer ${data.authToken}`);
+        alert(data.message);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      console.log("Error during signup");
+      alert(err);
+    }
+
+    // console.log(formData);
+    // localStorage.setItem("user", JSON.stringify(formData))
+    // window.location.reload();
+
     closeLoginModal();
-    
+
     setFormData({
-      username: "",
+      email: "",
       password: "",
     });
   };
-  
 
   useEffect(() => {
     const handleModalClick = (event) => {
@@ -74,33 +99,32 @@ export default function Login(props) {
     };
   }, []);
 
-  const handleSignup=()=>{
+  const handleSignup = () => {
     closeLoginModal();
     openSignupModal();
-  }
+  };
 
   return (
     <div>
       <div className={styleName} onClick={openLoginModal}>
-        {text?text:"Login"}
+        {text ? text : "Login"}
       </div>
 
       <CustomModal
         isOpen={loginModalIsOpen}
         onRequestClose={closeLoginModal}
         contentLabel="Login Modal"
-        ariaHideApp={false}
-      >
+        ariaHideApp={false}>
         <ModalContent ref={modalRef}>
           <h2 className="form-heading">Login</h2>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Mobile No.</label>
+            <label htmlFor="email">Email</label>
             <input
-              type="text"
-              placeholder="Enter your mobile number*"
-              id="username"
-              name="username"
-              value={formData.username}
+              type="email"
+              placeholder="Enter your email*"
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -118,12 +142,13 @@ export default function Login(props) {
             <div
               className="button login-button"
               onClick={handleSubmit}
-              type="submit"
-            >
+              type="submit">
               Login
             </div>
             <div className="new-account">Don't have an account yet? </div>
-            <div className="forgotPass create-acc" onClick={handleSignup}>Create an account</div>
+            <div className="forgotPass create-acc" onClick={handleSignup}>
+              Create an account
+            </div>
           </form>
         </ModalContent>
       </CustomModal>
