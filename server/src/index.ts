@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import AuthRouter from "./routes/auth";
 import otpRouter from "./routes/otp";
 import { authenticateJWT } from "./middlewares/authJWT";
@@ -9,6 +10,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use("/auth", AuthRouter);
 app.use("/otp", authenticateJWT, validateStats, otpRouter);
 
