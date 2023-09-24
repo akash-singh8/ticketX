@@ -15,11 +15,11 @@ const CustomModal = styled(Modal)`
   left: 0;
   right: 0;
   bottom: 0;
-  `;
-  
-  const ModalContent = styled.div`
+`;
+
+const ModalContent = styled.div`
   width: 500px;
-  z-index:1000;
+  z-index: 1000;
   position: fixed;
   flex-shrink: 0;
   border-radius: 16.477px;
@@ -32,18 +32,18 @@ const CustomModal = styled(Modal)`
   display: block;
 `;
 export default function SignUp() {
-  
-  const {signupModalIsOpen,closeSignupModal,openLoginModal,openotpModal} = useModal();
+  const { signupModalIsOpen, closeSignupModal, openLoginModal, openotpModal } =
+    useModal();
   const modalRef = useRef();
- 
+
   const [formData, setFormData] = useState({
     name: "",
     password: "",
-    number: "",
+    email: "",
     Confirmpassword: "",
     location: "",
   });
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -52,7 +52,43 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (formData.password !== formData.Confirmpassword) {
+      alert("Password didn't match");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:3080/auth/signup?role=user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            location: document.querySelector("select").value,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status === 201) {
+        localStorage.setItem("authorization", `Bearer ${data.authToken}`);
+        alert(data.message);
+      } else {
+        console.log(data);
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      console.log("Error during signup");
+      alert(err);
+    }
+
     closeSignupModal();
     openotpModal();
     //openLoginModal();
@@ -62,12 +98,12 @@ export default function SignUp() {
     //console.log(openLoginModal);
     // Clear the form data after submission
     setFormData({
+      name: "",
       email: "",
       password: "",
+      Confirmpassword: "",
     });
   };
-  
- 
 
   useEffect(() => {
     const handleModalClick = (event) => {
@@ -81,22 +117,21 @@ export default function SignUp() {
     };
   }, []);
 
-  const handleLogin=()=>{
+  const handleLogin = () => {
     closeSignupModal();
     openLoginModal();
-  }
+  };
   return (
     <div>
-        {/* <div className={styleName} onClick={openSignupModal}>
+      {/* <div className={styleName} onClick={openSignupModal}>
         {text ? text : "SignUp"}
       </div> */}
-       
+
       <CustomModal
         isOpen={signupModalIsOpen}
         onRequestClose={closeSignupModal}
         contentLabel="SignUp Modal"
-        ariaHideApp={false}
-      >
+        ariaHideApp={false}>
         <ModalContent ref={modalRef}>
           <div className="form-heading-signUp">SignUp</div>
           <form className="signup-form">
@@ -113,14 +148,14 @@ export default function SignUp() {
               required
             />
             <label className="signUp" htmlFor="email">
-              Mobile No.
+              Email
             </label>
             <input
-              type="text"
-              placeholder="Enter your mobile number*"
+              type="email"
+              placeholder="Enter your email*"
               id="email"
-              name="number"
-              value={formData.number}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -129,8 +164,7 @@ export default function SignUp() {
               id="dropdown"
               name="location"
               value={formData.location}
-             
-            >
+              onChange={handleChange}>
               <option value="Northern Region">Northern Region</option>
               <option value="Eastern Region">Eastern Region</option>
               <option value="Western Region">Western Region</option>
@@ -152,7 +186,7 @@ export default function SignUp() {
               required
             />
             <label htmlFor="password" className="signUp">
-              Password
+              Retype Password
             </label>
             <input
               type="password"
@@ -167,12 +201,13 @@ export default function SignUp() {
             <div
               className="button login-button"
               onClick={handleSubmit}
-              type="submit"
-            >
+              type="submit">
               SignUp
             </div>
             <div className="new-account">Already have an account? </div>
-            <div className="forgotPass create-acc" onClick={handleLogin} >LogIn</div>
+            <div className="forgotPass create-acc" onClick={handleLogin}>
+              LogIn
+            </div>
           </form>
         </ModalContent>
       </CustomModal>
