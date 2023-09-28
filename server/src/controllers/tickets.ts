@@ -82,3 +82,31 @@ export const getTickets = async (req: Request, res: Response) => {
     console.log(err);
   }
 };
+
+export const updateTicketStatus = async (req: Request, res: Response) => {
+  const userRole = req.body.user?.role;
+
+  if (!userRole || userRole !== "admin") {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
+
+  const ticket: { id: string; status: string } = req.body.ticket;
+  if (
+    ticket.status !== "pending" &&
+    ticket.status !== "inreview" &&
+    ticket.status !== "resolved"
+  ) {
+    return res.status(400).json({ message: "Invalid ticketStatus" });
+  }
+
+  try {
+    await Tickets.findById(ticket.id).updateOne({ status: ticket.status });
+
+    res.status(200).json({ message: "Successfully updated ticket status" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Internal server error while ticket status update" });
+    console.log(err);
+  }
+};
