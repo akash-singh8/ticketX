@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Users from "../models/Users";
 import Admins from "../models/Admins";
+import Tickets from "../models/Tickets";
+import ticketSchema from "../validation/ticket";
 
 export const getUser = async (req: Request, res: Response) => {
   const user: {
@@ -25,6 +27,29 @@ export const getUser = async (req: Request, res: Response) => {
     res
       .status(500)
       .json({ message: "Internal server error while getting tickets" });
+    console.log(err);
+  }
+};
+
+export const raiseTicket = async (req: Request, res: Response) => {
+  try {
+    const isValidTicket = ticketSchema.safeParse(req.body.ticket);
+
+    if (!isValidTicket.success) {
+      return res.status(400).json({
+        message: isValidTicket.error.issues[0].message,
+        error: isValidTicket.error,
+      });
+    }
+
+    const newTicket = new Tickets(isValidTicket.data);
+    await newTicket.save();
+
+    res.status(201).json({ message: "successfully raised ticket" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Internal server error while raising Ticket" });
     console.log(err);
   }
 };
