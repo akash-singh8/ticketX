@@ -53,3 +53,32 @@ export const raiseTicket = async (req: Request, res: Response) => {
     console.log(err);
   }
 };
+
+// admin specific routes
+export const getTickets = async (req: Request, res: Response) => {
+  const userRole = req.body.user?.role;
+  const ticketStatus: string = req.body.ticketStatus;
+
+  if (!userRole || userRole !== "admin") {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
+
+  if (
+    ticketStatus !== "pending" &&
+    ticketStatus !== "inreview" &&
+    ticketStatus !== "resolved"
+  ) {
+    return res.status(400).json({ message: "Invalid ticketStatus" });
+  }
+
+  try {
+    const tickets = await Tickets.find({ status: ticketStatus });
+
+    res.json({ tickets });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Internal server error while fetching tickets" });
+    console.log(err);
+  }
+};
