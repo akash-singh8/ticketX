@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import styled from "styled-components";
-import React, { useRef} from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useModal } from "../modalProvider/Modalprovider";
 import "./otp.css";
 const CustomModal = styled(Modal)`
@@ -29,28 +29,57 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Otp(props) {
-  const {
-    otpModalIsOpen,
-    openLoginModal,
-    openSignupModal,
-    closeotpModal,
-  } = useModal();
+  const { otpModalIsOpen, openLoginModal, openSignupModal, closeotpModal } =
+    useModal();
 
   const modalRef = useRef();
 
+  const [timer, setTimer] = useState(300);
+
   const handleBack = () => {
+    resetTimer();
     closeotpModal();
     openSignupModal();
   };
 
   const handleVerify = (event) => {
+    resetTimer();
     event.preventDefault();
-
     closeotpModal();
     openLoginModal();
   };
 
- 
+  const resetTimer = () => {
+    setTimer(300);
+  };
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
+  const onTimeUp = () => {
+    closeotpModal();
+    console.log("Timer has reached zero!");
+  };
+
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        clearInterval(timerInterval);
+        if (onTimeUp) {
+          onTimeUp();
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timerInterval);
+    };
+  }, [timer, onTimeUp]);
 
   return (
     <div>
@@ -62,6 +91,7 @@ export default function Otp(props) {
       >
         <ModalContent ref={modalRef}>
           <h2 className="form-heading">Verify</h2>
+          <h5 className="center">Time remaining : {formatTime(timer)}</h5>
           <form>
             <div class="otp-field mb-4">
               <input type="number" />
