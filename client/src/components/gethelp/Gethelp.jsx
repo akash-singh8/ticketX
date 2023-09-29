@@ -35,7 +35,7 @@ const ModalContent = styled.div`
 export default function Gethelp(props) {
   const { openSignupModal } = useModal();
   const navigate = useNavigate();
-  const { ticketName, cat } = props;
+  const { ticketName, cat ,image} = props;
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
   const modalRef = useRef();
@@ -84,7 +84,7 @@ export default function Gethelp(props) {
 
   return (
     <>
-      <Box ticketName={ticketName} onClick={openModal} openInPopup={true} />
+      <Box ticketName={ticketName} onClick={openModal} openInPopup={true}  image={image}/>
 
       <CustomModal
         isOpen={modalIsOpen}

@@ -2,7 +2,6 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
-import Otp from "../otp/Otp";
 import { useModal } from "../modalProvider/Modalprovider";
 
 const CustomModal = styled(Modal)`
@@ -91,12 +90,6 @@ export default function SignUp() {
 
     closeSignupModal();
     openotpModal();
-    //openLoginModal();
-    //event.preventDefault();
-    console.log(formData);
-    //add further logic here, like sending the form data to a server.
-    //console.log(openLoginModal);
-    // Clear the form data after submission
     setFormData({
       name: "",
       email: "",

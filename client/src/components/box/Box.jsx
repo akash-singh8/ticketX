@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './box.css';
 
 export default function Box(props) {
-  const { ticketName, specialStyle, openInPopup, onClick ,link} = props;
+  const { ticketName, specialStyle, openInPopup, onClick ,link,image} = props;
   const navigate =useNavigate()
 
   
@@ -27,7 +27,7 @@ export default function Box(props) {
   return (
     
       <div className={`box-container ${specialStyle ? 'helpbox' : ''}` } onClick={handleClick}>
-        <div className='ticket-image'></div>
+        <img className='ticket-image' src={image} alt='category-img'/>
         <div className='ticket-name'>{ticketName}</div>
       </div>
     

@@ -1,6 +1,9 @@
 import React from 'react'
 import "./raiseTicket.css"
 import Box from '../box/Box'
+import Resources from "../../assets/Resources.JPG"
+import GetHelp from "../../assets/Get Help.JPG"
+import Business from "../../assets/IMG_4774.jpg"
 
 export default function RaiseTicket() {
   return (
@@ -10,9 +13,9 @@ export default function RaiseTicket() {
                  TO <span>RAISE TICKET</span></div>
         </div>
         <div className='ticket-box'>
-            <Box ticketName='GET HELP' link="/get-help"/>
-            <Box ticketName='BUSINESS UPDATES' link="/business-updates"/>
-            <Box ticketName='RESOURCES' link="https://imagineher.org/programs/social-enterprise-innovation-program"/>
+            <Box ticketName='GET HELP' link="/get-help" image={GetHelp}/>
+            <Box ticketName='BUSINESS UPDATES' link="/business-updates" image={Business}/>
+            <Box ticketName='RESOURCES' link="https://imagineher.org/programs/social-enterprise-innovation-program" image={Resources}/>
         </div>
     </section>
   )
