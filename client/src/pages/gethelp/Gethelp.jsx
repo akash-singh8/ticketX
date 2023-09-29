@@ -3,12 +3,12 @@ import Box from '../../components/box/Box'
 import Footer from '../../components/footer/Footer'
 import NavBar from '../../components/navbar/NavBar'
 import GethelpPopup from '../../components/gethelp/Gethelp'
-import BusinessStrategy from "../../assets/Business Strategy.JPG"
-import Marketing from "../../assets/Marketing.jpg"
-import FinManagement from "../../assets/Financial Management.jpg"
-import TechSupport from "../../assets/Technical Support.JPG"
-import Others from "../../assets/Others.JPG"
-import Operations from "../../assets/Operational Costs & Logistics.JPG"
+import BusinessStrategy from "../../assets/Business Strategy.png"
+import Marketing from "../../assets/IMG_4774.png"
+import FinManagement from "../../assets/Financial Management.png"
+import TechSupport from "../../assets/Technical Support.png"
+import Others from "../../assets/Others.png"
+import Operations from "../../assets/Operational Costs & Logistics.png"
 
 
 export default function Gethelp() {

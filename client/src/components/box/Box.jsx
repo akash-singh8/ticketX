@@ -27,7 +27,7 @@ export default function Box(props) {
   return (
     
       <div className={`box-container ${specialStyle ? 'helpbox' : ''}` } onClick={handleClick}>
-        <img className='ticket-image' src={image} alt='category-img'/>
+        <img className='ticket-image' src={image} alt='category-img' loading="lazy"/>
         <div className='ticket-name'>{ticketName}</div>
       </div>
     

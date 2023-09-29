@@ -3,11 +3,11 @@ import Footer from '../../components/footer/Footer'
 import NavBar from '../../components/navbar/NavBar'
 import GethelpPopup from '../../components/gethelp/Gethelp'
 import Box from '../../components/box/Box'
-import Launch from "../../assets/New Product Launch.jpg"
-import Marketing from "../../assets/Marketing.jpg"
-import Expansion from "../../assets/1BSC8075 (2).JPG"
-import Revenue from "../../assets/Revenue.jpg"
-import Others from "../../assets/Others.JPG"
+import Launch from "../../assets/New Product Launch.png"
+import Marketing from "../../assets/IMG_4774.png"
+import Expansion from "../../assets/1BSC8075.png"
+import Revenue from "../../assets/Revenue.png"
+import Others from "../../assets/Others.png"
 export default function Businessupdates() {
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);

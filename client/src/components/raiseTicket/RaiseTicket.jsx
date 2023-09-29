@@ -1,9 +1,9 @@
 import React from 'react'
 import "./raiseTicket.css"
 import Box from '../box/Box'
-import Resources from "../../assets/Resources.JPG"
-import GetHelp from "../../assets/Get Help.JPG"
-import Business from "../../assets/IMG_4774.jpg"
+import Resources from "../../assets/Resources.png"
+import GetHelp from "../../assets/Get Help.png"
+import Business from "../../assets/IMG_4774.png"
 
 export default function RaiseTicket() {
   return (
