@@ -12,7 +12,7 @@ import SignUp from "../signUp/SignUp";
 
 function NavBar() {
   const { openSignupModal, openLoginModal,isAuthenticated,
-    setIsAuthenticated,} = useModal();
+    user,} = useModal();
   const navigate = useNavigate();
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
@@ -75,7 +75,7 @@ function NavBar() {
         {isAuthenticated ? (
           <>
             <div className="navigation profile-design" onClick={handleProfile}>
-              <div className="email">{auth}</div>
+              <div className="email">{user.name}</div>
               <img src={profile} alt="profile-pic" className="profile" />
             </div>
           </>
