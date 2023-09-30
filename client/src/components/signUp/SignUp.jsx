@@ -190,7 +190,6 @@ export default function SignUp() {
               onChange={handleChange}
               required
             />
-            <div className="forgotPass">Forgot Password?</div>
             <div
               className="button login-button"
               onClick={handleSubmit}
