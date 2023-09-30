@@ -42,7 +42,10 @@ function NavBar() {
   const handleProfile = () => {
     navigate("/ticket-history");
   };
-
+  const openSignup=()=>{
+    navigate("/")
+    openSignupModal();
+  }
 
   return (
     <>
@@ -80,7 +83,7 @@ function NavBar() {
             <div className="navigation">
             <Login styleName="links" />
             <Otp/>
-              <div className="button" onClick={openSignupModal}>
+              <div className="button" onClick={openSignup}>
                 SignUp
               </div>
             </div>
