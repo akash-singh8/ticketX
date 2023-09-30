@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<Landing />}></Route>
           <Route path="/get-help" element={<Gethelp />}></Route>
           <Route path="/business-updates" element={<Businessupdates />}></Route>
-        
+          <Route path="/forgot-password" element={<Businessupdates />}></Route>
           <Route path="/ticket-history" element={<TicketHistory/>}></Route>
           <Route path="/admin/business-strategy" element={<Admin cat="BUSINESS STRATEGY"/>}></Route>
           <Route path="/admin/marketing" element={<Admin cat="MARKETING"/>}></Route>
