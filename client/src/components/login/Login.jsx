@@ -31,7 +31,9 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Login(props) {
-  const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal } =
+  
+  const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal,isAuthenticated,
+    setIsAuthenticated, } =
     useModal();
     const navigate=useNavigate();
   const { styleName, text } = props;
@@ -65,9 +67,12 @@ export default function Login(props) {
       );
 
       const data = await response.json();
+      console.log(data);
 
       if (response.status === 200) {
+        console.log(data.role)
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
+        setIsAuthenticated(true)
         alert(data.message);
       } else {
         throw new Error(data.message);

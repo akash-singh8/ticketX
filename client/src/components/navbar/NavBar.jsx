@@ -11,7 +11,8 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal} = useModal();
+  const { openSignupModal, openLoginModal,isAuthenticated,
+    setIsAuthenticated,} = useModal();
   const navigate = useNavigate();
   const authData = localStorage.getItem("user");
   const auth = JSON.parse(authData);
@@ -60,7 +61,7 @@ function NavBar() {
           <div className="links web" onClick={handleClickServices}>
             Services
           </div>
-          {auth ? (
+          {isAuthenticated ? (
             <div className="links web" onClick={handleClickTicketHistory}>
               Ticket History
             </div>
@@ -71,10 +72,10 @@ function NavBar() {
           )}
         </div>
         <img className="company-logo" src={logo} alt="company-logo" />
-        {authData ? (
+        {isAuthenticated ? (
           <>
             <div className="navigation profile-design" onClick={handleProfile}>
-              <div className="email">{auth.email}</div>
+              <div className="email">{auth}</div>
               <img src={profile} alt="profile-pic" className="profile" />
             </div>
           </>
@@ -104,7 +105,7 @@ function NavBar() {
           <div className="links" onClick={handleClickServices}>
             Services
           </div>
-          {auth ? (
+          {isAuthenticated ? (
             <div className="links" onClick={handleClickTicketHistory}>
               Ticket History
             </div>

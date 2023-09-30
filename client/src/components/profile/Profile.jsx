@@ -27,7 +27,7 @@ const logout = () => {
                 <div className='name'>
 
                  <div className='title'>Name</div>
-                 <div className='name-box'>{auth.email}</div>
+                 <div className='name-box'>{auth}</div>
                 </div>
                 <div className='name'>
                  <div className='title'>Phone No</div>
