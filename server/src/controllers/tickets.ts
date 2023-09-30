@@ -13,9 +13,9 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     let userData;
     if (user.role === "admin") {
-      userData = await Admins.findById(user.id).populate("ticketResolved");
+      userData = await Admins.findById(user.id);
     } else {
-      userData = await Users.findById(user.id).populate("ticketRaised");
+      userData = await Users.findById(user.id);
     }
 
     if (!userData) {
