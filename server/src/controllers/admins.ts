@@ -11,8 +11,10 @@ import {
 
 export const handleAdminSignup = async (req: Request, res: Response) => {
   const bodyData: AdminSignupData = req.body;
+  console.log(bodyData)
 
   const isValidInput = adminSignupInputSchema.safeParse(bodyData);
+  console.log(isValidInput)
 
   if (!isValidInput.success) {
     res.status(400).json({
@@ -37,7 +39,7 @@ export const handleAdminSignup = async (req: Request, res: Response) => {
     }
 
     const OTP = Math.floor(Math.random() * 999999);
-    await sendMail(email, OTP);
+    //await sendMail(email, OTP);
 
     const OTP_token = jwt.sign({ OTP: OTP }, process.env.JWT_OTP_SECRET, {
       expiresIn: "5m",

@@ -59,7 +59,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/signup?role=user",
+        "http://localhost:3080/auth/signup?role=admin",
         {
           method: "POST",
           headers: {

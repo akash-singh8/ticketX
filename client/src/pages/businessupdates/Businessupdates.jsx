@@ -8,9 +8,10 @@ import Marketing from "../../assets/IMG_4774.png"
 import Expansion from "../../assets/1BSC8075.png"
 import Revenue from "../../assets/Revenue.png"
 import Others from "../../assets/Others.png"
+import { useModal } from "../../components/modalProvider/Modalprovider";
+
 export default function Businessupdates() {
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
+  const {user,isAuthenticated} = useModal();
   return (
     <>
       <NavBar/>
@@ -20,7 +21,7 @@ export default function Businessupdates() {
                  FOR <span>BUSINESS UPDATES</span></div>
         </div>
         <div className='ticket-box '>
-        {(!auth || (auth && auth.email==="client")) && 
+        {(!isAuthenticated || (isAuthenticated&& user.role==="client")) && 
         <>
             <GethelpPopup ticketName='NEW PRODUCT LAUNCH' cat="BUSINESS UPDATES" image={Launch}/>
             <GethelpPopup  ticketName='MARKETING'cat="BUSINESS UPDATES"image={Marketing}/>
@@ -28,7 +29,7 @@ export default function Businessupdates() {
             <GethelpPopup  ticketName='REVENUE'cat="BUSINESS UPDATES"image={Revenue}/>
             <GethelpPopup  ticketName='OTHERS'cat="BUSINESS UPDATES"image={Others}/>
         </>}
-        {auth && auth.email==="admin" && 
+        {isAuthenticated && user.role==="admin" && 
         <>
             <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch"image={Launch}/>
             <Box  ticketName='MARKETING'link="/admin/marketing"image={Marketing}/>

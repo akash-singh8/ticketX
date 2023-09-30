@@ -21,7 +21,7 @@ export function AppProvider({ children }) {
     setLoginModalIsOpen(false);
   };
 
-  const closeOtpModal = () => {
+  const closeotpModal = () => {
     setOtpModalIsOpen(false);
   };
 
@@ -42,7 +42,7 @@ export function AppProvider({ children }) {
     signupModalIsOpen,
     otpModalIsOpen,
     openOtpModal,
-    closeOtpModal,
+    closeotpModal,
     isAuthenticated,
     setIsAuthenticated,
     user,

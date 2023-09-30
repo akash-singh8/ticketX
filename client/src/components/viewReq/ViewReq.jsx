@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef } from "react";
-
+import { useModal } from "../modalProvider/Modalprovider";
 import "./viewReq.css";
 
 import profile from "../../assets/profile.png";
@@ -34,9 +34,8 @@ const ModalContent = styled.div`
 
 export default function ViewReq() {
   
+  const {user} = useModal();
   
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
   const modalRef = useRef();
  
 
@@ -71,7 +70,7 @@ export default function ViewReq() {
             <div className="profile-pic">
               <img src={profile} alt="profilepic" className="profile pic" />
               <div className="user-deatils">
-                <div className="name-admin">Name : {auth.email}</div>
+                <div className="name-admin">Name : {user.name}</div>
                 <div className="number">Phone Number : </div>
               </div>
             </div>
