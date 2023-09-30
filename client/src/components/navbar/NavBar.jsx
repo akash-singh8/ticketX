@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import profile from "../../assets/profile.png";
 import { useModal } from "../modalProvider/Modalprovider";
 import Otp from "../otp/Otp";
+import SignUp from "../signUp/SignUp";
 
 function NavBar() {
   const { openSignupModal, openLoginModal} = useModal();
@@ -77,6 +78,7 @@ function NavBar() {
         ) : (
           <>
             <div className="navigation">
+              <SignUp/>
             <Login styleName="links" />
             <Otp/>
               <div className="button" onClick={openSignupModal}>

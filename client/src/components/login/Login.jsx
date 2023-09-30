@@ -74,11 +74,6 @@ export default function Login(props) {
       console.log("Error during signup");
       alert(err);
     }
-
-    // console.log(formData);
-    // localStorage.setItem("user", JSON.stringify(formData))
-    // window.location.reload();
-
     closeLoginModal();
 
     setFormData({
