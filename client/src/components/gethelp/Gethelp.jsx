@@ -33,7 +33,7 @@ const ModalContent = styled.div`
 `;
 
 export default function Gethelp(props) {
-  const { openSignupModal } = useModal();
+  const { openSignupModal,isAuthenticated } = useModal();
   const navigate = useNavigate();
   const { ticketName, cat ,image} = props;
   const authData = localStorage.getItem("user");
@@ -54,7 +54,7 @@ export default function Gethelp(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    if (!auth) {
+    if (!isAuthenticated) {
       localStorage.setItem("formData", formData.request);
       navigate("/");
       openSignupModal();

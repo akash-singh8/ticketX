@@ -107,6 +107,7 @@ export default function Login(props) {
       if (response.status === 200) {
         const userData = await response.json();
         setUser(userData)
+        console.log(userData)
         
       } else {
         const errorData = await response.json();

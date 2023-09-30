@@ -8,8 +8,6 @@ import { useModal } from "../modalProvider/Modalprovider";
 export default function Hero() {
   const {openSignupModal,isAuthenticated,user} = useModal();
   const navigate=useNavigate()
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
   const handleClickServices = () => {
     navigate("/");
     setTimeout(() => {

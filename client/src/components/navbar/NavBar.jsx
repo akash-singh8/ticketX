@@ -14,8 +14,6 @@ function NavBar() {
   const { openSignupModal, openLoginModal,isAuthenticated,
     user,} = useModal();
   const navigate = useNavigate();
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleClickServices = () => {
