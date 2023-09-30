@@ -14,10 +14,17 @@ export const getUser = async (req: Request, res: Response) => {
     let userData;
     if (user.role === "admin") {
       userData = await Admins.findById(user.id);
+      if(userData){
+        userData = { ...userData.toObject(), role: "admin" };
+      }
+
     } else {
       userData = await Users.findById(user.id);
+      if(userData){
+        userData = { ...userData.toObject(), role: "client" };
+      }
     }
-
+  
     if (!userData) {
       return res.status(404).json({ message: "User not found" });
     }
