@@ -31,11 +31,15 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Login(props) {
-  
-  const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal,isAuthenticated,
-    setIsAuthenticated, } =
-    useModal();
-    const navigate=useNavigate();
+  const {
+    openSignupModal,
+    loginModalIsOpen,
+    closeLoginModal,
+    openLoginModal,
+    setUser,
+    setIsAuthenticated,
+  } = useModal();
+  const navigate = useNavigate();
   const { styleName, text } = props;
   const modalRef = useRef();
   const [formData, setFormData] = useState({
@@ -70,10 +74,12 @@ export default function Login(props) {
       console.log(data);
 
       if (response.status === 200) {
-        console.log(data.role)
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
-        setIsAuthenticated(true)
+        setIsAuthenticated(true);
         alert(data.message);
+        getUserDetails(data.authToken);
+      
+
       } else {
         throw new Error(data.message);
       }
@@ -87,6 +93,28 @@ export default function Login(props) {
       email: "",
       password: "",
     });
+  };
+
+  const getUserDetails = async (authToken) => {
+    try {
+      const response = await fetch("http://localhost:3080/auth/me", {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = await response.json();
+        setUser(userData)
+        
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch user details: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error("Error fetching user details:", err);
+    }
   };
 
   useEffect(() => {
@@ -106,7 +134,7 @@ export default function Login(props) {
     openSignupModal();
   };
   const forgotPassword = () => {
-     navigate("/forgot-password")
+    navigate("/forgot-password");
   };
 
   return (
@@ -119,7 +147,8 @@ export default function Login(props) {
         isOpen={loginModalIsOpen}
         onRequestClose={closeLoginModal}
         contentLabel="Login Modal"
-        ariaHideApp={false}>
+        ariaHideApp={false}
+      >
         <ModalContent ref={modalRef}>
           <h2 className="form-heading">Login</h2>
           <form onSubmit={handleSubmit}>
@@ -143,11 +172,14 @@ export default function Login(props) {
               onChange={handleChange}
               required
             />
-            <div className="forgotPass" onClick={forgotPassword}>Forgot Password?</div>
+            <div className="forgotPass" onClick={forgotPassword}>
+              Forgot Password?
+            </div>
             <div
               className="button login-button"
               onClick={handleSubmit}
-              type="submit">
+              type="submit"
+            >
               Login
             </div>
             <div className="new-account">Don't have an account yet? </div>

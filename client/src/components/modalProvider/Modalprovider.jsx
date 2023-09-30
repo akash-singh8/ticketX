@@ -7,6 +7,7 @@ export function AppProvider({ children }) {
   const [signupModalIsOpen, setSignupModalIsOpen] = useState(false);
   const [otpModalIsOpen, setOtpModalIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
 
   const openLoginModal = () => {
     setLoginModalIsOpen(true);
@@ -44,6 +45,8 @@ export function AppProvider({ children }) {
     closeOtpModal,
     isAuthenticated,
     setIsAuthenticated,
+    user,
+    setUser
   };
 
   return (
