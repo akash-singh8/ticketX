@@ -78,7 +78,6 @@ function NavBar() {
         ) : (
           <>
             <div className="navigation">
-              <SignUp/>
             <Login styleName="links" />
             <Otp/>
               <div className="button" onClick={openSignupModal}>
