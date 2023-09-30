@@ -3,6 +3,7 @@ import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import { useModal } from "../modalProvider/Modalprovider";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -32,6 +33,7 @@ const ModalContent = styled.div`
 export default function Login(props) {
   const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal } =
     useModal();
+    const navigate=useNavigate();
   const { styleName, text } = props;
   const modalRef = useRef();
   const [formData, setFormData] = useState({
@@ -98,6 +100,9 @@ export default function Login(props) {
     closeLoginModal();
     openSignupModal();
   };
+  const forgotPassword = () => {
+     navigate("/forgot-password")
+  };
 
   return (
     <div>
@@ -133,7 +138,7 @@ export default function Login(props) {
               onChange={handleChange}
               required
             />
-            <div className="forgotPass">Forgot Password?</div>
+            <div className="forgotPass" onClick={forgotPassword}>Forgot Password?</div>
             <div
               className="button login-button"
               onClick={handleSubmit}
