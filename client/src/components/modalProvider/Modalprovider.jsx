@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect} from "react";
 
 const AppContext = createContext();
 
@@ -9,6 +9,15 @@ export function AppProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
 
+  useEffect=()=>{
+    console.log(isAuthenticated)
+  }
+  const setLogin=()=>{
+     setIsAuthenticated(true)
+  }
+  const setLogout=()=>{
+    setIsAuthenticated(false)
+  }
   const openLoginModal = () => {
     setLoginModalIsOpen(true);
   };
@@ -44,9 +53,10 @@ export function AppProvider({ children }) {
     openotpModal,
     closeotpModal,
     isAuthenticated,
-    setIsAuthenticated,
     user,
-    setUser
+    setUser,
+    setLogin,
+    setLogout
   };
 
   return (

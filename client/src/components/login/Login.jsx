@@ -37,7 +37,7 @@ export default function Login(props) {
     closeLoginModal,
     openLoginModal,
     setUser,
-    setIsAuthenticated,
+    setLogin,
   } = useModal();
   const navigate = useNavigate();
   const { styleName, text } = props;
@@ -60,7 +60,7 @@ export default function Login(props) {
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/login?role=admin",
+        "http://localhost:3080/auth/login?role=user",
         {
           method: "POST",
           headers: {
@@ -75,7 +75,7 @@ export default function Login(props) {
 
       if (response.status === 200) {
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
-        setIsAuthenticated(true);
+        setLogin();
         alert(data.message);
         getUserDetails(data.authToken);
       
