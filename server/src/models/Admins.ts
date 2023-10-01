@@ -17,7 +17,7 @@ const AdminSchema = new mongoose.Schema({
   ticketResolved: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "tickets",
+      ref: "Ticket",
     },
   ],
   verified: {

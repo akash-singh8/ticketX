@@ -33,7 +33,7 @@ export const getUser = async (req: Request, res: Response) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Internal server error while getting tickets" });
+      .json({ message: "Internal server error while getting user details" });
     console.log(err);
   }
 };
