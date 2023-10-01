@@ -11,7 +11,7 @@ export default function Reqbox(props) {
           ? ticket.message.split(" ").slice(0, 30).join(" ") + "..."
           : ticket.message}
       </div>
-      <ViewReq />
+      <ViewReq ticket={ticket}/>
     </div>
   );
 }

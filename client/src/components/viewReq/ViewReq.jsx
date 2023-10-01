@@ -32,9 +32,9 @@ const ModalContent = styled.div`
   display: block;
 `;
 
-export default function ViewReq() {
-  
-  const {user} = useModal();
+export default function ViewReq(props) {
+  const ticket=props.ticket
+  const {user,isAuthenticated} = useModal();
   
   const modalRef = useRef();
  
@@ -70,20 +70,22 @@ export default function ViewReq() {
             <div className="profile-pic">
               <img src={profile} alt="profilepic" className="profile pic" />
               <div className="user-deatils">
-                <div className="name-admin">Name : {user.name}</div>
-                <div className="number">Phone Number : </div>
+                <div className="name-admin padding">Name : {user.name}</div>
+                <div className="number padding">Email : {user.email} </div>
+                <div className="number padding">Title : {ticket.title} </div>
               </div>
             </div>
             <div className="date">
-              Raised on <br></br> <span>21 July, 2021</span>
+              Raised on <br></br> <span>{ticket.dateRaised}</span>
             </div>
           </div>
-          <div className="text"></div>
+          <div className="text">{ticket.message}</div>
+            {isAuthenticated && user.role==='admin' &&
           <div className="checkbox">
             <input type="checkbox" />
             <div>Started Review</div>
-          </div>
-          <div className="button login-button request-button">Mark as Resolved</div>
+          </div>}
+          {isAuthenticated && user.role==='admin'&& <div className="button login-button request-button">Mark as Resolved</div>}
 
           <div className="new-account request-back center" onClick={closeModal}>
             Go Back
