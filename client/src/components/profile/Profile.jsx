@@ -1,11 +1,11 @@
 import React from 'react'
 import "./profile.css"
+import { useModal } from "../modalProvider/Modalprovider";
 
 import {useNavigate} from 'react-router-dom';
 
 export default function Profile() {
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
+  const {user,setIsAuthenticated} = useModal();
   const navigate=useNavigate()
   const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
@@ -13,6 +13,7 @@ export default function Profile() {
 };
 
 const logout = () => {
+  setIsAuthenticated(false)
   localStorage.clear();
   navigate('/');
 };
@@ -27,11 +28,11 @@ const logout = () => {
                 <div className='name'>
 
                  <div className='title'>Name</div>
-                 <div className='name-box'>{auth.email}</div>
+                 <div className='name-box'>{user.name}</div>
                 </div>
                 <div className='name'>
-                 <div className='title'>Phone No</div>
-                 <div className='name-box'>+91 82788XXXXXX</div>
+                 <div className='title'>Email</div>
+                 <div className='name-box'>{user.email}</div>
 
                 </div>
             </div>

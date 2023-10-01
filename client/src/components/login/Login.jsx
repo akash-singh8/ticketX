@@ -3,6 +3,7 @@ import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import { useModal } from "../modalProvider/Modalprovider";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -30,8 +31,15 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Login(props) {
-  const { openSignupModal, loginModalIsOpen, closeLoginModal, openLoginModal } =
-    useModal();
+  const {
+    openSignupModal,
+    loginModalIsOpen,
+    closeLoginModal,
+    openLoginModal,
+    setUser,
+    setIsAuthenticated,
+  } = useModal();
+  const navigate = useNavigate();
   const { styleName, text } = props;
   const modalRef = useRef();
   const [formData, setFormData] = useState({
@@ -52,7 +60,7 @@ export default function Login(props) {
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/login?role=user",
+        "http://localhost:3080/auth/login?role=admin",
         {
           method: "POST",
           headers: {
@@ -63,10 +71,15 @@ export default function Login(props) {
       );
 
       const data = await response.json();
+      console.log(data);
 
       if (response.status === 200) {
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
+        setIsAuthenticated(true);
         alert(data.message);
+        getUserDetails(data.authToken);
+      
+
       } else {
         throw new Error(data.message);
       }
@@ -80,6 +93,29 @@ export default function Login(props) {
       email: "",
       password: "",
     });
+  };
+
+  const getUserDetails = async (authToken) => {
+    try {
+      const response = await fetch("http://localhost:3080/auth/me", {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = await response.json();
+        setUser(userData)
+        console.log(userData)
+        
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch user details: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error("Error fetching user details:", err);
+    }
   };
 
   useEffect(() => {
@@ -98,6 +134,9 @@ export default function Login(props) {
     closeLoginModal();
     openSignupModal();
   };
+  const forgotPassword = () => {
+    navigate("/forgot-password");
+  };
 
   return (
     <div>
@@ -109,7 +148,8 @@ export default function Login(props) {
         isOpen={loginModalIsOpen}
         onRequestClose={closeLoginModal}
         contentLabel="Login Modal"
-        ariaHideApp={false}>
+        ariaHideApp={false}
+      >
         <ModalContent ref={modalRef}>
           <h2 className="form-heading">Login</h2>
           <form onSubmit={handleSubmit}>
@@ -133,11 +173,14 @@ export default function Login(props) {
               onChange={handleChange}
               required
             />
-            <div className="forgotPass">Forgot Password?</div>
+            <div className="forgotPass" onClick={forgotPassword}>
+              Forgot Password?
+            </div>
             <div
               className="button login-button"
               onClick={handleSubmit}
-              type="submit">
+              type="submit"
+            >
               Login
             </div>
             <div className="new-account">Don't have an account yet? </div>

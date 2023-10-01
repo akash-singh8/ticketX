@@ -1,51 +1,61 @@
 import React, { createContext, useContext, useState } from "react";
-const ModalContext = createContext();
 
-export function ModalProvider({ children }) {
-  const [loginModalIsOpen, setloginModalIsOpen] = useState(false);
-  const [signupModalIsOpen, setsignupModalIsOpen] = useState(false);
-  const [otpModalIsOpen, setotpModalIsOpen] = useState(false);
+const AppContext = createContext();
+
+export function AppProvider({ children }) {
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+  const [signupModalIsOpen, setSignupModalIsOpen] = useState(false);
+  const [otpModalIsOpen, setOtpModalIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
 
   const openLoginModal = () => {
-    setloginModalIsOpen(true);
+    setLoginModalIsOpen(true);
   };
+
   const openotpModal = () => {
-    setotpModalIsOpen(true);
+    setOtpModalIsOpen(true);
   };
 
   const closeLoginModal = () => {
-    setloginModalIsOpen(false);
+    setLoginModalIsOpen(false);
   };
+
   const closeotpModal = () => {
-    setotpModalIsOpen(false);
+    setOtpModalIsOpen(false);
   };
+
   const openSignupModal = () => {
-    setsignupModalIsOpen(true);
+    setSignupModalIsOpen(true);
   };
 
   const closeSignupModal = () => {
-    setsignupModalIsOpen(false);
+    setSignupModalIsOpen(false);
+  };
+
+  const contextValue = {
+    openLoginModal,
+    closeLoginModal,
+    loginModalIsOpen,
+    openSignupModal,
+    closeSignupModal,
+    signupModalIsOpen,
+    otpModalIsOpen,
+    openotpModal,
+    closeotpModal,
+    isAuthenticated,
+    setIsAuthenticated,
+    user,
+    setUser
   };
 
   return (
-    <ModalContext.Provider
-      value={{
-        openLoginModal,
-        closeLoginModal,
-        loginModalIsOpen,
-        openSignupModal,
-        closeSignupModal,
-        signupModalIsOpen,
-        otpModalIsOpen,
-        openotpModal,
-        closeotpModal,
-      }}
-    >
+    <AppContext.Provider value={contextValue}>
       {children}
-    </ModalContext.Provider>
+    </AppContext.Provider>
   );
 }
 
 export function useModal() {
-  return useContext(ModalContext);
+  return useContext(AppContext);
 }

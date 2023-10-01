@@ -11,10 +11,9 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal} = useModal();
+  const { openSignupModal, openLoginModal,isAuthenticated,
+    user,} = useModal();
   const navigate = useNavigate();
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleClickServices = () => {
@@ -42,7 +41,10 @@ function NavBar() {
   const handleProfile = () => {
     navigate("/ticket-history");
   };
-
+  const openSignup=()=>{
+    navigate("/")
+    openSignupModal();
+  }
 
   return (
     <>
@@ -57,7 +59,7 @@ function NavBar() {
           <div className="links web" onClick={handleClickServices}>
             Services
           </div>
-          {auth ? (
+          {isAuthenticated ? (
             <div className="links web" onClick={handleClickTicketHistory}>
               Ticket History
             </div>
@@ -68,20 +70,19 @@ function NavBar() {
           )}
         </div>
         <img className="company-logo" src={logo} alt="company-logo" />
-        {authData ? (
+        {isAuthenticated ? (
           <>
             <div className="navigation profile-design" onClick={handleProfile}>
-              <div className="email">{auth.email}</div>
+              <div className="email">{user.name}</div>
               <img src={profile} alt="profile-pic" className="profile" />
             </div>
           </>
         ) : (
           <>
             <div className="navigation">
-              <SignUp/>
             <Login styleName="links" />
             <Otp/>
-              <div className="button" onClick={openSignupModal}>
+              <div className="button" onClick={openSignup}>
                 SignUp
               </div>
             </div>
@@ -102,7 +103,7 @@ function NavBar() {
           <div className="links" onClick={handleClickServices}>
             Services
           </div>
-          {auth ? (
+          {isAuthenticated ? (
             <div className="links" onClick={handleClickTicketHistory}>
               Ticket History
             </div>

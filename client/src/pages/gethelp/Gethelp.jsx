@@ -9,11 +9,11 @@ import FinManagement from "../../assets/Financial Management.png"
 import TechSupport from "../../assets/Technical Support.png"
 import Others from "../../assets/Others.png"
 import Operations from "../../assets/Operational Costs & Logistics.png"
+import { useModal } from "../../components/modalProvider/Modalprovider";
 
 
 export default function Gethelp() {
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
+  const {user,isAuthenticated} = useModal();
  
   
   
@@ -27,7 +27,7 @@ export default function Gethelp() {
         </div>
         <div className='ticket-box '>
 
-          {(!auth || (auth && auth.email==="client")) &&
+          {(!isAuthenticated || (isAuthenticated && user.email==="client")) &&
           <>
             <GethelpPopup ticketName='BUSINESS STRATEGY' cat="GET HELP" image={BusinessStrategy}/>
             <GethelpPopup  ticketName='MARKETING'cat="GET HELP" image={Marketing}/>
@@ -36,7 +36,7 @@ export default function Gethelp() {
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'cat="GET HELP" image={Operations}/>
             <GethelpPopup  ticketName='OTHERS'cat="GET HELP" image={Others}/>
           </>}
-          { auth && auth.email==="admin" &&
+          { isAuthenticated && user.email==="admin" &&
           <>
              <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy" image={BusinessStrategy} />
              <Box ticketName='MARKETING' link="/admin/marketing" image={Marketing}/>

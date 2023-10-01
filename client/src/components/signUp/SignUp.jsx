@@ -59,7 +59,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/signup?role=user",
+        "http://localhost:3080/auth/signup?role=admin",
         {
           method: "POST",
           headers: {
@@ -79,6 +79,9 @@ export default function SignUp() {
       if (response.status === 201) {
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
         alert(data.message);
+        closeSignupModal();
+        openotpModal();
+
       } else {
         console.log(data);
         throw new Error(data.message);
@@ -88,8 +91,7 @@ export default function SignUp() {
       alert(err);
     }
 
-    closeSignupModal();
-    openotpModal();
+    
     setFormData({
       name: "",
       email: "",
@@ -190,7 +192,6 @@ export default function SignUp() {
               onChange={handleChange}
               required
             />
-            <div className="forgotPass">Forgot Password?</div>
             <div
               className="button login-button"
               onClick={handleSubmit}

@@ -6,10 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../modalProvider/Modalprovider";
 
 export default function Hero() {
-  const {openSignupModal} = useModal();
+  const {openSignupModal,isAuthenticated,user} = useModal();
   const navigate=useNavigate()
-  const authData = localStorage.getItem("user");
-  const auth = JSON.parse(authData);
   const handleClickServices = () => {
     navigate("/");
     setTimeout(() => {
@@ -33,11 +31,11 @@ export default function Hero() {
           Journey
         </div>
         <SignUp/>
-        {!auth && <div className="hero-button" text="REGISTER NOW" onClick={openSignupModal} >Register Now</div>}
-        {auth && auth.email==="client" && <>
+        {!isAuthenticated && <div className="hero-button" text="REGISTER NOW" onClick={openSignupModal} >Register Now</div>}
+        {isAuthenticated && user.role==="client" && <>
         <div className="hero-button" onClick={handleClickServices}>RAISE TICKETS</div>
         </>}
-        {auth && auth.email==="admin" && <>
+        {isAuthenticated && user.role==="admin" && <>
         <div className="hero-button" onClick={viewRequests}>VIEW TICKETS</div>
         </>}
       </div>

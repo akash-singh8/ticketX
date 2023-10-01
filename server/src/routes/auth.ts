@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { handleUserLogin, handleUserSignup } from "../controllers/users";
 import { handleAdminLogin, handleAdminSignup } from "../controllers/admins";
+import { authenticateJWT } from "../middlewares/authJWT";
+import { getTickets, getUser } from "../controllers/tickets";
 
 const AuthRouter = Router();
 
@@ -19,5 +21,9 @@ AuthRouter.post("/login", (req, res) => {
   else if (role === "admin") handleAdminLogin(req, res);
   else res.status(404).json({ message: "Role is not defined" });
 });
+
+AuthRouter.get("/me", authenticateJWT, getUser);
+
+AuthRouter.get("/getTickets", authenticateJWT, getTickets);
 
 export default AuthRouter;

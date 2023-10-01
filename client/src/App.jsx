@@ -3,21 +3,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import Gethelp from "./pages/gethelp/Gethelp";
 import Businessupdates from "./pages/businessupdates/Businessupdates";
-import { ModalProvider } from "./components/modalProvider/Modalprovider";
+import { AppProvider } from "./components/modalProvider/Modalprovider";
 import TicketHistory from "./pages/ticketHistory/TicketHistory";
 import Admin from "./pages/admin/Admin";
 import TicketRequests from "./pages/ticketrequests/Ticketrequests";
+import ForgotPass from "./pages/forgotPass/ForgotPass";
 function App() {
   return (
     <div className="App">
-      <ModalProvider>
+      <AppProvider>
 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />}></Route>
           <Route path="/get-help" element={<Gethelp />}></Route>
           <Route path="/business-updates" element={<Businessupdates />}></Route>
-        
+          <Route path="/forgot-password" element={<ForgotPass />}></Route>
           <Route path="/ticket-history" element={<TicketHistory/>}></Route>
           <Route path="/admin/business-strategy" element={<Admin cat="BUSINESS STRATEGY"/>}></Route>
           <Route path="/admin/marketing" element={<Admin cat="MARKETING"/>}></Route>
@@ -32,7 +33,7 @@ function App() {
           <Route path="/ticket-history/requests" element={<TicketRequests/>}></Route>
         </Routes>
       </BrowserRouter>
-      </ModalProvider>
+      </AppProvider>
     </div>
   );
 }
