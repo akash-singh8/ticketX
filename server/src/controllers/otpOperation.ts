@@ -6,7 +6,15 @@ import sendMail from "./sendMail";
 import { otpInputSchema } from "../validation/otpValidation";
 
 export const resendOTP = async (req: Request, res: Response) => {
-  const user: { id: string; role: string; email: string } = req.body.user;
+  const user: { id: string; role: string; email: string; verified: boolean } =
+    req.body.user;
+
+  if (user.verified) {
+    res.status(404).json({
+      message: `${user.email} is already verified`,
+    });
+    return;
+  }
 
   try {
     if (!process.env.JWT_OTP_SECRET)
@@ -50,7 +58,20 @@ export const verifyOTP = async (req: Request, res: Response) => {
   }
 
   const userEnteredOTP = parseInt(isValidOTP.data.OTP);
-  const user: { id: string; role: string; OTP: string } = req.body.user;
+  const user: {
+    id: string;
+    role: string;
+    email: string;
+    OTP: string;
+    verified: boolean;
+  } = req.body.user;
+
+  if (user.verified) {
+    res.status(404).json({
+      message: `${user.email} is already verified`,
+    });
+    return;
+  }
 
   try {
     if (!process.env.JWT_OTP_SECRET) {

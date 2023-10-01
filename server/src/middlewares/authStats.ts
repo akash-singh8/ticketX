@@ -26,13 +26,6 @@ export const validateStats = async (
       return;
     }
 
-    if (user.verified) {
-      res.status(404).json({
-        message: `${user.email} is already verified`,
-      });
-      return;
-    }
-
     if (user.incorrectAttempt >= 7 || user.OTP_Attempt >= 10) {
       if (userDetail.role === "admin") {
         await Admins.updateOne({ _id: user._id }, { banned: true });
@@ -46,7 +39,14 @@ export const validateStats = async (
       return;
     }
 
-    req.body.user = { ...userDetail, email: user.email, OTP: user.OTP };
+    req.body.user = {
+      ...userDetail,
+      name: user.name,
+      email: user.email,
+      OTP: user.OTP,
+      verified: user.verified,
+    };
+
     next();
   } catch (err) {
     res.status(500).json({

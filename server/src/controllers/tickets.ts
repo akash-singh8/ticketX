@@ -49,8 +49,29 @@ export const raiseTicket = async (req: Request, res: Response) => {
       });
     }
 
-    const newTicket = new Tickets(isValidTicket.data);
+    const user: {
+      id: string;
+      name: string;
+      email: string;
+    } = req.body.user;
+
+    const ticket = {
+      ...isValidTicket.data,
+      dateRaised: new Date().toDateString(),
+      status: "pending",
+      raisedBy: {
+        name: user.name,
+        email: user.email,
+      },
+    };
+
+    const newTicket = new Tickets(ticket);
     await newTicket.save();
+
+    await Users.updateOne(
+      { _id: user.id },
+      { $push: { ticketRaised: newTicket.id } }
+    );
 
     res.status(201).json({ message: "successfully raised ticket" });
   } catch (err) {

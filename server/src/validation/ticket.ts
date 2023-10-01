@@ -1,17 +1,5 @@
 import { z } from "zod";
 
-const userRaisedSchema = z.object({
-  name: z
-    .string()
-    .min(3, "Name must be at least 3 characters")
-    .max(100, "Name cannot exceed 100 characters"),
-  email: z
-    .string()
-    .min(5, "Email must be at least 5 characters")
-    .max(200, "Email cannot exceed 200 characters")
-    .email("Email must be a valid email address"),
-});
-
 const ticketSchema = z.object({
   category: z
     .string()
@@ -25,9 +13,6 @@ const ticketSchema = z.object({
     .string()
     .min(3, "Message must be at least 3 characters")
     .max(1000, "Message cannot exceed 1000 characters"),
-  dateRaised: z.date(),
-  status: z.enum(["pending", "inreview", "resolved"]),
-  raisedBy: userRaisedSchema,
 });
 
 export default ticketSchema;
