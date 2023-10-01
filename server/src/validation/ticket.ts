@@ -25,7 +25,10 @@ const ticketSchema = z.object({
     .string()
     .min(3, "Message must be at least 3 characters")
     .max(1000, "Message cannot exceed 1000 characters"),
-  dateRaised: z.date(),
+  dateRaised: z
+    .string()
+    .min(14, "Date must be atleast 14 char HH:MM:SS DD/MM/YY")
+    .max(80, "Date cannot exceed 80 characters"),
   status: z.enum(["pending", "inreview", "resolved"]),
   raisedBy: userRaisedSchema,
 });
