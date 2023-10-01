@@ -41,6 +41,7 @@ export const validateStats = async (
 
     req.body.user = {
       ...userDetail,
+      name: user.name,
       email: user.email,
       OTP: user.OTP,
       verified: user.verified,
