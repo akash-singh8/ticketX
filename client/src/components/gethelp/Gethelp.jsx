@@ -51,20 +51,52 @@ export default function Gethelp(props) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit =async (event) => {
     event.preventDefault();
-    console.log(formData);
     if (!isAuthenticated) {
       localStorage.setItem("formData", formData.request);
       navigate("/");
       openSignupModal();
     }
+    if(isAuthenticated){
+      const authToken = localStorage.getItem('authorization');
+      try {
+        const response = await fetch("http://localhost:3080/ticket/raise", {
+          method: "POST",
+          headers: {
+            Authorization: authToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+           ticket:
+            {
+              category: cat,
+              title: ticketName,
+              message: formData.request,
+            }
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+        
+          // Clear the form data after submission
+          auth &&
+            setFormData({
+              request: " ",
+            });
+           closeModal();
+           alert(data.message) 
+          
+          
+        } else {
+          const errorData = await response.json();
+          throw new Error(`Failed to fetch user details: ${errorData.message}`);
+        }
+      } catch (err) {
+        console.error("Error fetching user details:", err);
+      }
+    }
 
-    // Clear the form data after submission
-    auth &&
-      setFormData({
-        request: " ",
-      });
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
 

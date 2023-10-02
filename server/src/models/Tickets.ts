@@ -25,7 +25,7 @@ const TicketSchema = new mongoose.Schema({
     required: true,
   },
   dateRaised: {
-    type: Date,
+    type: String,
     required: true,
   },
   status: {

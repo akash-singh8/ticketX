@@ -5,7 +5,7 @@ import { useModal } from "../modalProvider/Modalprovider";
 import {useNavigate} from 'react-router-dom';
 
 export default function Profile() {
-  const {user,setIsAuthenticated} = useModal();
+  const {user,setLogout} = useModal();
   const navigate=useNavigate()
   const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
@@ -13,7 +13,7 @@ export default function Profile() {
 };
 
 const logout = () => {
-  setIsAuthenticated(false)
+  setLogout()
   localStorage.clear();
   navigate('/');
 };

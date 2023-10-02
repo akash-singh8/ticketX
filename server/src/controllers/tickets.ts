@@ -13,13 +13,13 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     let userData;
     if (user.role === "admin") {
-      userData = await Admins.findById(user.id);
+      userData = await Admins.findById(user.id).populate("ticketResolved");
       if(userData){
         userData = { ...userData.toObject(), role: "admin" };
       }
 
     } else {
-      userData = await Users.findById(user.id);
+      userData = await Users.findById(user.id).populate("ticketRaised");
       if(userData){
         userData = { ...userData.toObject(), role: "client" };
       }
@@ -33,7 +33,7 @@ export const getUser = async (req: Request, res: Response) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Internal server error while getting tickets" });
+      .json({ message: "Internal server error while getting user details" });
     console.log(err);
   }
 };
@@ -49,8 +49,29 @@ export const raiseTicket = async (req: Request, res: Response) => {
       });
     }
 
-    const newTicket = new Tickets(isValidTicket.data);
+    const user: {
+      id: string;
+      name: string;
+      email: string;
+    } = req.body.user;
+
+    const ticket = {
+      ...isValidTicket.data,
+      dateRaised: new Date().toDateString(),
+      status: "pending",
+      raisedBy: {
+        name: user.name,
+        email: user.email,
+      },
+    };
+
+    const newTicket = new Tickets(ticket);
     await newTicket.save();
+
+    await Users.updateOne(
+      { _id: user.id },
+      { $push: { ticketRaised: newTicket.id } }
+    );
 
     res.status(201).json({ message: "successfully raised ticket" });
   } catch (err) {
@@ -64,8 +85,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
 // admin specific routes
 export const getTickets = async (req: Request, res: Response) => {
   const userRole = req.body.user?.role;
-  const ticketStatus: string = req.body.ticketStatus;
-
+  const ticketStatus= req.query.ticketStatus;
   if (!userRole || userRole !== "admin") {
     return res.status(403).json({ message: "Unauthorized" });
   }

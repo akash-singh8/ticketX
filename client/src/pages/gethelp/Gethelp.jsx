@@ -27,7 +27,7 @@ export default function Gethelp() {
         </div>
         <div className='ticket-box '>
 
-          {(!isAuthenticated || (isAuthenticated && user.email==="client")) &&
+          {(!isAuthenticated || (isAuthenticated && user.role==="client")) &&
           <>
             <GethelpPopup ticketName='BUSINESS STRATEGY' cat="GET HELP" image={BusinessStrategy}/>
             <GethelpPopup  ticketName='MARKETING'cat="GET HELP" image={Marketing}/>
@@ -36,7 +36,7 @@ export default function Gethelp() {
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'cat="GET HELP" image={Operations}/>
             <GethelpPopup  ticketName='OTHERS'cat="GET HELP" image={Others}/>
           </>}
-          { isAuthenticated && user.email==="admin" &&
+          { isAuthenticated && user.role==="admin" &&
           <>
              <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy" image={BusinessStrategy} />
              <Box ticketName='MARKETING' link="/admin/marketing" image={Marketing}/>

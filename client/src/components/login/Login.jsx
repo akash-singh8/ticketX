@@ -37,7 +37,7 @@ export default function Login(props) {
     closeLoginModal,
     openLoginModal,
     setUser,
-    setIsAuthenticated,
+    setLogin,
   } = useModal();
   const navigate = useNavigate();
   const { styleName, text } = props;
@@ -75,7 +75,7 @@ export default function Login(props) {
 
       if (response.status === 200) {
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
-        setIsAuthenticated(true);
+        setLogin();
         alert(data.message);
         getUserDetails(data.authToken);
       

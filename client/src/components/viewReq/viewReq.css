@@ -2,16 +2,25 @@
     display: flex;
     margin: 10px 20px;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .profile-pic{
     display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .text{
     height: 230px;
     background-color: #f2f2f2;
     margin: 10px 20px;
+    padding: 20px;
+}
+.margin{
+    margin: 10px 20px;
+    
 }
 .checkbox{
     margin: 10px 20px;
@@ -20,4 +29,8 @@
 
 .container2-req{
     cursor: pointer;
+}
+
+.padding{
+    padding: 3px;
 }

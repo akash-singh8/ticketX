@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
   ticketRaised: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "tickets",
+      ref: "Ticket",
     },
   ],
   verified: {

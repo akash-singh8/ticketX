@@ -32,16 +32,11 @@ const ModalContent = styled.div`
   display: block;
 `;
 
-export default function ViewReq() {
-  
-  const {user} = useModal();
-  
+export default function ViewReq(props) {
+  const ticket=props.ticket
+  const {user,isAuthenticated} = useModal();
+  const authToken = localStorage.getItem("authorization");
   const modalRef = useRef();
- 
-
-  
-
-  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -51,6 +46,38 @@ export default function ViewReq() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+ 
+  const updateStatus = async (newstatus) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3080/ticket/update`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: authToken,
+            "Content-Type": "application/json", 
+          },
+          body: JSON.stringify({
+            ticket: { id: ticket._id, status: newstatus },
+          }),
+        }
+      );
+      console.log(response)
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message)
+        
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Failed to update ticket status: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error("Error updating ticket status:", err);
+    }
+  };
+  
+
+  
 
 
 
@@ -70,20 +97,28 @@ export default function ViewReq() {
             <div className="profile-pic">
               <img src={profile} alt="profilepic" className="profile pic" />
               <div className="user-deatils">
-                <div className="name-admin">Name : {user.name}</div>
-                <div className="number">Phone Number : </div>
+                {user && user.role==="client" ?<>
+                    <div className="name-admin padding">Name : {user.name}</div>
+                    <div className="number padding">Email : {user.email} </div>
+                </>:<>
+                    <div className="name-admin padding">Name : {ticket.raisedBy.name}</div>
+                    <div className="number padding">Email : {ticket.raisedBy.email} </div>
+                </>}
+                <div className="number padding">Title : {ticket.title} </div>
               </div>
             </div>
             <div className="date">
-              Raised on <br></br> <span>21 July, 2021</span>
+              Raised on <br></br> <span>{ticket.dateRaised}</span>
             </div>
           </div>
-          <div className="text"></div>
+          <div className="text">{ticket.message}</div>
+            <div className="margin">Status : {ticket.status}</div>
+            {isAuthenticated && user.role==='admin' && ticket.status==="pending" &&
           <div className="checkbox">
-            <input type="checkbox" />
+            <input type="checkbox" onClick={() => updateStatus("inreview")}/>
             <div>Started Review</div>
-          </div>
-          <div className="button login-button request-button">Mark as Resolved</div>
+          </div>}
+          {isAuthenticated && user.role==='admin'&& ticket.status!=="resolved" &&<div className="button login-button request-button" onClick={() => updateStatus("resolved")}>Mark as Resolved</div>}
 
           <div className="new-account request-back center" onClick={closeModal}>
             Go Back
