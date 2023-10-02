@@ -4,9 +4,9 @@ import Reqbox from "../reqbox/Reqbox";
 import Pagenavigation from "../pagenavigation/Pagenavigation";
 import Location from "../location/Location";
 
-
 export default function Adminsection(props) {
   const cat = props.cat;
+  const ticketName = props.ticketName;
   const [sortby, setSortBy] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("pending");
   const [getTickets, setGetTickets] = useState([]);
@@ -23,12 +23,10 @@ export default function Adminsection(props) {
           },
         }
       );
-      console.log(response)
+
       const data = await response.json();
       if (response.ok) {
-        console.log(data)
         setGetTickets(data.tickets);
-        console.log(getTickets)
       } else {
         const errorData = await response.json();
         throw new Error(`Failed to fetch tickets: ${errorData.message}`);
@@ -38,21 +36,20 @@ export default function Adminsection(props) {
     }
   };
 
-
   const filteredTickets = getTickets.filter((ticket) => {
     return (
       ticket.status === selectedStatus &&
-      ticket.title=== cat.toUpperCase()
+      ticket.category === cat.toUpperCase() &&
+      ticket.title === ticketName.toUpperCase()
     );
   });
 
   // Fetch tickets on loading and on status change
-  console.log(selectedStatus,"out")
+
   useEffect(() => {
-    console.log(selectedStatus)
     fetchTickets();
   }, []);
-  
+
   const handleStatusClick = (status) => {
     setSelectedStatus(status);
     fetchTickets();
@@ -86,18 +83,33 @@ export default function Adminsection(props) {
         <Location />
         <div className="center">
           <div className="req-status admin_status">
-            <div className="pending" onClick={() => handleStatusClick("pending")}>Pending</div>
-            <div className="inreview" onClick={() => handleStatusClick("inreview")}>In review</div>
-            <div className="resolved" onClick={() => handleStatusClick("resolved")}>Resolved</div>
+            <div
+              className="pending"
+              onClick={() => handleStatusClick("pending")}
+            >
+              Pending
+            </div>
+            <div
+              className="inreview"
+              onClick={() => handleStatusClick("inreview")}
+            >
+              In review
+            </div>
+            <div
+              className="resolved"
+              onClick={() => handleStatusClick("resolved")}
+            >
+              Resolved
+            </div>
           </div>
         </div>
         {filteredTickets.length > 0 ? (
-        filteredTickets.map((ticket) => (
-          <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
-        ))
-      ) : (
-        <h3 className="center">No {selectedStatus} Tickets</h3>
-      )}
+          filteredTickets.map((ticket) => (
+            <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
+          ))
+        ) : (
+          <h3 className="center">No {selectedStatus} Tickets</h3>
+        )}
         <Pagenavigation />
       </section>
     </>

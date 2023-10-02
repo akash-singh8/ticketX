@@ -15,7 +15,6 @@ export default function TicketRequestssection() {
     );
   }
   else if(user.role==="admin"){
-
     filteredTickets = user.ticketResolved.filter(
       (ticket) => ticket.status === selectedStatus
     );
