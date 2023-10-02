@@ -70,8 +70,13 @@ export default function ViewReq(props) {
             <div className="profile-pic">
               <img src={profile} alt="profilepic" className="profile pic" />
               <div className="user-deatils">
-                <div className="name-admin padding">Name : {user.name}</div>
-                <div className="number padding">Email : {user.email} </div>
+                {user && user.role==="client" ?<>
+                    <div className="name-admin padding">Name : {user.name}</div>
+                    <div className="number padding">Email : {user.email} </div>
+                </>:<>
+                    <div className="name-admin padding">Name : {ticket.raisedBy.name}</div>
+                    <div className="number padding">Email : {ticket.raisedBy.email} </div>
+                </>}
                 <div className="number padding">Title : {ticket.title} </div>
               </div>
             </div>
@@ -80,7 +85,8 @@ export default function ViewReq(props) {
             </div>
           </div>
           <div className="text">{ticket.message}</div>
-            {isAuthenticated && user.role==='admin' &&
+            <div className="margin">Status : {ticket.status}</div>
+            {isAuthenticated && user.role==='admin' && ticket.status==="pending" &&
           <div className="checkbox">
             <input type="checkbox" />
             <div>Started Review</div>
