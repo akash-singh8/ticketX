@@ -8,9 +8,19 @@ export default function TicketRequestssection() {
   const [selectedStatus, setSelectedStatus] = useState("pending");
 
   // Filter tickets based on the selected status
-  const filteredTickets = user.ticketRaised.filter(
-    (ticket) => ticket.status === selectedStatus
-  );
+  let filteredTickets=null;
+  if(user.role==="client"){
+    filteredTickets = user.ticketRaised.filter(
+      (ticket) => ticket.status === selectedStatus
+    );
+  }
+  else if(user.role==="admin"){
+
+    filteredTickets = user.ticketResolved.filter(
+      (ticket) => ticket.status === selectedStatus
+    );
+  }
+
 
   const handleStatusClick = (status) => {
     setSelectedStatus(status);

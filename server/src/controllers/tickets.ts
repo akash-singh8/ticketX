@@ -85,8 +85,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
 // admin specific routes
 export const getTickets = async (req: Request, res: Response) => {
   const userRole = req.body.user?.role;
-  const ticketStatus: string = req.body.ticketStatus;
-
+  const ticketStatus= req.query.ticketStatus;
   if (!userRole || userRole !== "admin") {
     return res.status(403).json({ message: "Unauthorized" });
   }
