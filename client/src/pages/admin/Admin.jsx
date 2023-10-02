@@ -5,11 +5,12 @@ import Adminsection from "../../components/adminsection/Adminsection";
 import Recentrequests from "../../components/recentrequests/Recentrequests";
 export default function Admin(props) {
   const recent=props.recent
-  const cat=props.cat
+  const ticketName=props.cat
+  const  cat=props.catmain
   return (
     <>
       <NavBar />
-      {recent ?<Recentrequests/>:<Adminsection cat={cat} />}
+      {recent ?<Recentrequests/>:<Adminsection cat={cat} ticketName={ticketName} />}
       <Footer />
     </>
   );

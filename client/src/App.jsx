@@ -20,15 +20,17 @@ function App() {
           <Route path="/business-updates" element={<Businessupdates />}></Route>
           <Route path="/forgot-password" element={<ForgotPass />}></Route>
           <Route path="/ticket-history" element={<TicketHistory/>}></Route>
-          <Route path="/admin/business-strategy" element={<Admin cat="BUSINESS STRATEGY"/>}></Route>
-          <Route path="/admin/marketing" element={<Admin cat="MARKETING"/>}></Route>
-          <Route path="/admin/financial-management" element={<Admin cat="FINANCIAL MANAGEMENT"/>}></Route>
-          <Route path="/admin/technical-support" element={<Admin cat="TECHNICAL SUPPORT"/>}></Route>
-          <Route path="/admin/operation&logistics" element={<Admin cat="OPERATION & LOGISTICS"/>}></Route>
-          <Route path="/admin/others" element={<Admin cat="OTHERS"/>}></Route>
-          <Route path="/admin/new-product-launch"element={<Admin cat="NEW PRODUCT LAUNCH"/>}></Route>
-          <Route path="/admin/expansion-of-business"element={<Admin cat="EXPANSION OF BUSINESS"/>}></Route>
-          <Route path="/admin/revenue"element={<Admin cat="REVENUE"/>}></Route>
+          <Route path="/admin/business-strategy" element={<Admin cat="BUSINESS STRATEGY" catmain="GET HELP"/>}></Route>
+          <Route path="/admin/marketing" element={<Admin cat="MARKETING" catmain="GET HELP"/>}></Route>
+          <Route path="/admin/marketing/business_updates" element={<Admin cat="MARKETING" catmain="BUSINESS UPDATES"/>}></Route>
+          <Route path="/admin/financial-management" element={<Admin cat="FINANCIAL MANAGEMENT" catmain="GET HELP"/>}></Route>
+          <Route path="/admin/technical-support" element={<Admin cat="TECHNICAL SUPPORT" catmain="GET HELP"/>}></Route>
+          <Route path="/admin/operation&logistics" element={<Admin cat="OPERATION & LOGISTICS" catmain="GET HELP"/>}></Route>
+          <Route path="/admin/others" element={<Admin cat="OTHERS" catmain="GET HELP" />}></Route>
+          <Route path="/admin/others/business_updates" element={<Admin cat="OTHERS" catmain="BUSINESS UPDATES" />}></Route>
+          <Route path="/admin/new-product-launch"element={<Admin cat="NEW PRODUCT LAUNCH" catmain="BUSINESS UPDATES"/>}></Route>
+          <Route path="/admin/expansion-of-business"element={<Admin cat="EXPANSION OF BUSINESS" catmain="BUSINESS UPDATES"/>}></Route>
+          <Route path="/admin/revenue"element={<Admin cat="REVENUE" catmain="BUSINESS UPDATES"/>}></Route>
           <Route path="/admin/requests"element={<Admin recent={true}/>}></Route>
           <Route path="/ticket-history/requests" element={<TicketRequests/>}></Route>
         </Routes>

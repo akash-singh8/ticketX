@@ -9,9 +9,6 @@ export function AppProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
 
-  useEffect=()=>{
-    console.log(isAuthenticated)
-  }
   const setLogin=()=>{
      setIsAuthenticated(true)
   }

@@ -31,11 +31,11 @@ export default function Businessupdates() {
         </>}
         {isAuthenticated && user.role==="admin" && 
         <>
-            <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch"image={Launch}/>
-            <Box  ticketName='MARKETING'link="/admin/marketing"image={Marketing}/>
-            <Box  ticketName='EXPANSION OF BUSINESS'link="/admin/expansion-of-business"image={Expansion}/>
-            <Box  ticketName='REVENUE'link="/admin/revenue"image={Revenue}/>
-            <Box  ticketName='OTHERS'link="/admin/others"image={Others}/>
+            <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch" cat="BUSINESS UPDATES"image={Launch}/>
+            <Box  ticketName='MARKETING'link="/admin/marketing/business_updates" cat="BUSINESS UPDATES"image={Marketing}/>
+            <Box  ticketName='EXPANSION OF BUSINESS'link="/admin/expansion-of-business" cat="BUSINESS UPDATES"image={Expansion}/>
+            <Box  ticketName='REVENUE'link="/admin/revenue" cat="BUSINESS UPDATES"image={Revenue}/>
+            <Box  ticketName='OTHERS'link="/admin/others/business_updates" cat="BUSINESS UPDATES"image={Others}/>
         </>}
            
         </div>
