@@ -141,6 +141,7 @@ export default function Login(props) {
     openSignupModal();
   };
   const forgotPassword = () => {
+    closeLoginModal()
     navigate("/forgot-password");
   };
 
