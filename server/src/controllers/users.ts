@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import Users from "../models/Users.js";
-import sendMail from "./sendMail.js";
-import { UserLoginData, UserSignupData } from "../types/user.js";
+import Users from "../models/Users";
+import sendMail from "./sendMail";
+import { UserLoginData, UserSignupData } from "../types/user";
 import {
   userLoginInputSchema,
   userSignupInputSchema,
-} from "../validation/user.js";
+} from "../validation/user";
 
 export const handleUserSignup = async (req: Request, res: Response) => {
   const bodyData: UserSignupData = req.body;

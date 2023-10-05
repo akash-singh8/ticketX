@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import sendMail from "./sendMail.js";
-import Admins from "../models/Admins.js";
-import { AdminLoginData, AdminSignupData } from "../types/admin.js";
+import sendMail from "./sendMail";
+import Admins from "../models/Admins";
+import { AdminLoginData, AdminSignupData } from "../types/admin";
 import {
   adminLoginInputSchema,
   adminSignupInputSchema,
-} from "../validation/admin.js";
+} from "../validation/admin";
 
 export const handleAdminSignup = async (req: Request, res: Response) => {
   const bodyData: AdminSignupData = req.body;
