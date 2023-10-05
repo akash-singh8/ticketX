@@ -140,14 +140,16 @@ export default function Gethelp(props) {
               onChange={handleChange}
               required
             />
-
+            <div className="center">
+              
             <div
-              className="button login-button request-button"
+              className="button login-button request-button reposition"
               onClick={handleSubmit}
               type="submit"
-            >
+              >
               Submit Request
             </div>
+              </div>
 
             <div className="new-account request-back" onClick={closeModal}>
               Go Back

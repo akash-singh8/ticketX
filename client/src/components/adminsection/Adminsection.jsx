@@ -47,7 +47,7 @@ export default function Adminsection(props) {
   // Fetch tickets on loading and on status change
 
   useEffect(() => {
-    fetchTickets();
+    fetchTickets("pending");
   }, []);
 
   const handlePending = (status) => {
