@@ -29,6 +29,7 @@ const ModalContent = styled.div`
   display: block;
 `;
 export default function Otp(props) {
+  const [otp,setotp]=useState("")
   const { otpModalIsOpen, openLoginModal, openSignupModal, closeotpModal } =
     useModal();
 
@@ -37,20 +38,37 @@ export default function Otp(props) {
   const [timer, setTimer] = useState(300);
 
   const handleBack = () => {
-    resetTimer();
     closeotpModal();
     openSignupModal();
   };
 
-  const handleVerify = (event) => {
-    resetTimer();
+  const handleVerify =async (event) => {
     event.preventDefault();
+    const authToken = localStorage.getItem('authorization');
+      try {
+        const response = await fetch("http://localhost:3080/otp/verify", {
+          method: "PATCH",
+          headers: {
+            Authorization: authToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+           OTP:otp
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          alert(data.message)  
+        } else {
+          const errorData = await response.json();
+          throw new Error(`Failed to verify: ${errorData.message}`);
+        }
+      } catch (err) {
+        console.error("Error verifying user email:", err);
+      }
+    setotp("")
     closeotpModal();
     openLoginModal();
-  };
-
-  const resetTimer = () => {
-    setTimer(300);
   };
 
   const formatTime = (timeInSeconds) => {
@@ -59,27 +77,49 @@ export default function Otp(props) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const onTimeUp = () => {
-    closeotpModal();
-    console.log("Timer has reached zero!");
-  };
-
-  useEffect(() => {
-    const timerInterval = setInterval(() => {
-      if (timer > 0) {
-        setTimer(timer - 1);
-      } else {
-        clearInterval(timerInterval);
-        if (onTimeUp) {
-          onTimeUp();
-        }
+  const handleOtpChange = (event) => {
+    const { name, value } = event.target;
+    setotp((prevOtp) => {
+      if (name === "otp1" && value.length <= 1) {
+        return value;
+      } else if (name === "otp2" && value.length <= 1) {
+        return prevOtp.slice(0, 1) + value;
+      } else if (name === "otp3" && value.length <= 1) {
+        return prevOtp.slice(0, 2) + value;
+      } else if (name === "otp4" && value.length <= 1) {
+        return prevOtp.slice(0, 3) + value;
+      } else if (name === "otp5" && value.length <= 1) {
+        return prevOtp.slice(0, 4) + value;
+      } else if (name === "otp6" && value.length <= 1) {
+        return prevOtp.slice(0, 5) + value;
       }
-    }, 1000);
+      return prevOtp;
+    });
+  };
+  useEffect(() => {
+    let interval;
+
+    if (otpModalIsOpen) {
+      interval = setInterval(() => {
+        if (timer > 0) {
+          setTimer((prevTimer) => prevTimer - 1);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
 
     return () => {
-      clearInterval(timerInterval);
+      clearInterval(interval);
     };
-  }, [timer, onTimeUp]);
+  }, [otpModalIsOpen, timer]);
+
+  useEffect(() => {
+    if (otpModalIsOpen) {
+      setTimer(300); // Reset the timer when the modal is opened
+    }
+  }, [otpModalIsOpen]);
+
 
   return (
     <div>
@@ -94,12 +134,31 @@ export default function Otp(props) {
           <h5 className="center">Time remaining : {formatTime(timer)}</h5>
           <form>
             <div class="otp-field mb-4">
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
+              <input type="number"
+              
+              name="otp1"
+              value={otp.charAt(0) || ""}
+              onChange={handleOtpChange} />
+              <input type="number"
+                name="otp2"
+                value={otp.charAt(1) || ""}
+                onChange={handleOtpChange} />
+              <input type="number"
+                name="otp3"
+                value={otp.charAt(2) || ""}
+                onChange={handleOtpChange} />
+              <input type="number"
+                name="otp4"
+                value={otp.charAt(3) || ""}
+                onChange={handleOtpChange}/>
+              <input type="number"
+                name="otp5"
+                value={otp.charAt(4) || ""}
+                onChange={handleOtpChange} />
+              <input type="number"
+                name="otp6"
+                value={otp.charAt(5) || ""}
+                onChange={handleOtpChange}/>
             </div>
             <div className="buttons2">
               <div

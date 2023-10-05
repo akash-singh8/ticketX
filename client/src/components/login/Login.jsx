@@ -60,7 +60,7 @@ export default function Login(props) {
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/login?role=admin",
+        "http://localhost:3080/auth/login?role=user",
         {
           method: "POST",
           headers: {
