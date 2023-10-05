@@ -9,7 +9,7 @@ import FinManagement from "../../assets/Financial Management.png"
 import TechSupport from "../../assets/Technical Support.png"
 import Others from "../../assets/Others.png"
 import Operations from "../../assets/Operational Costs & Logistics.png"
-import { useModal } from "../../components/modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 
 export default function Gethelp() {

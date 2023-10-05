@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useRef, useEffect, useState } from "react";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 import "./otp.css";
 const CustomModal = styled(Modal)`
   display: flex;

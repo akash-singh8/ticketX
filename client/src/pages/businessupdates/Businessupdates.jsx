@@ -8,7 +8,7 @@ import Marketing from "../../assets/IMG_4774.png"
 import Expansion from "../../assets/1BSC8075.png"
 import Revenue from "../../assets/Revenue.png"
 import Others from "../../assets/Others.png"
-import { useModal } from "../../components/modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 export default function Businessupdates() {
   const {user,isAuthenticated} = useModal();

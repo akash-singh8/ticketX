@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import Gethelp from "./pages/gethelp/Gethelp";
 import Businessupdates from "./pages/businessupdates/Businessupdates";
-import { AppProvider } from "./components/modalProvider/Modalprovider";
+import { AppProvider } from "./modalProvider/Modalprovider";
 import TicketHistory from "./pages/ticketHistory/TicketHistory";
 import Admin from "./pages/admin/Admin";
 import TicketRequests from "./pages/ticketrequests/Ticketrequests";

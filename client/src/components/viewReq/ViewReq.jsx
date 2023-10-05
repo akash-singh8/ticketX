@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef } from "react";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 import "./viewReq.css";
 
 import profile from "../../assets/profile.png";
