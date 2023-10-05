@@ -54,13 +54,19 @@ export default function Login(props) {
       [name]: value,
     }));
   };
-
+  const determineUserRole=(email)=> {
+    if (email.endsWith("@i-her.org")) {
+      return "admin";
+    } else {
+      return "user";
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const role=determineUserRole(formData.email)
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/login?role=user",
+        `http://localhost:3080/auth/login?role=${role}`,
         {
           method: "POST",
           headers: {
