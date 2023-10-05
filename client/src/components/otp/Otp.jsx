@@ -75,7 +75,7 @@ export default function Otp(props) {
     const authToken = localStorage.getItem('authorization');
     try {
       const response = await fetch('http://localhost:3080/otp/resend', {
-        method: 'PATCH', // Use POST for resending OTP
+        method: 'PATCH',
         headers: {
           Authorization: authToken,
         },
