@@ -24,7 +24,7 @@ background: #D81F84;
 width: 194.503px;
 height: 45.863px;
 flex-shrink: 0;
-margin: 20px 215px;
+/* margin: 20px 215px !important; */
 }
 
 .request-back{

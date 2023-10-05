@@ -12,10 +12,10 @@ export default function Adminsection(props) {
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
 
-  const fetchTickets = async () => {
+  const fetchTickets = async (status) => {
     try {
       const response = await fetch(
-        `http://localhost:3080/auth/getTickets?ticketStatus=${selectedStatus}`,
+        `http://localhost:3080/auth/getTickets?ticketStatus=${status}`,
         {
           method: "GET",
           headers: {
@@ -47,12 +47,20 @@ export default function Adminsection(props) {
   // Fetch tickets on loading and on status change
 
   useEffect(() => {
-    fetchTickets();
+    fetchTickets("pending");
   }, []);
 
-  const handleStatusClick = (status) => {
+  const handlePending = (status) => {
     setSelectedStatus(status);
-    fetchTickets();
+    fetchTickets("pending");
+  };
+  const handleInreview = (status) => {
+    setSelectedStatus(status);
+    fetchTickets("inreview");
+  };
+  const handleResolved = (status) => {
+    setSelectedStatus(status);
+    fetchTickets("resolved");
   };
 
   return (
@@ -85,19 +93,19 @@ export default function Adminsection(props) {
           <div className="req-status admin_status">
             <div
               className="pending"
-              onClick={() => handleStatusClick("pending")}
+              onClick={() => handlePending("pending")}
             >
               Pending
             </div>
             <div
               className="inreview"
-              onClick={() => handleStatusClick("inreview")}
+              onClick={() => handleInreview("inreview")}
             >
               In review
             </div>
             <div
               className="resolved"
-              onClick={() => handleStatusClick("resolved")}
+              onClick={() => handleResolved("resolved")}
             >
               Resolved
             </div>

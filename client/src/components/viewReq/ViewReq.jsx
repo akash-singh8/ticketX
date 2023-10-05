@@ -118,7 +118,13 @@ export default function ViewReq(props) {
             <input type="checkbox" onClick={() => updateStatus("inreview")}/>
             <div>Started Review</div>
           </div>}
-          {isAuthenticated && user.role==='admin'&& ticket.status!=="resolved" &&<div className="button login-button request-button" onClick={() => updateStatus("resolved")}>Mark as Resolved</div>}
+          {isAuthenticated && user.role==='admin'&& ticket.status!=="resolved" &&
+          <div className="center">
+
+          <div className="button login-button request-button reposition
+          " onClick={() => updateStatus("resolved")}>Mark as Resolved
+          </div>
+          </div>}
 
           <div className="new-account request-back center" onClick={closeModal}>
             Go Back

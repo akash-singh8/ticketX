@@ -50,16 +50,23 @@ export default function SignUp() {
       [name]: value,
     }));
   };
-
+  const determineUserRole=(email)=> {
+    if (email.endsWith("@i-her.org")) {
+      return "admin";
+    } else {
+      return "user";
+    }
+  };
   const handleSubmit = async () => {
     if (formData.password !== formData.Confirmpassword) {
       alert("Password didn't match");
       return;
     }
+    const role=determineUserRole(formData.email)
 
     try {
       const response = await fetch(
-        "http://localhost:3080/auth/signup?role=admin",
+        `http://localhost:3080/auth/signup?role=${role}`,
         {
           method: "POST",
           headers: {
