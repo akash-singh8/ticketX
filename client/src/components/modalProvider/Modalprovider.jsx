@@ -9,6 +9,41 @@ export function AppProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
 
+  const getUserDetails = async (authToken) => {
+    console.log(authToken)
+    try {
+      const response = await fetch("http://localhost:3080/auth/me", {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = await response.json();
+        setUser(userData)
+        console.log(userData)
+        
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch user details: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error("Error fetching user details:", err);
+    }
+  };
+
+  useEffect(()=>{
+    const authToken=localStorage.getItem('authorization')
+    if(authToken){
+       setLogin()
+       getUserDetails(authToken);
+    }
+    else{
+      setLogout()
+    }
+  },[])
+
   const setLogin=()=>{
      setIsAuthenticated(true)
   }
