@@ -11,10 +11,27 @@ export const validateStats = async (
 
   try {
     let user;
+    let userObj;
     if (userDetail.role === "admin") {
       user = await Admins.findById(userDetail.id);
+      userObj = {
+        ...userDetail,
+        name: user?.name,
+        email: user?.email,
+        OTP: user?.OTP,
+        verified: user?.verified,
+      };
     } else {
       user = await Users.findById(userDetail.id);
+      userObj = {
+        ...userDetail,
+        name: user?.name,
+        email: user?.email,
+        OTP: user?.OTP,
+        verified: user?.verified,
+        location: user?.location,
+        count: user?.ticketCount,
+      };
     }
 
     if (!user || user.banned) {
@@ -39,13 +56,7 @@ export const validateStats = async (
       return;
     }
 
-    req.body.user = {
-      ...userDetail,
-      name: user.name,
-      email: user.email,
-      OTP: user.OTP,
-      verified: user.verified,
-    };
+    req.body.user = userObj;
 
     next();
   } catch (err) {

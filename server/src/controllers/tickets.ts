@@ -46,6 +46,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       id: string;
       name: string;
       email: string;
+      location: string;
+      count: number;
     } = req.body.user;
 
     const ticket = {
@@ -55,6 +57,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       raisedBy: {
         name: user.name,
         email: user.email,
+        location: user.location,
+        count: user.count,
       },
     };
 
