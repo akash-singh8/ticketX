@@ -63,7 +63,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
 
     await Users.updateOne(
       { _id: user.id },
-      { $push: { ticketRaised: newTicket.id } }
+      { $push: { ticketRaised: newTicket.id }, $inc: { ticketCount: 1 } }
     );
 
     res.status(201).json({ message: "successfully raised ticket" });
