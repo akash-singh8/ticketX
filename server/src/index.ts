@@ -7,6 +7,7 @@ import otpRouter from "./routes/otp";
 import { authenticateJWT } from "./middlewares/authJWT";
 import { validateStats } from "./middlewares/authStats";
 import ticketRouter from "./routes/ticket";
+import queryRouter from "./routes/query";
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(
 app.use("/auth", AuthRouter);
 app.use("/otp", authenticateJWT, validateStats, otpRouter);
 app.use("/ticket", authenticateJWT, validateStats, ticketRouter);
+app.use("/query", queryRouter);
 
 const mongodb_uri = process.env.MONGODB_URI;
 
