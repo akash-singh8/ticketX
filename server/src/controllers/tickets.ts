@@ -61,12 +61,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
       ...isValidTicket.data,
       dateRaised: new Date().toDateString(),
       status: "pending",
-      raisedBy: {
-        name: user.name,
-        email: user.email,
-        location: user.location,
-        count: user.count,
-      },
+      raisedBy: user.id,
     };
 
     const newTicket = new Tickets(ticket);
@@ -103,7 +98,9 @@ export const getTickets = async (req: Request, res: Response) => {
   }
 
   try {
-    const tickets = await Tickets.find({ status: ticketStatus });
+    const tickets = await Tickets.find({ status: ticketStatus }).populate(
+      "raisedBy"
+    );
 
     res.json({ tickets });
   } catch (err) {
