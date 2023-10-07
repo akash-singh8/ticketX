@@ -9,6 +9,7 @@ export default function Adminsection(props) {
   const ticketName = props.ticketName;
   const [sortby, setSortBy] = useState(false);
   const [byReqDates, setbyReqDates] = useState(false);
+  const [byFrequency, setbyFrequency] = useState(false);
   const [sortedTickets, setSortedTickets] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("pending");
   const [getTickets, setGetTickets] = useState([]);
@@ -47,15 +48,27 @@ export default function Adminsection(props) {
       (!selectedLocation || ticket.raisedBy.location === selectedLocation)
     );
   });
-
+ 
   const SortByReqdate = () => {
     setbyReqDates(true);
+    setbyFrequency(false)
     const sortedByDateTickets = [...filteredTickets].sort((a, b) => {
       const dateA = new Date(a.dateRaised);
       const dateB = new Date(b.dateRaised);
       return dateA - dateB; 
     });
     setSortedTickets(sortedByDateTickets); 
+  };
+  const SortByFrequency = () => {
+    setbyFrequency(true);
+    setbyReqDates(false)
+    
+    const sortedByfrequencyTickets = [...filteredTickets].sort((a, b) => {
+      const countA = new Date(a.raisedBy.ticketCount);
+      const countB = new Date(b.raisedBy.ticketCount);
+      return countB - countA; 
+    });
+    setSortedTickets(sortedByfrequencyTickets); 
   };
 
   useEffect(() => {
@@ -96,7 +109,7 @@ export default function Adminsection(props) {
                 <div className="category" onClick={SortByReqdate}>
                   Requests date
                 </div>
-                <div className="category">Frequent requests</div>
+                <div className="category" onClick={SortByFrequency}>Frequent requests</div>
               </div>
             )}
             <div className="dots3" onClick={() => setSortBy(!sortby)}>
@@ -126,7 +139,7 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        {byReqDates ? (
+        {byReqDates ||byFrequency ? (
           sortedTickets.length > 0 ? (
             sortedTickets.map((ticket) => (
               <Reqbox key={ticket.id} ticket={ticket} />
