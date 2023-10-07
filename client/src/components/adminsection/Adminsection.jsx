@@ -8,6 +8,8 @@ export default function Adminsection(props) {
   const cat = props.cat;
   const ticketName = props.ticketName;
   const [sortby, setSortBy] = useState(false);
+  const [byReqDates, setbyReqDates] = useState(false);
+  const [sortedTickets, setSortedTickets] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("pending");
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
@@ -25,7 +27,7 @@ export default function Adminsection(props) {
         }
       );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       if (response.ok) {
         setGetTickets(data.tickets);
       } else {
@@ -46,6 +48,15 @@ export default function Adminsection(props) {
     );
   });
 
+  const SortByReqdate = () => {
+    setbyReqDates(true);
+    const sortedByDateTickets = [...filteredTickets].sort((a, b) => {
+      const dateA = new Date(a.dateRaised);
+      const dateB = new Date(b.dateRaised);
+      return dateA - dateB; 
+    });
+    setSortedTickets(sortedByDateTickets); 
+  };
 
   useEffect(() => {
     fetchTickets("pending");
@@ -82,7 +93,9 @@ export default function Adminsection(props) {
             {sortby && (
               <div className="sortby-dropdown">
                 <div className="dropdown-heading center">Sort by</div>
-                <div className="category">Requests date</div>
+                <div className="category" onClick={SortByReqdate}>
+                  Requests date
+                </div>
                 <div className="category">Frequent requests</div>
               </div>
             )}
@@ -93,13 +106,10 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        <Location onLocationChange={handleLocationChange}/>
+        <Location onLocationChange={handleLocationChange} />
         <div className="center">
           <div className="req-status admin_status">
-            <div
-              className="pending"
-              onClick={() => handlePending("pending")}
-            >
+            <div className="pending" onClick={() => handlePending("pending")}>
               Pending
             </div>
             <div
@@ -116,9 +126,17 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        {filteredTickets.length > 0 ? (
+        {byReqDates ? (
+          sortedTickets.length > 0 ? (
+            sortedTickets.map((ticket) => (
+              <Reqbox key={ticket.id} ticket={ticket} />
+            ))
+          ) : (
+            <h3 className="center">No {selectedStatus} Tickets</h3>
+          )
+        ) : filteredTickets.length > 0 ? (
           filteredTickets.map((ticket) => (
-            <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
+            <Reqbox key={ticket.id} ticket={ticket} />
           ))
         ) : (
           <h3 className="center">No {selectedStatus} Tickets</h3>
