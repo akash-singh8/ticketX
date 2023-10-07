@@ -37,7 +37,7 @@ export default function Login(props) {
     closeLoginModal,
     openLoginModal,
     setLogin,
-    getUserDetails
+    setUser
   } = useModal();
   const navigate = useNavigate();
   const { styleName, text } = props;
@@ -99,6 +99,30 @@ export default function Login(props) {
       email: "",
       password: "",
     });
+  };
+
+  const getUserDetails = async (authToken) => {
+    console.log(authToken)
+    try {
+      const response = await fetch("http://localhost:3080/auth/me", {
+        method: "GET",
+        headers: {
+          authorization: `${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = await response.json();
+        setUser(userData)
+        console.log(userData)
+        
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch user details: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error("Error fetching user details:", err);
+    }
   };
 
   useEffect(() => {
