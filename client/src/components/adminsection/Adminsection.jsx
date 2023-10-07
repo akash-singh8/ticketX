@@ -23,8 +23,8 @@ export default function Adminsection(props) {
           },
         }
       );
-
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
         setGetTickets(data.tickets);
       } else {
