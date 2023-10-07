@@ -11,6 +11,7 @@ export default function Adminsection(props) {
   const [selectedStatus, setSelectedStatus] = useState("pending");
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   const fetchTickets = async (status) => {
     try {
@@ -40,11 +41,11 @@ export default function Adminsection(props) {
     return (
       ticket.status === selectedStatus &&
       ticket.category === cat.toUpperCase() &&
-      ticket.title === ticketName.toUpperCase()
+      ticket.title === ticketName.toUpperCase() &&
+      (!selectedLocation || ticket.raisedBy.location === selectedLocation)
     );
   });
 
-  // Fetch tickets on loading and on status change
 
   useEffect(() => {
     fetchTickets("pending");
@@ -61,6 +62,10 @@ export default function Adminsection(props) {
   const handleResolved = (status) => {
     setSelectedStatus(status);
     fetchTickets("resolved");
+  };
+
+  const handleLocationChange = (location) => {
+    setSelectedLocation(location);
   };
 
   return (
@@ -88,7 +93,7 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        <Location />
+        <Location onLocationChange={handleLocationChange}/>
         <div className="center">
           <div className="req-status admin_status">
             <div
