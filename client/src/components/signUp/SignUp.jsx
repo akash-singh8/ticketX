@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 const CustomModal = styled(Modal)`
   display: flex;

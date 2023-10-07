@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import Gethelp from "./pages/gethelp/Gethelp";
 import Businessupdates from "./pages/businessupdates/Businessupdates";
-import { AppProvider } from "./components/modalProvider/Modalprovider";
+import { AppProvider } from "./modalProvider/Modalprovider";
 import TicketHistory from "./pages/ticketHistory/TicketHistory";
 import Admin from "./pages/admin/Admin";
 import TicketRequests from "./pages/ticketrequests/Ticketrequests";
-import ForgotPass from "./pages/forgotPass/ForgotPass";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 function App() {
 
   
@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Landing />}></Route>
           <Route path="/get-help" element={<Gethelp />}></Route>
           <Route path="/business-updates" element={<Businessupdates />}></Route>
-          <Route path="/forgot-password" element={<ForgotPass />}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/ticket-history" element={<TicketHistory/>}></Route>
           <Route path="/admin/business-strategy" element={<Admin cat="BUSINESS STRATEGY" catmain="GET HELP"/>}></Route>
           <Route path="/admin/marketing" element={<Admin cat="MARKETING" catmain="GET HELP"/>}></Route>

@@ -34,15 +34,20 @@ export function AppProvider({ children }) {
   };
 
   useEffect(()=>{
-    const authToken=localStorage.getItem('authorization')
-    if(authToken){
-       setLogin()
-       getUserDetails(authToken);
+    const initAuth=async()=>{
+
+      const authToken=localStorage.getItem('authorization')
+      if(authToken){
+        setLogin()
+         await getUserDetails(authToken);
+      }
+      else{
+        setLogout()
+      }
     }
-    else{
-      setLogout()
-    }
-  },[])
+
+    initAuth()
+    },[])
 
   const setLogin=()=>{
      setIsAuthenticated(true)

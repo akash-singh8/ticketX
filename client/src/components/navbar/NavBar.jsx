@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import profile from "../../assets/profile.png";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 

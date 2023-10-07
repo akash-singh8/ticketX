@@ -53,6 +53,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       id: string;
       name: string;
       email: string;
+      location: string;
+      count: number;
     } = req.body.user;
 
     const ticket = {
@@ -62,6 +64,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       raisedBy: {
         name: user.name,
         email: user.email,
+        location: user.location,
+        count: user.count,
       },
     };
 
@@ -70,7 +74,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
 
     await Users.updateOne(
       { _id: user.id },
-      { $push: { ticketRaised: newTicket.id } }
+      { $push: { ticketRaised: newTicket.id }, $inc: { ticketCount: 1 } }
     );
 
     res.status(201).json({ message: "successfully raised ticket" });
@@ -111,23 +115,26 @@ export const getTickets = async (req: Request, res: Response) => {
 };
 
 export const updateTicketStatus = async (req: Request, res: Response) => {
-  const userRole = req.body.user?.role;
+  const user = req.body.user;
 
-  if (!userRole || userRole !== "admin") {
+  if (!user?.role || user.role !== "admin") {
     return res.status(403).json({ message: "Unauthorized" });
   }
 
   const ticket: { id: string; status: string } = req.body.ticket;
-  if (
-    ticket.status !== "pending" &&
-    ticket.status !== "inreview" &&
-    ticket.status !== "resolved"
-  ) {
+  if (ticket.status !== "inreview" && ticket.status !== "resolved") {
     return res.status(400).json({ message: "Invalid ticketStatus" });
   }
 
   try {
-    await Tickets.findById(ticket.id).updateOne({ status: ticket.status });
+    await Tickets.updateOne({ _id: ticket.id }, { status: ticket.status });
+
+    if (ticket.status === "resolved") {
+      await Admins.updateOne(
+        { _id: user.id },
+        { $push: { ticketResolved: ticket.id } }
+      );
+    }
 
     res.status(200).json({ message: "Successfully updated ticket status" });
   } catch (err) {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ticket_popup.css";
 import Reqbox from "../reqbox/Reqbox";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 export default function TicketRequestssection() {
   const { user } = useModal();

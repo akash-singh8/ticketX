@@ -1,6 +1,6 @@
 import React from 'react'
 import "./profile.css"
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 import {useNavigate} from 'react-router-dom';
 

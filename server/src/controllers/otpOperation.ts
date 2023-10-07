@@ -20,7 +20,7 @@ export const resendOTP = async (req: Request, res: Response) => {
     if (!process.env.JWT_OTP_SECRET)
       throw new Error("JWT_OTP_SECRET environment variable is not defined.");
 
-    const new_OTP = Math.floor(Math.random() * 999999);
+    const new_OTP = Math.floor(100000 + Math.random() * 900000);
     const encrypted_OTP = jwt.sign(
       { OTP: new_OTP },
       process.env.JWT_OTP_SECRET,

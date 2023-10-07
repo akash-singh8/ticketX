@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useRef, useEffect, useState } from "react";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 import "./otp.css";
 const CustomModal = styled(Modal)`
   display: flex;
@@ -69,6 +69,28 @@ export default function Otp(props) {
     setotp("")
     closeotpModal();
     openLoginModal();
+  };
+
+  const handleResendOTP = async () => {
+    const authToken = localStorage.getItem('authorization');
+    try {
+      const response = await fetch('http://localhost:3080/otp/resend', {
+        method: 'PATCH',
+        headers: {
+          Authorization: authToken,
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        console.err(`Failed to resend OTP: ${data.message}`);
+      }
+    } catch (err) {
+      console.error('Error resending OTP:', err);
+    }
+    setTimer(300)
   };
 
   const formatTime = (timeInSeconds) => {
@@ -177,7 +199,7 @@ export default function Otp(props) {
               </div>
             </div>
             <div className="new-account">Didn't receive a code? </div>
-            <div className="forgotPass create-acc">Request again</div>
+            <div className="forgotPass create-acc" onClick={handleResendOTP}>Request again</div>
           </form>
         </ModalContent>
       </CustomModal>

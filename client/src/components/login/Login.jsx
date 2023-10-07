@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 
@@ -141,6 +141,7 @@ export default function Login(props) {
     openSignupModal();
   };
   const forgotPassword = () => {
+    closeLoginModal()
     navigate("/forgot-password");
   };
 

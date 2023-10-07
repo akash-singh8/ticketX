@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import Box from "../box/Box";
 import "./gethelp.css";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 const CustomModal = styled(Modal)`
   display: flex;

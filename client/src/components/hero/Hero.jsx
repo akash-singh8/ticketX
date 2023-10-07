@@ -3,7 +3,7 @@ import "./hero.css";
 import hero from "../../assets/hero.jpg";
 import SignUp from "../signUp/SignUp";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../modalProvider/Modalprovider";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 export default function Hero() {
   const {openSignupModal,isAuthenticated,user} = useModal();

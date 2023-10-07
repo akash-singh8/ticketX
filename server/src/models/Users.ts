@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  ticketCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Users = mongoose.model("User", UserSchema);
