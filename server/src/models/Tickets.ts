@@ -9,6 +9,14 @@ const UserRaised = new mongoose.Schema({
     type: String,
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
+  count: {
+    type: Number,
+    required: true,
+  },
 });
 
 const TicketSchema = new mongoose.Schema({

@@ -53,6 +53,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       id: string;
       name: string;
       email: string;
+      location: string;
+      count: number;
     } = req.body.user;
 
     const ticket = {
@@ -62,6 +64,8 @@ export const raiseTicket = async (req: Request, res: Response) => {
       raisedBy: {
         name: user.name,
         email: user.email,
+        location: user.location,
+        count: user.count,
       },
     };
 
@@ -70,7 +74,7 @@ export const raiseTicket = async (req: Request, res: Response) => {
 
     await Users.updateOne(
       { _id: user.id },
-      { $push: { ticketRaised: newTicket.id } }
+      { $push: { ticketRaised: newTicket.id }, $inc: { ticketCount: 1 } }
     );
 
     res.status(201).json({ message: "successfully raised ticket" });
