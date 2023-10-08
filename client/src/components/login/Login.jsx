@@ -36,8 +36,8 @@ export default function Login(props) {
     loginModalIsOpen,
     closeLoginModal,
     openLoginModal,
-    setUser,
     setLogin,
+    setUser
   } = useModal();
   const navigate = useNavigate();
   const { styleName, text } = props;
@@ -102,11 +102,12 @@ export default function Login(props) {
   };
 
   const getUserDetails = async (authToken) => {
+    console.log(authToken)
     try {
       const response = await fetch("http://localhost:3080/auth/me", {
         method: "GET",
         headers: {
-          authorization: `Bearer ${authToken}`,
+          authorization: `${authToken}`,
         },
       });
 

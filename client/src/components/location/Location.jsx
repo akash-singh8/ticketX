@@ -10,7 +10,7 @@ const locations = [
   "Central Region",
 ];
 
-export default function Location() {
+export default function Location(props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLocations, setFilteredLocations] = useState([]);
 
@@ -24,6 +24,7 @@ export default function Location() {
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
     filterLocations(e.target.value);
+    props.onLocationChange(e.target.value);
   };
 
   return (

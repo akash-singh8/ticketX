@@ -41,8 +41,8 @@ const TicketSchema = new mongoose.Schema({
     required: true,
   },
   raisedBy: {
-    type: UserRaised,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

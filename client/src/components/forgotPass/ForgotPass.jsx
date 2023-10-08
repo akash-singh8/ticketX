@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import "./forgotPass.css"
+import { useNavigate } from "react-router-dom";
 
 export default function ForgotPass() {
   const [email, setEmail] = useState('');
@@ -7,15 +8,69 @@ export default function ForgotPass() {
   const [pass, setpass] = useState('');
   const [confirmpass, setconfirmpass] = useState('');
   const [step, setStep] = useState(1);
+  const navigate=useNavigate();
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3080/query/forgot-password', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         email,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        alert(data.message);
+        localStorage.setItem("authorization", `Bearer ${data.authToken}`);
+      } else {
+        console.err(`Failed to send OTP: ${data.message}`);
+      }
+    } catch (err) {
+      console.error('Error sending OTP:', err);
+    }
     setStep(2);
   };
 
   const handleOTPSubmit = async (e) => {
-    e.preventDefault();
-    setStep(3);
+    if(pass===confirmpass){
+
+      e.preventDefault();
+      const authToken=localStorage.getItem('authorization')
+      try {
+      const response = await fetch('http://localhost:3080/query/set-password', {
+        method: 'POST',
+        headers: {
+          authorization:`${authToken}`,
+          "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify({
+          newPassword:pass,
+          OTP:otp
+        }),
+      });
+      
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        alert(data.message);
+        navigate("/")
+      } else {
+        console.err(`Failed to set new password: ${data.message}`);
+      }
+    } catch (err) {
+      console.error('Failed to set new password:', err);
+    }
+  }
+else{
+  alert("Password doesn't match")
+}
   };
 
   return (

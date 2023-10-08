@@ -8,9 +8,13 @@ export default function Adminsection(props) {
   const cat = props.cat;
   const ticketName = props.ticketName;
   const [sortby, setSortBy] = useState(false);
+  const [byReqDates, setbyReqDates] = useState(false);
+  const [byFrequency, setbyFrequency] = useState(false);
+  const [sortedTickets, setSortedTickets] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("pending");
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   const fetchTickets = async (status) => {
     try {
@@ -23,8 +27,8 @@ export default function Adminsection(props) {
           },
         }
       );
-
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
         setGetTickets(data.tickets);
       } else {
@@ -40,11 +44,32 @@ export default function Adminsection(props) {
     return (
       ticket.status === selectedStatus &&
       ticket.category === cat.toUpperCase() &&
-      ticket.title === ticketName.toUpperCase()
+      ticket.title === ticketName.toUpperCase() &&
+      (!selectedLocation || ticket.raisedBy.location === selectedLocation)
     );
   });
-
-  // Fetch tickets on loading and on status change
+ 
+  const SortByReqdate = () => {
+    setbyReqDates(true);
+    setbyFrequency(false)
+    const sortedByDateTickets = [...filteredTickets].sort((a, b) => {
+      const dateA = new Date(a.dateRaised);
+      const dateB = new Date(b.dateRaised);
+      return dateA - dateB; 
+    });
+    setSortedTickets(sortedByDateTickets); 
+  };
+  const SortByFrequency = () => {
+    setbyFrequency(true);
+    setbyReqDates(false)
+    
+    const sortedByfrequencyTickets = [...filteredTickets].sort((a, b) => {
+      const countA = new Date(a.raisedBy.ticketCount);
+      const countB = new Date(b.raisedBy.ticketCount);
+      return countB - countA; 
+    });
+    setSortedTickets(sortedByfrequencyTickets); 
+  };
 
   useEffect(() => {
     fetchTickets("pending");
@@ -63,6 +88,10 @@ export default function Adminsection(props) {
     fetchTickets("resolved");
   };
 
+  const handleLocationChange = (location) => {
+    setSelectedLocation(location);
+  };
+
   return (
     <>
       <section className="admin_section">
@@ -77,8 +106,10 @@ export default function Adminsection(props) {
             {sortby && (
               <div className="sortby-dropdown">
                 <div className="dropdown-heading center">Sort by</div>
-                <div className="category">Requests date</div>
-                <div className="category">Frequent requests</div>
+                <div className="category" onClick={SortByReqdate}>
+                  Requests date
+                </div>
+                <div className="category" onClick={SortByFrequency}>Frequent requests</div>
               </div>
             )}
             <div className="dots3" onClick={() => setSortBy(!sortby)}>
@@ -88,13 +119,10 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        <Location />
+        <Location onLocationChange={handleLocationChange} />
         <div className="center">
           <div className="req-status admin_status">
-            <div
-              className="pending"
-              onClick={() => handlePending("pending")}
-            >
+            <div className="pending" onClick={() => handlePending("pending")}>
               Pending
             </div>
             <div
@@ -111,9 +139,17 @@ export default function Adminsection(props) {
             </div>
           </div>
         </div>
-        {filteredTickets.length > 0 ? (
+        {byReqDates ||byFrequency ? (
+          sortedTickets.length > 0 ? (
+            sortedTickets.map((ticket) => (
+              <Reqbox key={ticket.id} ticket={ticket} />
+            ))
+          ) : (
+            <h3 className="center">No {selectedStatus} Tickets</h3>
+          )
+        ) : filteredTickets.length > 0 ? (
           filteredTickets.map((ticket) => (
-            <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
+            <Reqbox key={ticket.id} ticket={ticket} />
           ))
         ) : (
           <h3 className="center">No {selectedStatus} Tickets</h3>

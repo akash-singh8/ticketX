@@ -5,7 +5,7 @@ import sendMail from "./sendMail";
 import validateEmail from "../validation/email";
 import Admins from "../models/Admins";
 import { otpInputSchema } from "../validation/otpValidation";
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
 export const handleForgotPassword = async (req: Request, res: Response) => {
   const isValidEmail = validateEmail.safeParse(req.body);
@@ -28,8 +28,6 @@ export const handleForgotPassword = async (req: Request, res: Response) => {
     }
 
     const OTP = Math.floor(100000 + Math.random() * 900000);
-    await sendMail(email, OTP);
-
     const OTP_token = jwt.sign({ OTP: OTP }, process.env.JWT_OTP_SECRET!, {
       expiresIn: "5m",
     });

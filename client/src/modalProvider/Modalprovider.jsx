@@ -15,7 +15,7 @@ export function AppProvider({ children }) {
       const response = await fetch("http://localhost:3080/auth/me", {
         method: "GET",
         headers: {
-          authorization: `Bearer ${authToken}`,
+          authorization: `${authToken}`,
         },
       });
 
