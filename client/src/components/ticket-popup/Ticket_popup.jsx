@@ -5,7 +5,7 @@ import { useModal } from "../../modalProvider/Modalprovider";
 
 export default function TicketRequestssection() {
   const { user } = useModal();
-  const [selectedStatus, setSelectedStatus] = useState("pending");
+  const [selectedStatus, setSelectedStatus] = useState("inreview");
 
   // Filter tickets based on the selected status
   let filteredTickets=null;
@@ -35,9 +35,12 @@ export default function TicketRequestssection() {
       </div>
       <div className="center">
         <div className="req-status admin_status">
+          {user.role==="client"
+          &&
           <div className="pending" onClick={() => handleStatusClick("pending")}>
             Pending
           </div>
+          }
           <div className="inreview" onClick={() => handleStatusClick("inreview")}>
             Inreview
           </div>

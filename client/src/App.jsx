@@ -34,7 +34,7 @@ function App() {
           <Route path="/admin/expansion-of-business"element={<Admin cat="EXPANSION OF BUSINESS" catmain="BUSINESS UPDATES"/>}></Route>
           <Route path="/admin/revenue"element={<Admin cat="REVENUE" catmain="BUSINESS UPDATES"/>}></Route>
           <Route path="/admin/requests"element={<Admin recent={true}/>}></Route>
-          <Route path="/ticket-history/requests" element={<TicketRequests/>}></Route>
+          <Route path="/ticket-history/requests" element={<TicketRequests profile="true"/>}></Route>
         </Routes>
       </BrowserRouter>
       </AppProvider>
