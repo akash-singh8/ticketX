@@ -4,8 +4,8 @@ import Reqbox from '../reqbox/Reqbox'
 import Pagenavigation from '../pagenavigation/Pagenavigation'
 export default function Recentrequests() {
   const [getTickets, setGetTickets] = useState([]);
-
-  const fetchTickets = async (status) => {
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const fetchTickets = async () => {
     try {
       const authToken=localStorage.getItem("authorization")
       const response = await fetch(
@@ -34,6 +34,15 @@ export default function Recentrequests() {
     fetchTickets();
   }, []);
 
+  const filteredTickets = getTickets.filter((ticket) => {
+    return (
+      (!selectedLocation || ticket.raisedBy.location === selectedLocation)
+    );
+  });
+
+  const handleLocationChange = (location) => {
+    setSelectedLocation(location);
+  };
   
   return (
     <>
@@ -47,12 +56,12 @@ export default function Recentrequests() {
               
             
           
-        <Location/>
+        <Location onLocationChange={handleLocationChange} />
         <div className='requests'>
           {
 
-            getTickets.length > 0 ? (
-              getTickets.map((ticket) => (
+            filteredTickets.length > 0 ? (
+              filteredTickets.map((ticket) => (
                 <Reqbox key={ticket.id} ticket={ticket} />
                 ))
                 ) : (
