@@ -84,6 +84,7 @@ export default function Login(props) {
         setLogin();
         alert(data.message);
         getUserDetails(data.authToken);
+        window.location.reload();
       
 
       } else {

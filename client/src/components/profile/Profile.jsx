@@ -8,12 +8,18 @@ export default function Profile() {
   const {user,setLogout} = useModal();
   const navigate=useNavigate()
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState(user);
+  const [editedUser, setEditedUser] = useState({user});
   const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
   
 };
-console.log(user)
+const determineUserRole=(email)=> {
+  if (email.endsWith("@i-her.org")) {
+    return "admin";
+  } else {
+    return "user";
+  }
+};
 const logout = () => {
   setLogout()
   localStorage.clear();
@@ -28,43 +34,58 @@ const handleInputChange = (e) => {
   const { name, value } = e.target;
   setEditedUser({
     ...editedUser,
-    [name]: value,
+    [name]: value !== "" ? value : user[name],
   });
 };
 
-const handleProfileChanges=async ()=>{
-  setIsEditing(false)
+const handleProfileChanges = async () => {
   const authToken = localStorage.getItem('authorization');
-    try {
-      const response = await fetch('http://localhost:3080/auth/profile-update', {
-        method: 'POST',
-        headers: {
-          Authorization: authToken,
-          "Content-Type": "application/json",
 
-        },
-        body: JSON.stringify({
-          name: editedUser.name,
-          email: editedUser.email,
-          location: document.querySelector("select").value,
-        }),
-      });
-      console.log(response)
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message);
-      } else {
-        console.err(`Failed to update profile changes: ${data.message}`);
-      }
-    } catch (err) {
-      console.error('Error updating profile changes:', err);
+  try {
+    const role = await determineUserRole(editedUser.email); // Assuming determineUserRole is asynchronous
+
+    let bodyData;
+    if (role === "admin") {
+      bodyData = {
+        name: editedUser.name,
+        email: editedUser.email,
+      };
+    } else {
+      const location = document.querySelector("select").value; // Move this inside the else block
+      bodyData = {
+        name: editedUser.name,
+        email: editedUser.email,
+        location: location,
+      };
     }
-    setEditedUser({
-      name: "",
-      email: "",
-      location: "",
+
+    const response = await fetch('http://localhost:3080/auth/profile-update', {
+      method: 'POST',
+      headers: {
+        Authorization: authToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData),
     });
-}
+
+    console.log(response);
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+      window.location.reload();
+    } else {
+      console.error(`Failed to update profile changes: ${data.message}`);
+    }
+  } catch (err) {
+    console.error('Error updating profile changes:', err);
+  }
+
+  setIsEditing(false);
+  setEditedUser(user);
+};
+
   return (
     <>
     <div className='profile_page'>
@@ -95,6 +116,7 @@ const handleProfileChanges=async ()=>{
                  onChange={handleInputChange}></input>
 
                 </div>
+                {user && user.role==="client" &&
                 <div className='name'>
                  <div className='title'>Location</div>
                  <select
@@ -112,6 +134,7 @@ const handleProfileChanges=async ()=>{
             </select>
 
                 </div>
+              }
             </div>
           </>:<>
           <div >
@@ -125,11 +148,13 @@ const handleProfileChanges=async ()=>{
                  <div className='name-box'>{user.email}</div>
 
                 </div>
+                {user && user.role==="client" &&
                 <div className='name'>
                  <div className='title'>Location</div>
                  <div className='name-box'>{user.location}</div>
 
                 </div>
+                }
             </div>
           
           </>}  

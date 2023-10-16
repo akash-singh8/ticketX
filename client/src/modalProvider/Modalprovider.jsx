@@ -10,7 +10,6 @@ export function AppProvider({ children }) {
   const [user, setUser] = useState({});
 
   const getUserDetails = async (authToken) => {
-    console.log(authToken)
     try {
       const response = await fetch("http://localhost:3080/auth/me", {
         method: "GET",
@@ -22,7 +21,6 @@ export function AppProvider({ children }) {
       if (response.status === 200) {
         const userData = await response.json();
         setUser(userData)
-        console.log(userData)
         
       } else {
         const errorData = await response.json();
