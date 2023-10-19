@@ -20,6 +20,12 @@ const AdminSchema = new mongoose.Schema({
       ref: "Ticket",
     },
   ],
+  ticketInReview: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ticket",
+    },
+  ],
   verified: {
     type: Boolean,
     default: false,
