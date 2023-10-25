@@ -49,6 +49,7 @@ const handleProfileChanges = async () => {
       bodyData = {
         name: editedUser.name,
         email: editedUser.email,
+        location:"random"
       };
     } else {
       const location = document.querySelector("select").value; // Move this inside the else block
