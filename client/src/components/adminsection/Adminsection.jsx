@@ -120,7 +120,7 @@ export default function Adminsection(props) {
     SortByFrequency();
   };
   
-  const currentTickets = sortby ? sortedTickets : filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
+  const currentTickets = sortby ? sortedTickets.slice(indexOfFirstTicket, indexOfLastTicket) : filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
   return (
     <>
       <section className="admin_section">
