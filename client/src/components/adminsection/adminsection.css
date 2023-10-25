@@ -102,3 +102,10 @@ background: #F8F8F8;
 cursor: pointer;
 
 }
+
+.filters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
