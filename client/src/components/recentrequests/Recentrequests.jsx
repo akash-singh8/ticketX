@@ -5,6 +5,16 @@ import Pagenavigation from '../pagenavigation/Pagenavigation'
 export default function Recentrequests() {
   const [getTickets, setGetTickets] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ticketsPerPage = 5;
+  // Calculate the index range for the currently displayed tickets
+  const indexOfLastTicket = currentPage * ticketsPerPage;
+  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
+  
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
   const fetchTickets = async () => {
     try {
       const authToken=localStorage.getItem("authorization")
@@ -43,6 +53,8 @@ export default function Recentrequests() {
   const handleLocationChange = (location) => {
     setSelectedLocation(location);
   };
+
+  const currentTickets = filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
   
   return (
     <>
@@ -61,7 +73,7 @@ export default function Recentrequests() {
           {
 
             filteredTickets.length > 0 ? (
-              filteredTickets.map((ticket) => (
+              currentTickets.map((ticket) => (
                 <Reqbox key={ticket.id} ticket={ticket} />
                 ))
                 ) : (
@@ -70,7 +82,12 @@ export default function Recentrequests() {
                 }
 
         </div>
-        <Pagenavigation />
+        <Pagenavigation
+        ticketsPerPage={ticketsPerPage}
+        totalTickets={filteredTickets.length}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
       </section>
     </>
   )
