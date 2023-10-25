@@ -113,7 +113,7 @@ export default function ViewReq(props) {
           </div>
           <div className="text">{ticket.message}</div>
             <div className="margin">Status : {ticket.status}</div>
-            {isAuthenticated && user.role==='admin' && ticket.status==="pending" &&
+            {isAuthenticated && user.ticketResolved && ticket.status==="pending" &&
           <div className="checkbox">
             <input type="checkbox" onClick={() => updateStatus("inreview")}/>
             <div>Started Review</div>

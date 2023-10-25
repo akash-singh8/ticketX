@@ -17,23 +17,14 @@ export default function TicketRequestssection() {
     setCurrentPage(pageNumber);
   }
 
-  // Filter tickets based on the selected status
-  const determineUserRole=(email)=> {
-    if (email.endsWith("@i-her.org")) {
-      return "admin";
-    } else {
-      return "client";
-    }
-  };
-  const role = determineUserRole(user.email); 
-  console.log(user)
+  
   let filteredTickets=[];
-  if(role==="client"){
+  if(user.role && user.role==="client"){
     filteredTickets = user.ticketRaised.filter(
       (ticket) => ticket.status === selectedStatus
     );
   }
-  else if(role==="admin"){
+  else if(user.ticketResolved){
     if(selectedStatus==="inreview"){
       filteredTickets = user.ticketInReview
     }
@@ -58,7 +49,7 @@ export default function TicketRequestssection() {
       </div>
       <div className="center">
         <div className="req-status admin_status">
-          {role==="client"
+          {user.role && user.role==="client"
           &&
           <div className="pending" onClick={() => handleStatusClick("pending")}>
             Pending
