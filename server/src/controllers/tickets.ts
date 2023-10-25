@@ -129,7 +129,17 @@ export const updateTicketStatus = async (req: Request, res: Response) => {
     if (ticket.status === "resolved") {
       await Admins.updateOne(
         { _id: user.id },
-        { $push: { ticketResolved: ticket.id } }
+        {
+          $push: { ticketResolved: ticket.id },
+          $pull: { ticketInReview: ticket.id },
+        }
+      );
+    } else {
+      await Admins.updateOne(
+        { _id: user.id },
+        {
+          $push: { ticketInReview: ticket.id },
+        }
       );
     }
 
