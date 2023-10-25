@@ -13,11 +13,9 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     let userData;
     if (user.role === "admin") {
-      userData = await Admins.findById(user.id).populate("ticketResolved");
-      if(userData){
-        userData = { ...userData.toObject(), role: "admin" };
-      }
-
+      userData = await Admins.findById(user.id)
+        .populate("ticketResolved")
+        .populate("ticketInReview");
     } else {
       userData = await Users.findById(user.id).populate("ticketRaised");
       if(userData){
