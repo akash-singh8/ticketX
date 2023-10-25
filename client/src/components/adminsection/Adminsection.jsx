@@ -15,7 +15,17 @@ export default function Adminsection(props) {
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ticketsPerPage = 5;
 
+  // Calculate the index range for the currently displayed tickets
+  const indexOfLastTicket = currentPage * ticketsPerPage;
+  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
+  
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+  
   const fetchTickets = async (status) => {
     try {
       const response = await fetch(
@@ -26,9 +36,9 @@ export default function Adminsection(props) {
             Authorization: authToken,
           },
         }
-      );
-      const data = await response.json();
-      if (response.ok) {
+        );
+        const data = await response.json();
+        if (response.ok) {
         setGetTickets(data.tickets);
       } else {
         const errorData = await response.json();
@@ -38,16 +48,16 @@ export default function Adminsection(props) {
       console.error("Error fetching tickets:", err);
     }
   };
-
+  
   const filteredTickets = getTickets.filter((ticket) => {
     return (
       ticket.status === selectedStatus &&
       ticket.category === cat.toUpperCase() &&
       ticket.title === ticketName.toUpperCase() &&
       (!selectedLocation || ticket.raisedBy.location === selectedLocation)
-    );
+      );
   });
-
+  
   const SortByReqdate = () => {
     const sortedByDateTickets = [...filteredTickets].sort((a, b) => {
       const dateA = new Date(a.dateRaised);
@@ -67,21 +77,21 @@ export default function Adminsection(props) {
     console.log(sortedByfrequencyTickets,"freq")
     setSortedTickets(sortedByfrequencyTickets);
   };
-
+  
   useEffect(() => {
     fetchTickets("pending");
   }, []);
-
+  
   const handlePending = (status) => {
     setSelectedStatus(status);
     fetchTickets("pending");
   };
-
+  
   const handleInreview = (status) => {
     setSelectedStatus(status);
     fetchTickets("inreview");
   };
-
+  
   const handleResolved = (status) => {
     setSelectedStatus(status);
     fetchTickets("resolved");
@@ -90,7 +100,7 @@ export default function Adminsection(props) {
   const handleLocationChange = (location) => {
     setSelectedLocation(location);
   };
-
+  
   const handleRequestDatesClick = () => {
     setSortBy(!sortby);
     console.log(sortby)
@@ -109,7 +119,8 @@ export default function Adminsection(props) {
     }
     SortByFrequency();
   };
-
+  
+  const currentTickets = sortby ? sortedTickets : filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
   return (
     <>
       <section className="admin_section">
@@ -148,16 +159,21 @@ export default function Adminsection(props) {
         </div>
         {sortby
           ? sortedTickets.length > 0
-            ? sortedTickets.map((ticket) => (
+            ? currentTickets.map((ticket) => (
                 <Reqbox key={ticket.id} ticket={ticket} />
               ))
             : <h3 className="center">No {selectedStatus} Tickets</h3>
           : filteredTickets.length > 0
-          ? filteredTickets.map((ticket) => (
+          ? currentTickets.map((ticket) => (
               <Reqbox key={ticket.id} ticket={ticket} />
             ))
           : <h3 className="center">No {selectedStatus} Tickets</h3>}
-        <Pagenavigation />
+         <Pagenavigation
+        ticketsPerPage={ticketsPerPage}
+        totalTickets={sortby ? sortedTickets.length : filteredTickets.length}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
       </section>
     </>
   );
