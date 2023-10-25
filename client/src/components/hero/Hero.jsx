@@ -35,7 +35,7 @@ export default function Hero() {
         {isAuthenticated && user.role==="client" && <>
         <div className="hero-button" onClick={handleClickServices}>RAISE TICKETS</div>
         </>}
-        {isAuthenticated && user.role==="admin" && <>
+        {isAuthenticated && user.ticketResolved && <>
         <div className="hero-button" onClick={viewRequests}>VIEW TICKETS</div>
         </>}
       </div>

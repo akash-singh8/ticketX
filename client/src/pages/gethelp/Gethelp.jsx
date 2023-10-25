@@ -36,7 +36,7 @@ export default function Gethelp() {
             <GethelpPopup  ticketName='OPERATION & LOGISTICS'cat="GET HELP" image={Operations}/>
             <GethelpPopup  ticketName='OTHERS'cat="GET HELP" image={Others}/>
           </>}
-          { isAuthenticated && user.role==="admin" &&
+          { isAuthenticated && user.ticketResolved &&
           <>
              <Box ticketName='BUSINESS STRATEGY' link="/admin/business-strategy" image={BusinessStrategy} />
              <Box ticketName='MARKETING' link="/admin/marketing" image={Marketing}/>
