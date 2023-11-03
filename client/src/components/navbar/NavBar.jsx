@@ -11,8 +11,7 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal,isAuthenticated,
-    user,} = useModal();
+  const { openSignupModal, openLoginModal, isAuthenticated, user } = useModal();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -41,10 +40,10 @@ function NavBar() {
   const handleProfile = () => {
     navigate("/ticket-history");
   };
-  const openSignup=()=>{
-    navigate("/")
+  const openSignup = () => {
+    navigate("/");
     openSignupModal();
-  }
+  };
 
   return (
     <>
@@ -80,8 +79,8 @@ function NavBar() {
         ) : (
           <>
             <div className="navigation">
-            <Login styleName="links" />
-            <Otp/>
+              <Login styleName="links" />
+              <Otp />
               <div className="button" onClick={openSignup}>
                 SignUp
               </div>
@@ -112,12 +111,22 @@ function NavBar() {
               Impact
             </div>
           )}
-          <div className="links" onClick={openLoginModal}>
-            Login
-          </div>
-          <div className="links" onClick={openSignupModal}>
-            SignUp
-          </div>
+          {isAuthenticated ? (
+            <>
+              <div className="links" onClick={handleProfile}>
+                Profile
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="links" onClick={openLoginModal}>
+                Login
+              </div>
+              <div className="links" onClick={openSignupModal}>
+                SignUp
+              </div>
+            </>
+          )}
         </div>
       )}
     </>
