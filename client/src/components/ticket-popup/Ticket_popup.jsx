@@ -47,8 +47,7 @@ export default function TicketRequestssection() {
           <span>HISTORY</span>
         </div>
       </div>
-      <div className="center">
-        <div className="req-status admin_status">
+        <div className="req-status admin_status center">
           {user.role && user.role==="client"
           &&
           <div className="pending" onClick={() => handleStatusClick("pending")}>
@@ -62,7 +61,7 @@ export default function TicketRequestssection() {
             Resolved
           </div>
         </div>
-      </div>
+      
       {filteredTickets.length > 0 ? (
         currentTickets.map((ticket) => (
           <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
