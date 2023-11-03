@@ -21,7 +21,7 @@ export default function Gethelp() {
     <>
       <NavBar/>
       <section  className='gethelp-tickets raiseTicket'>
-        <div className='heading'>
+        <div className='heading center_class'>
             <div>SELECT CATEGORY <br></br>
                  TO <span>GET HELP </span>WITH</div>
         </div>
