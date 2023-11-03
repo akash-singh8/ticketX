@@ -11,7 +11,8 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal, isAuthenticated, user } = useModal();
+  const { openSignupModal, openLoginModal, isAuthenticated, user,openotpModal } = useModal();
+  console.log(user)
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -43,6 +44,10 @@ function NavBar() {
   const openSignup = () => {
     navigate("/");
     openSignupModal();
+  };
+  const openOtp = () => {
+    navigate("/");
+    openotpModal();
   };
 
   return (
@@ -115,6 +120,9 @@ function NavBar() {
             <>
               <div className="links" onClick={handleProfile}>
                 Profile
+              </div>
+              <div className="links" onClick={openOtp}>
+                Verify Email
               </div>
             </>
           ) : (
