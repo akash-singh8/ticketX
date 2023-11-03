@@ -4,6 +4,7 @@ import hero from "../../assets/hero.png";
 import SignUp from "../signUp/SignUp";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../modalProvider/Modalprovider";
+import Otp from "../otp/Otp";
 
 export default function Hero() {
   const { openSignupModal, isAuthenticated, user } = useModal();
@@ -33,6 +34,7 @@ export default function Hero() {
           </div>
         </div>
         <SignUp />
+        <Otp notsignin={true}/>
 
         {!isAuthenticated && (
           <div className="center_class">

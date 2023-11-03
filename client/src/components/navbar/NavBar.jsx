@@ -11,8 +11,13 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal, isAuthenticated, user,openotpModal } = useModal();
-  console.log(user)
+  const {
+    openSignupModal,
+    openLoginModal,
+    isAuthenticated,
+    user,
+    openotpModal,
+  } = useModal();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -120,10 +125,12 @@ function NavBar() {
               <div className="links" onClick={handleProfile}>
                 Profile
               </div>
-              <Otp notsignin={true}/>
-              <div className="links" onClick={openOtp}>
-                Verify Email
-              </div>
+              <Otp notsignin={true} />
+              {user && !user.verified && (
+                <div className="links" onClick={openOtp}>
+                  Verify Email
+                </div>
+              )}
             </>
           ) : (
             <>

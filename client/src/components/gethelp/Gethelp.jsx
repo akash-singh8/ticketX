@@ -5,6 +5,7 @@ import Box from "../box/Box";
 import "./gethelp.css";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../modalProvider/Modalprovider";
+import Otp from "../otp/Otp";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -135,6 +136,7 @@ export default function Gethelp(props) {
         ariaHideApp={false}
       >
         <ModalContent ref={modalRef}>
+            <Otp/>
           <div className="form-heading-signUp">{cat}</div>
           <form className="signup-form">
             <div>
