@@ -30,6 +30,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width:450px) {
+    width:280px;
+    min-height:430px;
+    padding: 5px;
+}
 `;
 
 export default function ViewReq(props) {
@@ -110,7 +115,7 @@ export default function ViewReq(props) {
               </div>
             </div>
             <div className="date">
-              Raised on <br></br> <span>{ticket.dateRaised}</span>
+              Raised on : <br></br> <span>{ticket.dateRaised}</span>
             </div>
           </div>
           <div className="text">{ticket.message}</div>
