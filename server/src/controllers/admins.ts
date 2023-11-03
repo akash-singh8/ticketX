@@ -24,7 +24,7 @@ export const handleAdminSignup = async (req: Request, res: Response) => {
     return;
   }
 
-  const { name, email, password } = isValidInput.data;
+  const { name, email, password, location } = isValidInput.data;
 
   try {
     const admin = await Admins.findOne({ email });
@@ -50,6 +50,7 @@ export const handleAdminSignup = async (req: Request, res: Response) => {
       name,
       email,
       password: encrypted_Pswd,
+      location,
       OTP: OTP_token,
       OTP_Attempt: 1,
     });

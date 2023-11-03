@@ -26,6 +26,10 @@ const AdminSchema = new mongoose.Schema({
       ref: "Ticket",
     },
   ],
+  location: {
+    type: String,
+    required: true,
+  },
   verified: {
     type: Boolean,
     default: false,
