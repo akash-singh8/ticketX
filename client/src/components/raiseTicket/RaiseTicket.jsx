@@ -8,7 +8,7 @@ import Business from "../../assets/IMG_4774.png"
 export default function RaiseTicket() {
   return (
     <section className='raiseTicket' id='services'>
-        <div className='heading'>
+        <div className='heading center_class'>
             <div>SELECT CATEGORY <br></br>
                  TO <span>RAISE TICKET</span></div>
         </div>
