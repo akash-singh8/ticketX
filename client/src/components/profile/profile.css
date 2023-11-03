@@ -87,3 +87,41 @@ text-decoration-line: underline;
 margin-left: 50px;
 cursor: pointer;
 }
+
+@media (max-width:450px) {
+    .profile-img{
+        display: none;
+    }
+    .profile_page{
+       margin: 18px 18px;
+       border-radius: 0px;
+       padding: 15px 15px;
+    }
+    .title,.name-box{
+        font-size: 15px;
+        max-width: 65px;
+    }
+    .name-box{
+        min-width: 190px;
+        height: 40px;
+    }
+    .container-profile{
+        display: block;
+    }
+    .buttons{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .edit{
+        width: 90px;
+        font-size: 13px;
+        height: 32px;
+    }
+    .side{
+        font-size: 15px !important;
+        position: absolute;
+        bottom: 40px;
+        left: 140px;
+    }
+}
