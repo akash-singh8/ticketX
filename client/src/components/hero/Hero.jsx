@@ -1,6 +1,6 @@
 import React from "react";
 import "./hero.css";
-import hero from "../../assets/hero.jpg";
+import hero from "../../assets/hero.png";
 import SignUp from "../signUp/SignUp";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../modalProvider/Modalprovider";
