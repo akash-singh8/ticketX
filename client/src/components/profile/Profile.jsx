@@ -12,13 +12,7 @@ export default function Profile() {
   const handleClickTicketHistory = () => {
     navigate("/ticket-history/requests");
   };
-  const determineUserRole = (email) => {
-    if (email.endsWith("@i-her.org")) {
-      return "admin";
-    } else {
-      return "user";
-    }
-  };
+
   const logout = () => {
     setLogout();
     localStorage.clear();
@@ -41,23 +35,13 @@ export default function Profile() {
     const authToken = localStorage.getItem("authorization");
 
     try {
-      const role = await determineUserRole(editedUser.email); // Assuming determineUserRole is asynchronous
 
-      let bodyData;
-      if (role === "admin") {
-        bodyData = {
-          name: editedUser.name,
-          email: editedUser.email,
-          location: "random",
-        };
-      } else {
-        const location = document.querySelector("select").value; // Move this inside the else block
-        bodyData = {
-          name: editedUser.name,
-          email: editedUser.email,
-          location: location,
-        };
-      }
+
+      let bodyData = {
+        name: editedUser.name,
+        email: editedUser.email,
+        location: document.querySelector("select").value,
+      };
 
       const response = await fetch(
         "http://localhost:3080/auth/profile-update",
@@ -120,7 +104,7 @@ export default function Profile() {
                       onChange={handleInputChange}
                     ></input>
                   </div>
-                  {user && user.role === "client" && (
+                 
                     <div className="name">
                       <div className="title">Location</div>
                       <select
@@ -140,7 +124,7 @@ export default function Profile() {
                         <option value="Central Region">Central Region</option>
                       </select>
                     </div>
-                  )}
+                  
                 </div>
               </>
             ) : (
@@ -154,12 +138,12 @@ export default function Profile() {
                     <div className="title">Email</div>
                     <div className="name-box">{user.email}</div>
                   </div>
-                  {user && user.role === "client" && (
+                 
                     <div className="name">
                       <div className="title">Location</div>
                       <div className="name-box">{user.location}</div>
                     </div>
-                  )}
+                  
                 </div>
               </>
             )}

@@ -39,7 +39,6 @@ const ModalContent = styled.div`
 
 export default function ViewReq(props) {
   const ticket=props.ticket
-  console.log(ticket)
   const {user,isAuthenticated} = useModal();
   const authToken = localStorage.getItem("authorization");
   const modalRef = useRef();
