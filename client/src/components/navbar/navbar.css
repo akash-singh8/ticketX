@@ -153,6 +153,9 @@ display: flex;
     .links:hover{
         background-color: #f3afed;
     }
+    .company-logo{
+        left: -0px;
+    }
   }
     
     
