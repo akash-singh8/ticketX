@@ -34,6 +34,7 @@ const ModalContent = styled.div`
 
 export default function ViewReq(props) {
   const ticket=props.ticket
+  console.log(ticket)
   const {user,isAuthenticated} = useModal();
   const authToken = localStorage.getItem("authorization");
   const modalRef = useRef();
@@ -66,6 +67,7 @@ export default function ViewReq(props) {
       const data = await response.json();
       if (response.ok) {
         alert(data.message)
+        window.location.reload()
         
       } else {
         const errorData = await response.json();
@@ -118,7 +120,7 @@ export default function ViewReq(props) {
             <input type="checkbox" onClick={() => updateStatus("inreview")}/>
             <div>Started Review</div>
           </div>}
-          {isAuthenticated && user.role==='admin'&& ticket.status!=="resolved" &&
+          {isAuthenticated && user.ticketResolved && ticket.status!=="resolved" &&
           <div className="center">
 
           <div className="button login-button request-button reposition
