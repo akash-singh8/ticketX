@@ -30,6 +30,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width: 450px) {
+    width: 260px;
+    height: 470px;
+    padding: 5px;
+  }
 `;
 
 export default function Gethelp(props) {
