@@ -26,12 +26,21 @@ export default function Hero() {
         <div className="hero-heading">
           TICKET <br></br>PORTAL
         </div>
+        <div className="center_class">
+
         <div className="hero-details">
           Unleash the Power of Collaboration and Fuel Your Entrepreneurial
           Journey
         </div>
+        </div>
         <SignUp/>
-        {!isAuthenticated && <div className="hero-button" text="REGISTER NOW" onClick={openSignupModal} >Register Now</div>}
+        
+        {!isAuthenticated && 
+        <div className="center_class">
+
+        <div className="hero-button center" text="REGISTER NOW" onClick={openSignupModal} >Register Now</div>
+        </div>
+        }
         {isAuthenticated && user.role==="client" && <>
         <div className="hero-button" onClick={handleClickServices}>RAISE TICKETS</div>
         </>}
