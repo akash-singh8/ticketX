@@ -38,7 +38,7 @@ const ModalContent = styled.div`
 `;
 
 export default function Gethelp(props) {
-  const { openSignupModal,isAuthenticated } = useModal();
+  const { openSignupModal,isAuthenticated ,user,openotpModal} = useModal();
   const navigate = useNavigate();
   const { ticketName, cat ,image} = props;
   const authData = localStorage.getItem("user");
@@ -63,7 +63,13 @@ export default function Gethelp(props) {
       navigate("/");
       openSignupModal();
     }
-    if(isAuthenticated){
+    if (user && !user.verified){
+      localStorage.setItem("formData", formData.request);
+      navigate("/");
+      openotpModal();
+
+    }
+    if(isAuthenticated && user.verified){
       const authToken = localStorage.getItem('authorization');
       try {
         const response = await fetch("http://localhost:3080/ticket/raise", {

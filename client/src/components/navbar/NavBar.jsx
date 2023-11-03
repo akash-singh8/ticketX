@@ -85,7 +85,6 @@ function NavBar() {
           <>
             <div className="navigation">
               <Login styleName="links" />
-              <Otp />
               <div className="button" onClick={openSignup}>
                 SignUp
               </div>
@@ -121,6 +120,7 @@ function NavBar() {
               <div className="links" onClick={handleProfile}>
                 Profile
               </div>
+              <Otp notsignin={true}/>
               <div className="links" onClick={openOtp}>
                 Verify Email
               </div>
