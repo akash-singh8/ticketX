@@ -87,16 +87,53 @@ text-decoration-line: underline;
 margin-left: 50px;
 cursor: pointer;
 }
-
-@media (max-width:450px) {
+@media (max-width:1070px) {
     .profile-img{
         display: none;
+    }
+    .edit1{
+        margin-bottom: 80px;
+    }
+    .profile_page{
+        margin: 20px 10px;
+        padding: 90px 20px;
+    }
+    
+}
+@media (max-width:720px) {
+    .profile-cont{
+        width: 100%;
+    }
+    .buttons{
+        display: flex;
+    }
+    .container-profile{
+        display: block;
     }
     .profile_page{
        margin: 18px 18px;
        border-radius: 0px;
-       padding: 15px 15px;
+       padding: 40px 50px;
+    } 
+    .edit1{
+        margin-bottom: 0px;
     }
+    .edit{
+        width: 120px;
+        font-size: 13px;
+        height: 32px;
+    }
+    .buttons{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .name{
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+@media (max-width:500px) {
     .title,.name-box{
         font-size: 15px;
         max-width: 65px;
@@ -104,14 +141,6 @@ cursor: pointer;
     .name-box{
         min-width: 190px;
         height: 40px;
-    }
-    .container-profile{
-        display: block;
-    }
-    .buttons{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
     }
     .edit{
         width: 90px;
@@ -124,4 +153,7 @@ cursor: pointer;
         bottom: 40px;
         left: 140px;
     }
+    .profile_page{
+        padding: 40px 10px;
+     }
 }

@@ -145,7 +145,7 @@ export default function Profile() {
               </>
             ) : (
               <>
-                <div>
+                <div className="profile-cont">
                   <div className="name">
                     <div className="title">Name</div>
                     <div className="name-box">{user.name}</div>
@@ -176,7 +176,7 @@ export default function Profile() {
               </>
             ) : (
               <>
-                <div className="hero-button edit" onClick={handleEditProfile}>
+                <div className="hero-button edit edit1" onClick={handleEditProfile}>
                   Edit Profile
                 </div>
               </>
@@ -186,9 +186,9 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        <div className="req-popup side" onClick={handleClickTicketHistory}>
+        {/* <div className="req-popup side" onClick={handleClickTicketHistory}>
           Ticket History
-        </div>
+        </div> */}
       </div>
     </>
   );
