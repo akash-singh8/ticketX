@@ -43,3 +43,11 @@ span{
         margin-bottom: 0px;
     }
 }
+@media (max-width:1050px) {
+    .ticket-box{
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+}

@@ -122,7 +122,7 @@ function NavBar() {
               <div className="links" onClick={openLoginModal}>
                 Login
               </div>
-              <div className="links" onClick={openSignupModal}>
+              <div className="links" onClick={openSignup}>
                 SignUp
               </div>
             </>

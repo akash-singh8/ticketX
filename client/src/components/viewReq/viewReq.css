@@ -40,7 +40,7 @@
     padding: 3px;
 }
 
-@media (max-width:450px) {
+@media (max-width:690px) {
     .profile{
         display: none;
     }
@@ -60,5 +60,10 @@
     }
     .text{
         font-size: 12px;
+    }
+    .reposition{
+        font-size: 12px;
+        width: 150px;
+        height: 30px;
     }
 }

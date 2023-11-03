@@ -133,19 +133,19 @@ export default function Adminsection(props) {
           </div>
         </div>
         <div className="filters">
-          <label>
+          <label className="filter_label">
             <input type="checkbox" onClick={handleRequestDatesClick} />
             Filter By Request Dates
           </label>
-          <label>
+          <label className="filter_label">
             <input type="checkbox" onClick={handleFrequencyClick} />
             Filter By Frequency
           </label>
         </div>
         <Location onLocationChange={handleLocationChange} />
 
-        <div className="center">
-          <div className="req-status admin_status">
+        
+          <div className="req-status admin_status center">
             <div className="pending" onClick={() => handlePending("pending")}>
               Pending
             </div>
@@ -156,7 +156,7 @@ export default function Adminsection(props) {
               Resolved
             </div>
           </div>
-        </div>
+        
         {sortby
           ? sortedTickets.length > 0
             ? currentTickets.map((ticket) => (

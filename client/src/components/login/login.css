@@ -62,7 +62,7 @@ margin: 20px 0px;
 }
 
 
-@media (max-width: 450px) {
+@media (max-width: 690px) {
     .form-heading{
         font-size: 20px;
         padding: 10px 0px;

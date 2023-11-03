@@ -30,7 +30,7 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
-  @media (max-width:450px) {
+  @media (max-width:690px) {
     width:280px;
     min-height:430px;
     padding: 5px;
