@@ -96,7 +96,7 @@ align-items: center;
        
     .container1{
         margin: 0px 0px;
-        
+        width: 300px;
         
     }
     .hero-image{
@@ -113,4 +113,12 @@ align-items: center;
     
     }
     
+}
+@media(max-width:320px){
+    .hero-details{
+        display: block;
+        width: 250px;
+        font-size: 12px;
+    }
+   
 }

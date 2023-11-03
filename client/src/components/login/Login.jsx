@@ -29,6 +29,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width:450px) {
+    width:250px;
+    height:360px;
+    padding: 5px;
+}
 `;
 export default function Login(props) {
   const {
@@ -185,13 +190,16 @@ export default function Login(props) {
             <div className="forgotPass" onClick={forgotPassword}>
               Forgot Password?
             </div>
+            <div className="center_class">
+
             <div
               className="button login-button"
               onClick={handleSubmit}
               type="submit"
-            >
+              >
               Login
             </div>
+              </div>
             <div className="new-account">Don't have an account yet? </div>
             <div className="forgotPass create-acc" onClick={handleSignup}>
               Create an account
