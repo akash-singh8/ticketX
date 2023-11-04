@@ -57,6 +57,28 @@ export default function Gethelp(props) {
     }));
   };
 
+  const handlesendOTP = async () => {
+    const authToken = localStorage.getItem('authorization');
+    try {
+      const response = await fetch('http://localhost:3080/otp/resend', {
+        method: 'PATCH',
+        headers: {
+          Authorization: authToken,
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        console.err(`Failed to send OTP: ${data.message}`);
+      }
+    } catch (err) {
+      console.error('Error sending OTP:', err);
+    }
+  
+  };
+
   const handleSubmit =async (event) => {
     event.preventDefault();
     if (!isAuthenticated) {
@@ -69,6 +91,7 @@ export default function Gethelp(props) {
       localStorage.setItem("formData", formData.request);
       navigate("/");
       openotpModal();
+      handlesendOTP()
 
     }
     if(isAuthenticated && user.verified){
