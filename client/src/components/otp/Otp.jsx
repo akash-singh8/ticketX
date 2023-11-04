@@ -223,7 +223,7 @@ export default function Otp(props) {
               </div>
             </div>
             <div className="new-account">Didn't receive a code? </div>
-            <div className="forgotPass create-acc" onClick={handleResendOTP}>Request again</div>
+            <div className="forgotPass create-acc" onClick={handleResendOTP}>Request OTP</div>
           </form>
         </ModalContent>
       </CustomModal>
