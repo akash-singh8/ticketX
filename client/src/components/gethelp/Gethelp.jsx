@@ -63,6 +63,7 @@ export default function Gethelp(props) {
       localStorage.setItem("formData", formData.request);
       navigate("/");
       openSignupModal();
+      return
     }
     if (user && !user.verified){
       localStorage.setItem("formData", formData.request);
