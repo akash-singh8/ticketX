@@ -149,8 +149,14 @@ export const updateTicketStatus = async (req: Request, res: Response) => {
 };
 
 export const getRecentTickets = async (req: Request, res: Response) => {
+  const userRole = req.body.user?.role;
+
+  if (!userRole || userRole !== "admin") {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
+
   try {
-    const recentTickets = await Tickets.find().limit(25);
+    const recentTickets = await Tickets.find().limit(25).populate("raisedBy");
 
     res.status(200).json({ tickets: recentTickets });
   } catch (err) {
