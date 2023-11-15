@@ -2,7 +2,7 @@ import { Router } from "express";
 import { handleUserLogin, handleUserSignup } from "../controllers/users";
 import { handleAdminLogin, handleAdminSignup } from "../controllers/admins";
 import { authenticateJWT } from "../middlewares/authJWT";
-import { getTickets, getUser } from "../controllers/tickets";
+import { getUser } from "../controllers/tickets";
 import { validateStats } from "../middlewares/authStats";
 import updateProfile from "../controllers/update";
 
@@ -25,8 +25,6 @@ AuthRouter.post("/login", (req, res) => {
 });
 
 AuthRouter.get("/me", authenticateJWT, getUser);
-
-AuthRouter.get("/getTickets", authenticateJWT, getTickets);
 
 AuthRouter.post(
   "/profile-update",
