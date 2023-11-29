@@ -29,7 +29,7 @@ export default function Adminsection(props) {
   const fetchTickets = async (status) => {
     try {
       const response = await fetch(
-        `http://localhost:3080/auth/getTickets?ticketStatus=${status}`,
+        `http://localhost:3080/ticket/all?ticketStatus=${status}`,
         {
           method: "GET",
           headers: {
