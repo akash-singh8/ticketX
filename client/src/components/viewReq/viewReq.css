@@ -17,10 +17,11 @@
 }
 
 .text{
-    height: 230px;
+    min-height: 230px;
     background-color: #f2f2f2;
     margin: 10px 20px;
     padding: 20px;
+    display: flex;
 }
 .margin{
     margin: 10px 20px;
@@ -37,4 +38,32 @@
 
 .padding{
     padding: 3px;
+}
+
+@media (max-width:690px) {
+    .profile{
+        display: none;
+    }
+    .user-details{
+        display: block;
+    }
+    .padding{
+        font-size: 13px;
+    }
+    .profile-pic{
+        justify-content:flex-start;
+    }
+    .date{
+        display: flex;
+        font-size: 10px;
+        justify-content: flex-end;
+    }
+    .text{
+        font-size: 12px;
+    }
+    .reposition{
+        font-size: 12px;
+        width: 150px;
+        height: 30px;
+    }
 }

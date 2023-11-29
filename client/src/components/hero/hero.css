@@ -68,10 +68,18 @@ align-items: center;
 }
 
 @media(max-width:480px){
+    .center_class{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        
+    }
     #hero{
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 20px 0px;
     }
     .hero-heading{
         font-size: 30px;
@@ -80,21 +88,23 @@ align-items: center;
         line-height: 30px;
     }
     .hero-details{
-        text-align: center;
-        font-size: 8px;
-        margin: 0px 0px;
-       
+       font-size: 13px;
+       width: fit-content;
     }
+        
+        
+       
     .container1{
         margin: 0px 0px;
-        
+        width: 300px;
         
     }
     .hero-image{
-        max-width: 200px;
+        max-width: 250px;
+        margin: 0px 0px;
     }
     .hero-button{
-        margin: 30px 100px;
+        margin: 10px 100px;
        
     width: 200px;
     height: 50px;
@@ -103,4 +113,12 @@ align-items: center;
     
     }
     
+}
+@media(max-width:320px){
+    .hero-details{
+        display: block;
+        width: 250px;
+        font-size: 12px;
+    }
+   
 }

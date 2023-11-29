@@ -11,8 +11,13 @@ import Otp from "../otp/Otp";
 import SignUp from "../signUp/SignUp";
 
 function NavBar() {
-  const { openSignupModal, openLoginModal,isAuthenticated,
-    user,} = useModal();
+  const {
+    openSignupModal,
+    openLoginModal,
+    isAuthenticated,
+    user,
+    openotpModal,
+  } = useModal();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -41,10 +46,14 @@ function NavBar() {
   const handleProfile = () => {
     navigate("/ticket-history");
   };
-  const openSignup=()=>{
-    navigate("/")
+  const openSignup = () => {
+    navigate("/");
     openSignupModal();
-  }
+  };
+  const openOtp = () => {
+    navigate("/");
+    openotpModal();
+  };
 
   return (
     <>
@@ -80,8 +89,7 @@ function NavBar() {
         ) : (
           <>
             <div className="navigation">
-            <Login styleName="links" />
-            <Otp/>
+              <Login styleName="links" />
               <div className="button" onClick={openSignup}>
                 SignUp
               </div>
@@ -112,12 +120,28 @@ function NavBar() {
               Impact
             </div>
           )}
-          <div className="links" onClick={openLoginModal}>
-            Login
-          </div>
-          <div className="links" onClick={openSignupModal}>
-            SignUp
-          </div>
+          {isAuthenticated ? (
+            <>
+              <div className="links" onClick={handleProfile}>
+                Profile
+              </div>
+              <Otp notsignin={true} />
+              {user && !user.verified && (
+                <div className="links" onClick={openOtp}>
+                  Verify Email
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="links" onClick={openLoginModal}>
+                Login
+              </div>
+              <div className="links" onClick={openSignup}>
+                SignUp
+              </div>
+            </>
+          )}
         </div>
       )}
     </>

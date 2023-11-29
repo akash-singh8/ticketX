@@ -17,7 +17,7 @@ line-height: normal;
 
 .req-box{
     width: 100%;
-height: 77px;
+min-height: 77px;
 flex-shrink: 0;
 border-radius: 13.656px;
 border: 0.759px solid #DBDBDB;
@@ -27,7 +27,9 @@ justify-content: space-between;
 padding: 20px 20px;
 margin: 20px 0px;
 }
-
+.message{
+    overflow-wrap: break-word;
+}
 .container1-req{
     display: block;
     margin-right: 10px;
@@ -39,6 +41,7 @@ font-size: 16.5px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+display: flex;
 }
 
 .ticket-detail{
@@ -50,3 +53,8 @@ font-weight: 400;
 line-height: normal;
 }
 
+@media (max-width:370px) {
+    .message{
+        max-width: 120px;
+    }
+}

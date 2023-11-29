@@ -29,6 +29,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width: 690px) {
+    width: 260px;
+    height: 470px;
+    padding: 5px;
+  }
 `;
 export default function SignUp() {
   const { signupModalIsOpen, closeSignupModal, openLoginModal, openotpModal } =
@@ -50,7 +55,7 @@ export default function SignUp() {
       [name]: value,
     }));
   };
-  const determineUserRole=(email)=> {
+  const determineUserRole = (email) => {
     if (email.endsWith("@i-her.org")) {
       return "admin";
     } else {
@@ -62,7 +67,7 @@ export default function SignUp() {
       alert("Password didn't match");
       return;
     }
-    const role=determineUserRole(formData.email)
+    const role = determineUserRole(formData.email);
 
     try {
       const response = await fetch(
@@ -88,7 +93,6 @@ export default function SignUp() {
         alert(data.message);
         closeSignupModal();
         openotpModal();
-
       } else {
         console.log(data);
         throw new Error(data.message);
@@ -98,7 +102,6 @@ export default function SignUp() {
       alert(err);
     }
 
-    
     setFormData({
       name: "",
       email: "",
@@ -133,7 +136,8 @@ export default function SignUp() {
         isOpen={signupModalIsOpen}
         onRequestClose={closeSignupModal}
         contentLabel="SignUp Modal"
-        ariaHideApp={false}>
+        ariaHideApp={false}
+      >
         <ModalContent ref={modalRef}>
           <div className="form-heading-signUp">SignUp</div>
           <form className="signup-form">
@@ -166,7 +170,8 @@ export default function SignUp() {
               id="dropdown"
               name="location"
               value={formData.location}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <option value="Northern Region">Northern Region</option>
               <option value="Eastern Region">Eastern Region</option>
               <option value="Western Region">Western Region</option>
@@ -199,15 +204,22 @@ export default function SignUp() {
               onChange={handleChange}
               required
             />
-            <div
-              className="button login-button"
-              onClick={handleSubmit}
-              type="submit">
-              SignUp
+            <div className="center">
+              <div
+                className="button login-button"
+                onClick={handleSubmit}
+                type="submit"
+              >
+                SignUp
+              </div>
             </div>
-            <div className="new-account">Already have an account? </div>
-            <div className="forgotPass create-acc" onClick={handleLogin}>
-              LogIn
+            <div className="center">
+              <div className="new-account">Already have an account? </div>
+            </div>
+            <div className="center">
+              <div className="forgotPass create-acc" onClick={handleLogin}>
+                LogIn
+              </div>
             </div>
           </form>
         </ModalContent>

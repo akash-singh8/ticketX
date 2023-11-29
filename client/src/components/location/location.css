@@ -25,3 +25,10 @@ padding: 20px 20px;
 .requests{
     margin:60px 0px
 }
+ 
+@media (max-width:600px) {
+    .location_input{
+        height: 40px;
+        width: 200px !important;
+    }
+}

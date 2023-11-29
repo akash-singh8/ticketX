@@ -13,11 +13,9 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     let userData;
     if (user.role === "admin") {
-      userData = await Admins.findById(user.id).populate("ticketResolved");
-      if(userData){
-        userData = { ...userData.toObject(), role: "admin" };
-      }
-
+      userData = await Admins.findById(user.id)
+        .populate("ticketResolved")
+        .populate("ticketInReview");
     } else {
       userData = await Users.findById(user.id).populate("ticketRaised");
       if(userData){
@@ -129,7 +127,17 @@ export const updateTicketStatus = async (req: Request, res: Response) => {
     if (ticket.status === "resolved") {
       await Admins.updateOne(
         { _id: user.id },
-        { $push: { ticketResolved: ticket.id } }
+        {
+          $push: { ticketResolved: ticket.id },
+          $pull: { ticketInReview: ticket.id },
+        }
+      );
+    } else {
+      await Admins.updateOne(
+        { _id: user.id },
+        {
+          $push: { ticketInReview: ticket.id },
+        }
       );
     }
 
@@ -138,6 +146,25 @@ export const updateTicketStatus = async (req: Request, res: Response) => {
     res
       .status(500)
       .json({ message: "Internal server error while ticket status update" });
+    console.log(err);
+  }
+};
+
+export const getRecentTickets = async (req: Request, res: Response) => {
+  const userRole = req.body.user?.role;
+
+  if (!userRole || userRole !== "admin") {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const recentTickets = await Tickets.find().limit(25).populate("raisedBy");
+
+    res.status(200).json({ tickets: recentTickets });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Internal server error while fetching recent tickets" });
     console.log(err);
   }
 };

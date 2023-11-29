@@ -23,26 +23,15 @@ const updateProfile = async (req: Request, res: Response) => {
   const verified = user.email === newData.email;
 
   try {
-    if (user.role === "admin") {
-      await Admins.updateOne(
-        { _id: user.id },
-        {
-          name: newData.name,
-          email: user.email,
-          verified: verified,
-        }
-      );
-    } else {
-      await Users.updateOne(
-        { _id: user.id },
-        {
-          name: newData.name,
-          email: newData.email,
-          location: newData.location,
-          verified: verified,
-        }
-      );
-    }
+    await (user.role === "admin" ? Admins : Users).updateOne(
+      { _id: user.id },
+      {
+        name: newData.name,
+        email: user.email,
+        location: newData.location,
+        verified: verified,
+      }
+    );
 
     res.status(200).json({ message: "Successfully updated profile" });
   } catch (err) {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import React, { useRef, useEffect, useState } from "react";
 import { useModal } from "../../modalProvider/Modalprovider";
 import "./otp.css";
+import { useNavigate } from "react-router-dom";
 const CustomModal = styled(Modal)`
   display: flex;
   align-items: center;
@@ -27,8 +28,15 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width:690px) {
+    width:250px;
+    height:260px;
+    padding: 5px;
+}
 `;
 export default function Otp(props) {
+  const notSign=props.notsignin;
+  const navigate =useNavigate()
   const [otp,setotp]=useState("")
   const { otpModalIsOpen, openLoginModal, openSignupModal, closeotpModal } =
     useModal();
@@ -68,7 +76,7 @@ export default function Otp(props) {
       }
     setotp("")
     closeotpModal();
-    openLoginModal();
+    !notSign && openLoginModal();
   };
 
   const handleResendOTP = async () => {
@@ -142,6 +150,11 @@ export default function Otp(props) {
     }
   }, [otpModalIsOpen]);
 
+  const handleHome=()=>{
+    closeotpModal();
+    navigate("/")
+  }
+
 
   return (
     <div>
@@ -183,13 +196,24 @@ export default function Otp(props) {
                 onChange={handleOtpChange}/>
             </div>
             <div className="buttons2">
+              {!notSign &&
               <div
-                className="button login-button otp-button"
-                onClick={handleBack}
-                type="submit"
+              className="button login-button otp-button"
+              onClick={handleBack}
+              type="submit"
               >
                 Go Back
               </div>
+              }
+              {notSign &&
+              <div
+              className="button login-button otp-button"
+              onClick={handleHome}
+             
+              >
+                Home
+              </div>
+              }
               <div
                 className="button login-button otp-button"
                 onClick={handleVerify}
@@ -199,7 +223,7 @@ export default function Otp(props) {
               </div>
             </div>
             <div className="new-account">Didn't receive a code? </div>
-            <div className="forgotPass create-acc" onClick={handleResendOTP}>Request again</div>
+            <div className="forgotPass create-acc" onClick={handleResendOTP}>Request OTP</div>
           </form>
         </ModalContent>
       </CustomModal>

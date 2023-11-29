@@ -30,6 +30,11 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width:690px) {
+    width:280px;
+    min-height:430px;
+    padding: 5px;
+}
 `;
 
 export default function ViewReq(props) {
@@ -66,6 +71,7 @@ export default function ViewReq(props) {
       const data = await response.json();
       if (response.ok) {
         alert(data.message)
+        window.location.reload()
         
       } else {
         const errorData = await response.json();
@@ -108,17 +114,17 @@ export default function ViewReq(props) {
               </div>
             </div>
             <div className="date">
-              Raised on <br></br> <span>{ticket.dateRaised}</span>
+              Raised on : <br></br> <span>{ticket.dateRaised}</span>
             </div>
           </div>
           <div className="text">{ticket.message}</div>
             <div className="margin">Status : {ticket.status}</div>
-            {isAuthenticated && user.role==='admin' && ticket.status==="pending" &&
+            {isAuthenticated && user.ticketResolved && ticket.status==="pending" &&
           <div className="checkbox">
             <input type="checkbox" onClick={() => updateStatus("inreview")}/>
             <div>Started Review</div>
           </div>}
-          {isAuthenticated && user.role==='admin'&& ticket.status!=="resolved" &&
+          {isAuthenticated && user.ticketResolved && ticket.status!=="resolved" &&
           <div className="center">
 
           <div className="button login-button request-button reposition

@@ -1,5 +1,5 @@
 .raiseTicket{
-    margin: 50px 120px;
+    margin: 0px 120px;
     justify-content: space-sround;
     max-width: 1980px;
    
@@ -38,6 +38,16 @@ span{
         margin: 0px 0px;
     }
     .heading{
-        font-size: 30px;
+        font-size: 26px;
+        margin:50px 10px;
+        margin-bottom: 0px;
     }
+}
+@media (max-width:1050px) {
+    .ticket-box{
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
 }

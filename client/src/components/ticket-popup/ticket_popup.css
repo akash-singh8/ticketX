@@ -1,17 +1,16 @@
 .req-status{
-    width: 542px;
+    
 height: 51.27px;
-flex-shrink: 0;
+
 border-radius: 14.649px;
 background: #F8F8F8;
-display: flex;
 padding: 0px 20px;
-justify-content: center;
-align-items: center;
+justify-content: space-between;
+
 }
 
 .pending,.inreview,.resolved{
-    width: 150px;
+    
 height: 35px;
 flex-shrink: 0;
 border-radius: 11.719px;
@@ -29,5 +28,12 @@ justify-content: center;
 .pending:hover,.inreview:hover,.resolved:hover{
     border: 0.366px solid #DFDFDF;
     background: #FFF;
+    padding: 4px;
 
+}
+
+@media (max-width:1000px) {
+    .admin_section{
+        margin: 20px 10px;
+    }
 }

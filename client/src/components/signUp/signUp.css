@@ -7,7 +7,7 @@ form {
     margin: 10px 20px;
 
 }
-#MobileNo,#email,#password,#passwordConfirm,#dropdown{
+#MobileNo,#passwordConfirm,#dropdown{
     width: 100% !important;
     margin: 5px 5px;
     border-radius: 9.886px;
@@ -46,50 +46,35 @@ label {
 .signUp{
     padding: 0px 5px;
 }
-.forgotPass{
-    text-align: right;
-    color: #037DE2;
-font-family: 'Roboto';
-font-size: 13.181px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-letter-spacing: 0.264px;
-margin: 20px 0px;
-cursor: pointer;
-}
 
-.login-button{
-    margin: 40px 140px;
-    border-radius: 6.591px;
 
-}
+
 .new-account,.create-acc{
     text-align: center;
     margin: 0px 0px;
 }
-Modal{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-.modalContent{
-    width: 500px;
-height: 550px;
-flex-shrink: 0;
-border-radius: 16.477px;
-background: #FFF;
-box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.16);
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #888;
-  border-radius: 8px;
-  display:block;
-  
-}
+
+@media (max-width: 690px) {
+    .form-heading-signUp{
+        font-size: 20px;
+        padding: 8px 0px;
+    }
+    #MobileNo,#passwordConfirm,#dropdown{
+        height: 20px ;
+        margin: 3px 3px;
+        font-size: 13px;
+    }
+    #email,#password{
+        height: 20px !important;
+        margin: 3px 3px !important;
+        font-size: 13px;
+    }
+    .signup-form{
+        margin: 0px 10px;
+        margin-bottom: 5px;
+    }
+    #passwordConfirm{
+        margin-bottom: 20px;
+    }
+  }
+

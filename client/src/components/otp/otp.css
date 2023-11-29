@@ -31,3 +31,21 @@
   .otp-button{
     margin: 0px 0px!important;
   }
+  .forgotPass{
+    cursor: pointer;
+  }
+
+  @media (max-width: 690px) {
+    .otp-field input{
+      height: 30px ;
+      width: 30px;
+    }
+    .buttons2{
+      margin: 30px 0px;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .otp-button{
+      margin: 0px 5px !important;
+    }
+  }

@@ -20,6 +20,16 @@ const AdminSchema = new mongoose.Schema({
       ref: "Ticket",
     },
   ],
+  ticketInReview: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ticket",
+    },
+  ],
+  location: {
+    type: String,
+    required: true,
+  },
   verified: {
     type: Boolean,
     default: false,

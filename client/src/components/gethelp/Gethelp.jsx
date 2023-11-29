@@ -5,6 +5,7 @@ import Box from "../box/Box";
 import "./gethelp.css";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../modalProvider/Modalprovider";
+import Otp from "../otp/Otp";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -30,10 +31,15 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   border-radius: 8px;
   display: block;
+  @media (max-width: 690px) {
+    width: 300px;
+    height: 470px;
+    padding: 5px;
+  }
 `;
 
 export default function Gethelp(props) {
-  const { openSignupModal,isAuthenticated } = useModal();
+  const { openSignupModal,isAuthenticated ,user,openotpModal} = useModal();
   const navigate = useNavigate();
   const { ticketName, cat ,image} = props;
   const authData = localStorage.getItem("user");
@@ -51,14 +57,44 @@ export default function Gethelp(props) {
     }));
   };
 
+  const handlesendOTP = async () => {
+    const authToken = localStorage.getItem('authorization');
+    try {
+      const response = await fetch('http://localhost:3080/otp/resend', {
+        method: 'PATCH',
+        headers: {
+          Authorization: authToken,
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        console.err(`Failed to send OTP: ${data.message}`);
+      }
+    } catch (err) {
+      console.error('Error sending OTP:', err);
+    }
+  
+  };
+
   const handleSubmit =async (event) => {
     event.preventDefault();
     if (!isAuthenticated) {
       localStorage.setItem("formData", formData.request);
       navigate("/");
       openSignupModal();
+      return
     }
-    if(isAuthenticated){
+    if (user && !user.verified){
+      localStorage.setItem("formData", formData.request);
+      navigate("/");
+      openotpModal();
+      handlesendOTP()
+
+    }
+    if(isAuthenticated && user.verified){
       const authToken = localStorage.getItem('authorization');
       try {
         const response = await fetch("http://localhost:3080/ticket/raise", {
@@ -124,6 +160,7 @@ export default function Gethelp(props) {
         ariaHideApp={false}
       >
         <ModalContent ref={modalRef}>
+            <Otp/>
           <div className="form-heading-signUp">{cat}</div>
           <form className="signup-form">
             <div>

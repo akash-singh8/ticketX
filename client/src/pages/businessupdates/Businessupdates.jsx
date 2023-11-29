@@ -29,7 +29,7 @@ export default function Businessupdates() {
             <GethelpPopup  ticketName='REVENUE'cat="BUSINESS UPDATES"image={Revenue}/>
             <GethelpPopup  ticketName='OTHERS'cat="BUSINESS UPDATES"image={Others}/>
         </>}
-        {isAuthenticated && user.role==="admin" && 
+        {isAuthenticated && user.ticketResolved && 
         <>
             <Box ticketName='NEW PRODUCT LAUNCH'link="/admin/new-product-launch" cat="BUSINESS UPDATES"image={Launch}/>
             <Box  ticketName='MARKETING'link="/admin/marketing/business_updates" cat="BUSINESS UPDATES"image={Marketing}/>
