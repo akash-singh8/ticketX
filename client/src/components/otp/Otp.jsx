@@ -111,22 +111,24 @@ export default function Otp(props) {
   const handleOtpChange = (event) => {
     const { name, value } = event.target;
     setotp((prevOtp) => {
-      if (name === "otp1" && value.length <= 1) {
-        return value;
-      } else if (name === "otp2" && value.length <= 1) {
-        return prevOtp.slice(0, 1) + value;
-      } else if (name === "otp3" && value.length <= 1) {
-        return prevOtp.slice(0, 2) + value;
-      } else if (name === "otp4" && value.length <= 1) {
-        return prevOtp.slice(0, 3) + value;
-      } else if (name === "otp5" && value.length <= 1) {
-        return prevOtp.slice(0, 4) + value;
-      } else if (name === "otp6" && value.length <= 1) {
-        return prevOtp.slice(0, 5) + value;
+      const updatedOtp = [...prevOtp];
+      const index = parseInt(name.slice(-1), 10);
+  
+      if (!isNaN(index) && index >= 1 && index <= 6) {
+        updatedOtp[index - 1] = value; 
+  
+        if (value.length === 1 && index < 6) { 
+          const nextInput = document.querySelector(`input[name=otp${index + 1}]`);
+          if (nextInput) {
+            nextInput.focus(); 
+          }
+        }
       }
-      return prevOtp;
+  
+      return updatedOtp.join('').slice(0, 6); 
     });
   };
+  
   useEffect(() => {
     let interval;
 
