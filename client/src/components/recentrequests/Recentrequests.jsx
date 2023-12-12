@@ -72,8 +72,8 @@ export default function Recentrequests() {
           {
 
             filteredTickets.length > 0 ? (
-              currentTickets.map((ticket) => (
-                <Reqbox key={ticket.id} ticket={ticket} />
+              currentTickets.map((ticket,index) => (
+                <Reqbox key={index} ticket={ticket} />
                 ))
                 ) : (
                   <h3 className="center">No Recent Tickets</h3>

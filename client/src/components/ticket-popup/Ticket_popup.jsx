@@ -76,8 +76,8 @@ export default function TicketRequestssection() {
       </div>
 
       {filteredTickets.length > 0 ? (
-        currentTickets.map((ticket) => (
-          <Reqbox key={ticket.id} ticket={ticket} /> // Added a key prop for React
+        currentTickets.map((ticket,index) => (
+          <Reqbox key={index} ticket={ticket} /> // Added a key prop for React
         ))
       ) : (
         <h3 className="center">No {selectedStatus} Tickets</h3>
