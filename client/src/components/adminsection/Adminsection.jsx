@@ -159,13 +159,13 @@ export default function Adminsection(props) {
         
         {sortby
           ? sortedTickets.length > 0
-            ? currentTickets.map((ticket) => (
-                <Reqbox key={ticket.id} ticket={ticket} />
+            ? currentTickets.map((ticket,index) => (
+                <Reqbox key={index} ticket={ticket} />
               ))
             : <h3 className="center">No {selectedStatus} Tickets</h3>
           : filteredTickets.length > 0
-          ? currentTickets.map((ticket) => (
-              <Reqbox key={ticket.id} ticket={ticket} />
+          ? currentTickets.map((ticket,index) => (
+              <Reqbox key={index} ticket={ticket} />
             ))
           : <h3 className="center">No {selectedStatus} Tickets</h3>}
          <Pagenavigation

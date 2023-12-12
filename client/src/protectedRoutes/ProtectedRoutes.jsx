@@ -4,11 +4,10 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useModal } from '../modalProvider/Modalprovider';
 
 const ProtectedRoutes = ({ element}) => {
-  const {user,openotpModal}=useModal();
+  const {user}=useModal();
   if (user && user.ticketResolved  && user.verified) {
     return <Outlet/>;
   } else {
-     openotpModal()
      return<Navigate to="/" />;
   }
 };

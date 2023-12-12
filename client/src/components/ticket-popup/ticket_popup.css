@@ -24,11 +24,13 @@ line-height: normal;
 display: flex;
 align-items: center;
 justify-content: center;
+padding: 10px;
 }
-.pending:hover,.inreview:hover,.resolved:hover{
+.pending:hover,.inreview:hover,.resolved:hover,.status{
     border: 0.366px solid #DFDFDF;
     background: #FFF;
-    padding: 4px;
+    padding: 10px;
+    cursor: pointer;
 
 }
 
