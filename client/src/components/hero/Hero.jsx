@@ -34,6 +34,7 @@ export default function Hero() {
           </div>
         </div>
         <SignUp />
+        <Otp notsignin={true}></Otp>
 
         {!isAuthenticated && (
           <div className="center_class">
