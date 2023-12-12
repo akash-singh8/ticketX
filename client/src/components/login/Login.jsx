@@ -82,7 +82,6 @@ export default function Login(props) {
       );
 
       const data = await response.json();
-      console.log(data);
 
       if (response.status === 200) {
         localStorage.setItem("authorization", `Bearer ${data.authToken}`);
@@ -108,7 +107,6 @@ export default function Login(props) {
   };
 
   const getUserDetails = async (authToken) => {
-    console.log(authToken)
     try {
       const response = await fetch("http://localhost:3080/auth/me", {
         method: "GET",
@@ -120,7 +118,6 @@ export default function Login(props) {
       if (response.status === 200) {
         const userData = await response.json();
         setUser(userData)
-        console.log(userData)
         
       } else {
         const errorData = await response.json();
