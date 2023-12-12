@@ -11,7 +11,7 @@ export function AppProvider({ children }) {
 
   const getUserDetails = async (authToken) => {
     try {
-      const response = await fetch("http://localhost:3080/auth/me", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/auth/me`, {
         method: "GET",
         headers: {
           authorization: `${authToken}`,

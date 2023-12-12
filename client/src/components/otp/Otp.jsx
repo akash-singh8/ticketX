@@ -54,7 +54,7 @@ export default function Otp(props) {
     event.preventDefault();
     const authToken = localStorage.getItem('authorization');
       try {
-        const response = await fetch("http://localhost:3080/otp/verify", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/otp/verify`, {
           method: "PATCH",
           headers: {
             Authorization: authToken,
@@ -82,7 +82,7 @@ export default function Otp(props) {
   const handleResendOTP = async () => {
     const authToken = localStorage.getItem('authorization');
     try {
-      const response = await fetch('http://localhost:3080/otp/resend', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/otp/resend`, {
         method: 'PATCH',
         headers: {
           Authorization: authToken,

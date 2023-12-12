@@ -60,7 +60,7 @@ export default function Gethelp(props) {
   const handlesendOTP = async () => {
     const authToken = localStorage.getItem('authorization');
     try {
-      const response = await fetch('http://localhost:3080/otp/resend', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/otp/resend`, {
         method: 'PATCH',
         headers: {
           Authorization: authToken,
@@ -97,7 +97,7 @@ export default function Gethelp(props) {
     if(isAuthenticated && user.verified){
       const authToken = localStorage.getItem('authorization');
       try {
-        const response = await fetch("http://localhost:3080/ticket/raise", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/raise`, {
           method: "POST",
           headers: {
             Authorization: authToken,

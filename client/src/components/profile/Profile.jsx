@@ -39,7 +39,7 @@ export default function Profile() {
       };
 
       const response = await fetch(
-        "http://localhost:3080/auth/profile-update",
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/auth/profile-update`,
         {
           method: "POST",
           headers: {
@@ -71,7 +71,7 @@ export default function Profile() {
   const handlesendOTP = async () => {
     const authToken = localStorage.getItem("authorization");
     try {
-      const response = await fetch("http://localhost:3080/otp/resend", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/otp/resend`, {
         method: "PATCH",
         headers: {
           Authorization: authToken,

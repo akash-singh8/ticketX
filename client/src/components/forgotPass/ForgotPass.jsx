@@ -13,7 +13,7 @@ export default function ForgotPass() {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3080/query/forgot-password', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/query/forgot-password`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export default function ForgotPass() {
       e.preventDefault();
       const authToken=localStorage.getItem('authorization')
       try {
-      const response = await fetch('http://localhost:3080/query/set-password', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/query/set-password`, {
         method: 'POST',
         headers: {
           authorization:`${authToken}`,

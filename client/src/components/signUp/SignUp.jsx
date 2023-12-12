@@ -71,7 +71,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        `http://localhost:3080/auth/signup?role=${role}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/auth/signup?role=${role}`,
         {
           method: "POST",
           headers: {

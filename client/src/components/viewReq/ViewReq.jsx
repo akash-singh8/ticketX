@@ -55,7 +55,7 @@ export default function ViewReq(props) {
   const updateStatus = async (newstatus) => {
     try {
       const response = await fetch(
-        `http://localhost:3080/ticket/update`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/update`,
         {
           method: "PUT",
           headers: {

@@ -19,7 +19,7 @@ export default function Recentrequests() {
     try {
       const authToken=localStorage.getItem("authorization")
       const response = await fetch(
-        `http://localhost:3080/ticket/recent`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/recent`,
         {
           method: "GET",
           headers: {

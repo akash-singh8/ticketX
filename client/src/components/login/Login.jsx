@@ -71,7 +71,7 @@ export default function Login(props) {
     const role=determineUserRole(formData.email)
     try {
       const response = await fetch(
-        `http://localhost:3080/auth/login?role=${role}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/auth/login?role=${role}`,
         {
           method: "POST",
           headers: {
@@ -108,7 +108,7 @@ export default function Login(props) {
 
   const getUserDetails = async (authToken) => {
     try {
-      const response = await fetch("http://localhost:3080/auth/me", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/auth/me`, {
         method: "GET",
         headers: {
           authorization: `${authToken}`,
