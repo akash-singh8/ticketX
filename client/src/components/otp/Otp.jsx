@@ -67,6 +67,7 @@ export default function Otp(props) {
         const data = await response.json();
         if (response.ok) {
           alert(data.message)  
+          window.location.reload();
         } else {
           const errorData = await response.json();
           throw new Error(`Failed to verify: ${errorData.message}`);
