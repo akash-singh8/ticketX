@@ -22,6 +22,10 @@ app.use("/otp", authenticateJWT, validateStats, otpRouter);
 app.use("/ticket", authenticateJWT, validateStats, ticketRouter);
 app.use("/query", queryRouter);
 
+app.get("/health-check", (req, res) => {
+  res.status(200).json({ message: "Yeah, I'm Alive!!" });
+});
+
 const mongodb_uri = process.env.MONGODB_URI;
 
 if (!mongodb_uri) {
