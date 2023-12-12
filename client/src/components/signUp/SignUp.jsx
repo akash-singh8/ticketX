@@ -3,6 +3,8 @@ import styled from "styled-components";
 import React, { useState, useRef, useEffect } from "react";
 import "./signUp.css";
 import { useModal } from "../../modalProvider/Modalprovider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -47,6 +49,12 @@ export default function SignUp() {
     Confirmpassword: "",
     location: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -179,31 +187,47 @@ export default function SignUp() {
               <option value="West Nile">West Nile</option>
               <option value="Central Region">Central Region</option>
             </select>
+              <label htmlFor="password" className="signUp">
+                Password
+              </label>
+            <div className="password_container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password*"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <span
+                className="password-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+              </span>
+            </div>
 
-            <label htmlFor="password" className="signUp">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Enter your password*"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="password" className="signUp">
-              Retype Password
-            </label>
-            <input
-              type="password"
-              placeholder="Confirm your password*"
-              id="passwordConfirm"
-              name="Confirmpassword"
-              value={formData.Confirmpassword}
-              onChange={handleChange}
-              required
-            />
+              <label htmlFor="password" className="signUp">
+                Retype Password
+              </label>
+            <div className="password_container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Confirm your password*"
+                id="passwordConfirm"
+                name="Confirmpassword"
+                value={formData.Confirmpassword}
+                onChange={handleChange}
+                required
+              />
+              <span
+                className="password-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+              </span>
+            </div>
             <div className="center">
               <div
                 className="button login-button"
