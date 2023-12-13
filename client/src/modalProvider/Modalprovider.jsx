@@ -22,6 +22,7 @@ export function AppProvider({ children }) {
         const userData = await response.json();
         setUser(userData)
       } else {
+        setLogout();
         const errorData = await response.json();
         throw new Error(`Failed to fetch user details: ${errorData.message}`);
       }
