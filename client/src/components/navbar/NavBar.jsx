@@ -54,6 +54,9 @@ function NavBar() {
     navigate("/");
     openotpModal();
   };
+  const handleLogo=()=>{
+      navigate("/");
+  }
 
   return (
     <>
@@ -78,7 +81,7 @@ function NavBar() {
             </div>
           )}
         </div>
-        <img className="company-logo" src={logo} alt="company-logo" />
+        <img className="company-logo" src={logo} alt="company-logo" onClick={handleLogo} />
         {isAuthenticated ? (
           <>
             <div className="navigation profile-design" onClick={handleProfile}>

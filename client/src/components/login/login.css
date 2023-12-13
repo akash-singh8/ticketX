@@ -60,7 +60,14 @@ margin: 20px 0px;
     text-align: center;
     margin: 0px 0px;
 }
-
+.password_container{
+    display: flex;
+}
+.password-toggle{
+    position: relative;
+    right: 35px;
+    top: 27px;
+}
 
 @media (max-width: 690px) {
     .form-heading{
@@ -70,6 +77,10 @@ margin: 20px 0px;
     #email,#password{
         height: 30px;
         margin: 3px 3px;
+    }
+    .password-toggle{
+        top: 15px;
+        size: 2px;
     }
     .login-button{
         padding: 5px 5px;

@@ -3,15 +3,19 @@ import "./adminsection.css";
 import Reqbox from "../reqbox/Reqbox";
 import Pagenavigation from "../pagenavigation/Pagenavigation";
 import Location from "../location/Location";
+import { useModal } from "../../modalProvider/Modalprovider";
 
 export default function Adminsection(props) {
+  const { user } = useModal();
   const cat = props.cat;
   const ticketName = props.ticketName;
   const [sortby, setSortBy] = useState(false);
   const [byReqDates, setbyReqDates] = useState(true);
   const [byFrequency, setbyFrequency] = useState(true);
   const [sortedTickets, setSortedTickets] = useState([]);
-  const [selectedStatus, setSelectedStatus] = useState("pending");
+  const initialStatus =
+    user.role && user.role === "client" ? "pending" : "inreview";
+  const [selectedStatus, setSelectedStatus] = useState(initialStatus);
   const [getTickets, setGetTickets] = useState([]);
   const authToken = localStorage.getItem("authorization");
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -146,13 +150,17 @@ export default function Adminsection(props) {
 
         
           <div className="req-status admin_status center">
-            <div className="pending" onClick={() => handlePending("pending")}>
+            <div className={`pending ${
+              selectedStatus === "pending" ? "status" : ""
+            }`} onClick={() => handlePending("pending")}>
               Pending
             </div>
-            <div className="inreview" onClick={() => handleInreview("inreview")}>
+            <div className={`inreview ${
+            selectedStatus === "inreview" ? "status" : ""
+          }`} onClick={() => handleInreview("inreview")}>
               In review
             </div>
-            <div className="resolved" onClick={() => handleResolved("resolved")}>
+            <div className={`resolved ${selectedStatus === "resolved" ? "status" : ""}`} onClick={() => handleResolved("resolved")}>
               Resolved
             </div>
           </div>

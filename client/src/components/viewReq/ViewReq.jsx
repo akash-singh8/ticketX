@@ -71,7 +71,6 @@ export default function ViewReq(props) {
       const data = await response.json();
       if (response.ok) {
         alert(data.message)
-        window.location.reload()
         
       } else {
         const errorData = await response.json();
