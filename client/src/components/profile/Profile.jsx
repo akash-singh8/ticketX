@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./profile.css";
 import { useModal } from "../../modalProvider/Modalprovider";
-import Otp from "../otp/Otp";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
@@ -30,14 +29,23 @@ export default function Profile() {
 
   const handleProfileChanges = async () => {
     const authToken = localStorage.getItem("authorization");
-
-    try {
-      let bodyData = {
+    let bodyData
+    if(user && user.role==="client"){
+      bodyData = {
         name: editedUser.name,
         email: editedUser.email,
         location: document.querySelector("select").value,
       };
+    }
+    else{
+      bodyData = {
+        name: editedUser.name,
+        email: editedUser.email,
+        location: "not applicable",
+      };
+    }
 
+    try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/auth/profile-update`,
         {
@@ -127,7 +135,7 @@ export default function Profile() {
                       onChange={handleInputChange}
                     ></input>
                   </div>
-
+                  {user && user.role==="client" &&
                   <div className="name">
                     <div className="title">Location</div>
                     <select
@@ -147,6 +155,7 @@ export default function Profile() {
                       <option value="Central Region">Central Region</option>
                     </select>
                   </div>
+              }
                 </div>
               </>
             ) : (
@@ -160,11 +169,12 @@ export default function Profile() {
                     <div className="title">Email</div>
                     <div className="name-box">{user.email}</div>
                   </div>
-
+                  {user && user.role==="client" &&
                   <div className="name">
                     <div className="title">Location</div>
                     <div className="name-box">{user.location}</div>
                   </div>
+                  }
                 </div>
               </>
             )}

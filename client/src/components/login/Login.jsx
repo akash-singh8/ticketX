@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useModal } from "../../modalProvider/Modalprovider";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const CustomModal = styled(Modal)`
   display: flex;
@@ -51,6 +53,11 @@ export default function Login(props) {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -175,15 +182,25 @@ export default function Login(props) {
               required
             />
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
+            <div className="password_container">
+              <input
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password*"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
-            />
+              />
+            <span
+                className="password-toggle"
+                onClick={togglePasswordVisibility}
+                >
+               <FontAwesomeIcon
+                  icon={showPassword ? faEye : faEyeSlash}
+                />
+              </span>
+                </div>
             <div className="forgotPass" onClick={forgotPassword}>
               Forgot Password?
             </div>
